@@ -1,0 +1,285 @@
+DROP TABLE IF EXISTS MATCH_GOAL;
+DROP TABLE IF EXISTS MATCH_POSITION;
+DROP TABLE IF EXISTS PLAYER;
+DROP TABLE IF EXISTS RESULT;
+DROP TABLE IF EXISTS MATCH;
+DROP TABLE IF EXISTS TEAM;
+DROP TABLE IF EXISTS COACH;
+DROP TABLE IF EXISTS OWNER;
+DROP TABLE IF EXISTS CONTACT;
+DROP TABLE IF EXISTS GOAL_TYPE;
+DROP TABLE IF EXISTS PERSON;
+DROP TABLE IF EXISTS ASSOCIATION;
+DROP TABLE IF EXISTS LOCATION;
+DROP TABLE IF EXISTS SEASON;
+DROP TABLE IF EXISTS ADDRESS;
+
+
+CREATE TABLE ADDRESS
+(
+  address_id VARCHAR(64) NOT NULL,
+  address_line_1 VARCHAR(64) NOT NULL,
+  address_line_2 VARCHAR(64),
+  postal_code VARCHAR(8) NOT NULL,
+  city VARCHAR(64) NOT NULL,
+  country VARCHAR(64) NOT NULL,
+  address_line_3 VARCHAR(64),
+  PRIMARY KEY (address_id)
+);
+
+CREATE TABLE SEASON
+(
+  season_id INT NOT NULL,
+  start_date DATE NOT NULL,
+  end_date DATE NOT NULL,
+  name VARCHAR(64) NOT NULL,
+  description VARCHAR(64),
+  PRIMARY KEY (season_id)
+);
+
+CREATE TABLE LOCATION
+(
+  location_id INT NOT NULL,
+  name VARCHAR(64) NOT NULL,
+  description VARCHAR(64),
+  address_id VARCHAR(64) NOT NULL,
+  PRIMARY KEY (location_id),
+  FOREIGN KEY (address_id) REFERENCES ADDRESS(address_id)
+);
+
+CREATE TABLE ASSOCIATION
+(
+  association_id INT NOT NULL,
+  name VARCHAR(64) NOT NULL,
+  description VARCHAR(64) NOT NULL,
+  PRIMARY KEY (association_id)
+);
+
+CREATE TABLE PERSON
+(
+  person_id INT NOT NULL,
+  first_name VARCHAR(64) NOT NULL,
+  last_name VARCHAR(64) NOT NULL,
+  date_of_birth DATE NOT NULL,
+  address_id VARCHAR(64),
+  PRIMARY KEY (person_id),
+  FOREIGN KEY (address_id) REFERENCES ADDRESS(address_id)
+);
+
+CREATE TABLE GOAL_TYPE
+(
+  goal_type_id INT NOT NULL,
+  type VARCHAR(64) NOT NULL,
+  PRIMARY KEY (goal_type_id)
+);
+
+CREATE TABLE CONTACT
+(
+  contact_id INT NOT NULL,
+  contact_type VARCHAR(64) NOT NULL,
+  contact_detail VARCHAR(64) NOT NULL,
+  person_id INT NOT NULL,
+  PRIMARY KEY (contact_id),
+  FOREIGN KEY (person_id) REFERENCES PERSON(person_id)
+);
+
+CREATE TABLE OWNER
+(
+  owner_id INT NOT NULL,
+  person_id INT NOT NULL,
+  PRIMARY KEY (owner_id),
+  FOREIGN KEY (person_id) REFERENCES PERSON(person_id)
+);
+
+CREATE TABLE COACH
+(
+  coach_id INT NOT NULL,
+  person_id INT NOT NULL,
+  PRIMARY KEY (coach_id),
+  FOREIGN KEY (person_id) REFERENCES PERSON(person_id)
+);
+
+CREATE TABLE TEAM
+(
+  team_id INT NOT NULL,
+  owner_id INT NOT NULL,
+  association_id INT NOT NULL,
+  coach_id INT NOT NULL,
+  location_id INT NOT NULL,
+  PRIMARY KEY (team_id),
+  FOREIGN KEY (owner_id) REFERENCES OWNER(owner_id),
+  FOREIGN KEY (association_id) REFERENCES ASSOCIATION(association_id),
+  FOREIGN KEY (coach_id) REFERENCES COACH(coach_id),
+  FOREIGN KEY (location_id) REFERENCES LOCATION(location_id)
+);
+
+CREATE TABLE MATCH
+(
+  match_id INT NOT NULL,
+  match_date DATE NOT NULL,
+  season_id INT NOT NULL,
+  location_id INT NOT NULL,
+  home_team_id INT NOT NULL,
+  away_team_id INT NOT NULL,
+  PRIMARY KEY (match_id),
+  FOREIGN KEY (season_id) REFERENCES SEASON(season_id),
+  FOREIGN KEY (location_id) REFERENCES LOCATION(location_id),
+  FOREIGN KEY (home_team_id) REFERENCES TEAM(team_id),
+  FOREIGN KEY (away_team_id) REFERENCES TEAM(team_id)
+);
+
+CREATE TABLE RESULT
+(
+  score INT NOT NULL,
+  result VARCHAR(4) NOT NULL,
+  match_id INT NOT NULL,
+  team_id INT NOT NULL,
+  PRIMARY KEY (match_id,team_id),
+  FOREIGN KEY (match_id) REFERENCES MATCH(match_id),
+  FOREIGN KEY (team_id) REFERENCES TEAM(team_id)
+);
+
+CREATE TABLE PLAYER
+(
+  player_id INT NOT NULL,
+  normal_position VARCHAR(64),
+  number VARCHAR(8),
+  person_id INT NOT NULL,
+  team_id INT NOT NULL,
+  PRIMARY KEY (player_id),
+  FOREIGN KEY (person_id) REFERENCES PERSON(person_id),
+  FOREIGN KEY (team_id) REFERENCES TEAM(team_id)
+);
+
+CREATE TABLE MATCH_POSITION
+(
+  position VARCHAR(64),
+  player_id INT NOT NULL,
+  match_id INT NOT NULL,
+  PRIMARY KEY (player_id, match_id),
+  FOREIGN KEY (player_id) REFERENCES PLAYER(player_id),
+  FOREIGN KEY (match_id) REFERENCES MATCH(match_id)
+);
+
+CREATE TABLE MATCH_GOAL
+(
+  goal_id INT NOT NULL,
+  description VARCHAR(64),
+  goal_type_id INT NOT NULL,
+  match_id INT NOT NULL,
+  player_id INT NOT NULL,
+  PRIMARY KEY (goal_id),
+  FOREIGN KEY (goal_type_id) REFERENCES GOAL_TYPE(goal_type_id),
+  FOREIGN KEY (match_id) REFERENCES MATCH(match_id),
+  FOREIGN KEY (player_id) REFERENCES PLAYER(player_id)
+);
+
+-- INSERT ADDRESS
+INSERT INTO address(address_id,address_line_1,address_line_2,address_line_3,postal_code,city,country) VALUES(1,'Granfaret 32',NULL,NULL,'1405','Langhus','Norway');
+INSERT INTO address(address_id,address_line_1,address_line_2,address_line_3,postal_code,city,country) VALUES(2,'Aasveien 33',NULL,NULL,'1430','Aas','Norway');
+INSERT INTO address(address_id,address_line_1,address_line_2,address_line_3,postal_code,city,country) VALUES(3,'Skiveien 34',NULL,NULL,'1400','Ski','Norway');
+INSERT INTO address(address_id,address_line_1,address_line_2,address_line_3,postal_code,city,country) VALUES(4,'Bergenveien 35',NULL,NULL,'1300','Bergen','Norway');
+
+
+-- INSERT SEASON
+INSERT INTO season(season_id,start_date,end_date,name,description) VALUES (1,'2018-01-01','2018-12-31','Season1','First Season');
+INSERT INTO season(season_id,start_date,end_date,name,description) VALUES (2,'2019-01-01','2019-12-31','Season2','Second Season');
+INSERT INTO season(season_id,start_date,end_date,name,description) VALUES (3,'2020-01-01','2020-12-31','Season3','Third Season');
+
+
+-- INSERT LOCATION
+INSERT INTO location(location_id,name,description,address_id) VALUES (1,'Langhus','Description of Langhus...',1);
+INSERT INTO location(location_id,name,description,address_id) VALUES (2,'Aas','Description of Aas...',2);
+INSERT INTO location(location_id,name,description,address_id) VALUES (3,'Ski','Description of Ski...',3);
+INSERT INTO location(location_id,name,description,address_id) VALUES (4,'Bergen','Description of Bergen...',4);
+
+
+
+-- INSERT ASSOCIATION
+INSERT INTO association(association_id,name,description) VALUES (1,'Association1','Description of Association1...');
+INSERT INTO association(association_id,name,description) VALUES (2,'Association2','Description of Association2...');
+INSERT INTO association(association_id,name,description) VALUES (3,'Association3','Description of Association3...');
+INSERT INTO association(association_id,name,description) VALUES (4,'Association4','Description of Association4...');
+
+
+-- INSERT PERSON
+INSERT INTO person(person_id,first_name,last_name,date_of_birth,address_id) VALUES (1,'Gabriel','Aunan','1991-03-26',1);
+INSERT INTO person(person_id,first_name,last_name,date_of_birth,address_id) VALUES (2,'Martin','Martinsen','1993-05-16',2);
+INSERT INTO person(person_id,first_name,last_name,date_of_birth,address_id) VALUES (3,'Thor','Thordenlund','1991-03-26',3);
+INSERT INTO person(person_id,first_name,last_name,date_of_birth,address_id) VALUES (4,'Harald','Hudini','1989-02-08',4);
+
+-- INSERT GOAL_TYPE
+INSERT INTO goal_type(goal_type_id,type) VALUES (1,'Penalty');
+INSERT INTO goal_type(goal_type_id,type) VALUES (2,'Free kick');
+INSERT INTO goal_type(goal_type_id,type) VALUES (3,'Corner');
+
+-- INSERT CONTACT
+INSERT INTO contact(contact_id,contact_type,contact_detail, person_id) VALUES (1,'Cell','98047957',1);
+INSERT INTO contact(contact_id,contact_type,contact_detail, person_id) VALUES (2,'Cell','98076487',2);
+INSERT INTO contact(contact_id,contact_type,contact_detail, person_id) VALUES (3,'Cell','98968473',3);
+
+-- INSERT OWNER
+INSERT INTO owner(owner_id,person_id) VALUES (1,1);
+INSERT INTO owner(owner_id,person_id) VALUES (2,2);
+INSERT INTO owner(owner_id,person_id) VALUES (3,3);
+
+-- INSERT COACH
+INSERT INTO coach(coach_id,person_id) VALUES (1,1);
+INSERT INTO coach(coach_id,person_id) VALUES (2,2);
+INSERT INTO coach(coach_id,person_id) VALUES (3,3);
+
+-- INSERT TEAM
+INSERT INTO team(team_id,owner_id,association_id,coach_id,location_id) VALUES (1,1,1,1,1);
+INSERT INTO team(team_id,owner_id,association_id,coach_id,location_id) VALUES (2,2,2,2,2);
+INSERT INTO team(team_id,owner_id,association_id,coach_id,location_id) VALUES (3,3,3,3,3);
+
+-- INESRT MACTCH
+INSERT INTO match(match_id,match_date,season_id,location_id,home_team_id,away_team_id) VALUES (1,'2018-06-01',1,1,1,2);
+INSERT INTO match(match_id,match_date,season_id,location_id,home_team_id,away_team_id) VALUES (2,'2018-06-01',1,2,2,3);
+INSERT INTO match(match_id,match_date,season_id,location_id,home_team_id,away_team_id) VALUES (3,'2018-06-01',1,3,3,1);
+
+INSERT INTO match(match_id,match_date,season_id,location_id,home_team_id,away_team_id) VALUES (4,'2019-06-01',2,1,1,2);
+INSERT INTO match(match_id,match_date,season_id,location_id,home_team_id,away_team_id) VALUES (5,'2019-06-01',2,2,2,3);
+INSERT INTO match(match_id,match_date,season_id,location_id,home_team_id,away_team_id) VALUES (6,'2019-06-01',2,3,3,1);
+
+-- INSERT RESULT
+INSERT INTO result(score,result,match_id,team_id) VALUES (3,'Win',1,1);
+INSERT INTO result(score,result,match_id,team_id) VALUES (2,'Loss',1,2);
+
+INSERT INTO result(score,result,match_id,team_id) VALUES (2,'Draw',2,2);
+INSERT INTO result(score,result,match_id,team_id) VALUES (2,'Draw',2,3);
+
+INSERT INTO result(score,result,match_id,team_id) VALUES (3,'Win',3,1);
+INSERT INTO result(score,result,match_id,team_id) VALUES (1,'Loss',3,3);
+
+-- INSERT PLAYER
+INSERT INTO Player(player_id,normal_position,number,person_id,team_id) VALUES (1,'Attack','1',1,1);
+INSERT INTO Player(player_id,normal_position,number,person_id,team_id) VALUES (2,'Defence','2',2,2);
+INSERT INTO Player(player_id,normal_position,number,person_id,team_id) VALUES (3,'Center','3',3,3);
+
+-- INSERT MATCH_POSITION
+INSERT INTO MATCH_POSITION(position,player_id,match_id) VALUES ('Attack',1,1);
+INSERT INTO MATCH_POSITION(position,player_id,match_id) VALUES ('Attack',2,1);
+
+INSERT INTO MATCH_POSITION(position,player_id,match_id) VALUES ('Defence',2,2);
+INSERT INTO MATCH_POSITION(position,player_id,match_id) VALUES ('Attack',3,2);
+
+INSERT INTO MATCH_POSITION(position,player_id,match_id) VALUES ('Center',3,3);
+INSERT INTO MATCH_POSITION(position,player_id,match_id) VALUES ('Attack',1,3);
+
+-- INSERT MATCH_GOAL
+INSERT INTO MATCH_GOAL(goal_id,description,goal_type_id,match_id,player_id) VALUES (1,'Corner goal',3,1,1);
+INSERT INTO MATCH_GOAL(goal_id,description,goal_type_id,match_id,player_id) VALUES (2,'Free-kick goal',2,1,1);
+INSERT INTO MATCH_GOAL(goal_id,description,goal_type_id,match_id,player_id) VALUES (3,'Penalty goal',1,1,1);
+INSERT INTO MATCH_GOAL(goal_id,description,goal_type_id,match_id,player_id) VALUES (4,'Corner goal',3,1,2);
+INSERT INTO MATCH_GOAL(goal_id,description,goal_type_id,match_id,player_id) VALUES (5,'Free-kick goal',2,1,2);
+
+INSERT INTO MATCH_GOAL(goal_id,description,goal_type_id,match_id,player_id) VALUES (6,'Corner goal',3,2,2);
+INSERT INTO MATCH_GOAL(goal_id,description,goal_type_id,match_id,player_id) VALUES (7,'Free-kick goal',2,2,2);
+INSERT INTO MATCH_GOAL(goal_id,description,goal_type_id,match_id,player_id) VALUES (8,'Penalty goal',1,2,3);
+INSERT INTO MATCH_GOAL(goal_id,description,goal_type_id,match_id,player_id) VALUES (9,'Free-kick goal',2,2,3);
+
+INSERT INTO MATCH_GOAL(goal_id,description,goal_type_id,match_id,player_id) VALUES (10,'Corner goal',3,3,1);
+INSERT INTO MATCH_GOAL(goal_id,description,goal_type_id,match_id,player_id) VALUES (11,'Free-kick goal',2,3,1);
+INSERT INTO MATCH_GOAL(goal_id,description,goal_type_id,match_id,player_id) VALUES (12,'Corner goal',3,3,1);
+INSERT INTO MATCH_GOAL(goal_id,description,goal_type_id,match_id,player_id) VALUES (13,'Free-kick goal',2,3,3);
