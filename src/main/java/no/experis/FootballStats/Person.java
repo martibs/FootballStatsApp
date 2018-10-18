@@ -13,6 +13,8 @@ public class Person {
         this.addressid = addressid;
     }
 
+    // GETTERS
+
     public int getId() {
         return id;
     }
@@ -33,7 +35,32 @@ public class Person {
         return addressid;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    // SETTERS
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public void setDateofbirth(String dateofbirth) {
+        this.dateofbirth = dateofbirth;
+    }
+
+    public void setAddressid(int addressid) {
+        this.addressid = addressid;
+    }
+
+
     public String toString(){
         return "ID = " + id + ", Firstname = " + firstname + ", Lastname = " + lastname + ", Dateofbirth = " + dateofbirth + ", AddressID = " + addressid;
     }
+
+
 }
