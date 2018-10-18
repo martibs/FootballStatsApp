@@ -18,20 +18,16 @@ public class PersonService {
 
         // String sql = "SELECT * FROM CARS";
 
-        // List<Person> people = jtm.query(sql, new BeanPropertyRowMapper(Car.class));
+        //List<Person> people = jtm.query(sql, new BeanPropertyRowMapper(Car.class));
         Person martin = new Person(1, "Martin", "Sundfor", "12321", 1 );
         Person gabriel = new Person(2, "Gabriel", "Aunan", "12321", 2 );
 
         ArrayList<Person> people = new ArrayList<Person>();
-
 
         people.add(martin);
         people.add(gabriel);
 
         return people;
     }
-
-
-
 
 }

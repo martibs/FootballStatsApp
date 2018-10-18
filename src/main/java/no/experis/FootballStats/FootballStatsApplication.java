@@ -17,8 +17,6 @@ public class FootballStatsApplication {
 			System.out.println(person.toString());
 		}
 */
-
-
 	}
 
 }

@@ -6,12 +6,10 @@ import java.util.ArrayList;
 public class DatabaseManager {
 
     //private static final String connectionURL = "jdbc:postgresql://mydbinstance.cqjagjopuiru.eu-central-1.rds.amazonaws.com:1433/masterdb";
-    private static final String connectionURL = "jdbc:postgresql://127.0.0.1:5432/Case_db";
     //private static final String connectionURL = "jdbc:postgresql://courseinstance.cqjagjopuiru.eu-central-1.rds.amazonaws.com:5432/courseDB";
+    private static final String connectionURL = "jdbc:postgresql://127.0.0.1:5432/Case_db";
 
     private Person person;
-
-
 
     private Connection connect() {
         Connection conn = null;
@@ -55,9 +53,6 @@ public class DatabaseManager {
                 person = new Person(id,firstname,lastname,date,addressid);
                 tempPerson.add(person);
             }
-
-
-
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
