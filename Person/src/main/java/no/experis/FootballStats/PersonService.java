@@ -9,15 +9,19 @@ import java.util.List;
 @Service
 public class PersonService {
 
+    DatabaseManager db = new DatabaseManager();
+
     public List<Player> displayAllPersons(){
         // String sql = "SELECT * FROM CARS";
         //List<Person> people = jtm.query(sql, new BeanPropertyRowMapper(Car.class));
 
-        Player martin = new Player("1", "Martin", "Sundfor", "12321", "1", "2", "striker", "9", "5");
+        //Player martin = new Player("1", "Martin", "Sundfor", "12321", "1", "2", "striker", "9", "5");
 
         ArrayList<Player> people = new ArrayList<Player>();
+        people.addAll(db.getAllPeople());
 
-        people.add(martin);
+
+        //people.add(martin);
         return people;
     }
 
