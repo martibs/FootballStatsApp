@@ -48,8 +48,6 @@ public class DatabaseManager {
                 date= rs.getString("date_of_birth");
                 addressid= rs.getInt("address_id");
 
-
-                //System.out.println(rs.getInt("personID"));
                 person = new Person(id,firstname,lastname,date,addressid);
                 tempPerson.add(person);
             }
@@ -58,23 +56,5 @@ public class DatabaseManager {
             System.out.println(e.getMessage());
         }
         return tempPerson;
-    }
-
-    public String findPerson() {
-        String sql = "SELECT * FROM person;";
-        String person = "dette er en test!";
-
-        try (Connection conn = this.connect();
-            PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            Statement stmt = conn.createStatement();
-
-            ResultSet resultSet = stmt.executeQuery(sql);
-            person = resultSet.getString("lastname");
-
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return person;
     }
 }
