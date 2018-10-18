@@ -30,9 +30,9 @@ public class PersonController {
     @GetMapping("/showPeople")
     public List showPerson() {
 
-        List<Person> people = personService.displayAllPersons();
+        List<Player> players = personService.displayAllPersons();
 
-        return people;
+        return players;
     }
 
 }
