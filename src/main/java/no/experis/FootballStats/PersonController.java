@@ -43,6 +43,7 @@ public class PersonController {
 
         Map<String, Object> params = new HashMap<>();
         params.put("people", people);
+        //return people;
 
         return new ModelAndView("showPeople", params);
     }
