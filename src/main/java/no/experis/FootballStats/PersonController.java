@@ -22,30 +22,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
 public class PersonController {
-/*
-    @Autowired
-    private DatabaseManager dbManager = new DatabaseManager();
-*/
-    @Autowired
-    private PersonService personService;
 
-    @RequestMapping("/")
-    public String index (){
-        return "index";
-    }
+    PersonService personService = new PersonService();
 
-    @RequestMapping("/showPeople")
-    public ModelAndView showPerson() {
+    @GetMapping("/showPeople")
+    public List showPerson() {
 
         List<Person> people = personService.displayAllPersons();
 
-        Map<String, Object> params = new HashMap<>();
-        params.put("people", people);
-        //return people;
-
-        return new ModelAndView("showPeople", params);
+        return people;
     }
 
 }
