@@ -49,8 +49,8 @@ public class DatabaseManager {
             while (rs.next()) {
                 match_id = Integer.toString(rs.getInt("MATCH_ID"));
                 match_date = rs.getString("MATCH_DATE");
-                home_team_id = rs.getString("HOME_TEAM_ID");
-                away_team_id = rs.getString("AWAY_TEAM_ID");
+                home_team_id = Integer.toString(rs.getInt("HOME_TEAM_ID"));
+                away_team_id = Integer.toString(rs.getInt("AWAY_TEAM_ID"));
                 season_id = Integer.toString(rs.getInt("SEASON_ID"));
                 location_id = Integer.toString(rs.getInt("LOCATION_ID"));
 

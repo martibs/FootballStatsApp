@@ -10,9 +10,17 @@ public class MatchController {
     private MatchService matchService = new MatchService();
 
     @GetMapping("/showMatches")
-    public List shotMatches() {
+    public List showMatches() {
         List<Match> matches = matchService.displayAllMatches();
         return matches;
+    }
+
+    @GetMapping("/showOneMatch")
+    public Match showMatch() {
+        String match_id = "1"; // TODO: CHANG TO A CORRECT SPRING BOOT GET VARIABLE!
+
+        Match match = matchService.displayOneMatch(match_id);
+        return match;
     }
 
 }

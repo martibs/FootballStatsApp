@@ -11,12 +11,23 @@ public class MatchService {
     private DatabaseManager dbManager = new DatabaseManager();
 
     public List<Match> displayAllMatches(){
-        ArrayList<Match> match = new ArrayList<Match>();
+        ArrayList<Match> matches = new ArrayList<Match>();
 
-        match.addAll(dbManager.getMatches());
+        matches.addAll(dbManager.getMatches());
 
-        return match;
+        return matches;
     }
 
+    public Match displayOneMatch(String match_id){
+        ArrayList<Match> matches = new ArrayList<Match>();
+        matches.addAll(dbManager.getMatches());
+
+        for(Match match : matches){
+            if(match.getMatch_id().equals(match_id)){
+                return match;
+            }
+        }
+        return null;
+    }
 
 }
