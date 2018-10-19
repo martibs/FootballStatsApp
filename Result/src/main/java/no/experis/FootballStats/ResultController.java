@@ -15,10 +15,9 @@ public class ResultController {
         return results;
     }
 
-    @GetMapping("/showOneResult")
-    public Result showAddress(){
-        String resultid = "1";      // TODO: Change the var to proper springboot GET variable
-        Result result = resultService.displayOneResult(resultid);
+    @GetMapping("/showOneResult/{someID}")
+    public Result showAddress(@PathVariable(value="someID") String id){
+        Result result = resultService.displayOneResult(id);
         return result;
     }
 
