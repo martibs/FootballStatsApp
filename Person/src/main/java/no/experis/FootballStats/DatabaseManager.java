@@ -131,6 +131,23 @@ public class DatabaseManager {
     }
 
 
+    // TEST UPDATE STATEMENT
+    public void updateTest() {
+        // SQL statement for updating a table
+
+        System.out.println("Started to update a table!");
+
+        String sql = "UPDATE PERSON SET FIRST_NAME = 'GEIR' WHERE PERSON_ID = 3;";
+
+        try (Connection conn = this.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("fin.");
+    }
 
     // CREATES A NEW DATABASE
     public void createNewDatabase() {

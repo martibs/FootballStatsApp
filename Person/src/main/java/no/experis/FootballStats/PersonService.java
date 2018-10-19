@@ -10,6 +10,7 @@ public class PersonService {
 
     private DatabaseManager dbManager = new DatabaseManager();
 
+    // Players
     public List<Player> displayAllPlayers(){
         ArrayList<Player> people = new ArrayList<Player>();
 
@@ -17,6 +18,21 @@ public class PersonService {
 
         return people;
     }
+
+
+    public Player displayOnePlayer(String player_id){
+        ArrayList<Player> players = new ArrayList<Player>();
+        players.addAll(dbManager.getPlayers());
+
+        for(Player player : players){
+            if(player.getPlayer_id().equals(player_id)){
+                return player;
+            }
+        }
+        return null;
+    }
+
+    // Coaches
 
     public List<Coach> displayAllCoaches(){
         ArrayList<Coach> people = new ArrayList<Coach>();
@@ -26,6 +42,21 @@ public class PersonService {
         return people;
     }
 
+
+    public Coach displayOneCoach(String coach_id){
+        ArrayList<Coach> coaches = new ArrayList<Coach>();
+        coaches.addAll(dbManager.getCoaches());
+
+        for(Coach coach : coaches){
+            if(coach.getCoach_id().equals(coach_id)){
+                return coach;
+            }
+        }
+        return null;
+    }
+
+    // Owners
+
     public List<Owner> displayAllOwners(){
         ArrayList<Owner> people = new ArrayList<Owner>();
 
@@ -34,5 +65,22 @@ public class PersonService {
         return people;
     }
 
+    public Owner displayOneOwner(String owner_id){
+        ArrayList<Owner> owners = new ArrayList<Owner>();
+        owners.addAll(dbManager.getOwners());
+
+        for(Owner owner : owners){
+            if(owner.getOwner_id().equals(owner_id)){
+                return owner;
+            }
+        }
+        return null;
+    }
+
+
+    // Test method for updating the database
+    public void updateTest(){
+        dbManager.updateTest();
+    }
 
 }
