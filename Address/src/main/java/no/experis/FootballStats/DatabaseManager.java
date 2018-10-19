@@ -14,11 +14,16 @@ public class DatabaseManager {
 
     private Connection conn = null;
 
-    private String id;
-    private String firstname;
-    private String lastname;
-    private String date;
-    private String addressid;
+    private String address_id;
+    private String address_line_1;
+    private String address_line_2;
+    private String address_line_3;
+    private String postal_code;
+    private String city;
+    private String country;
+    private String location_id;
+    private String location_name;
+    private String description;
 
 
     public Connection connect() {
@@ -32,15 +37,11 @@ public class DatabaseManager {
         return conn;
     }
 
-    public ArrayList<Player> getPlayers() {
-        String sql = "SELECT * FROM PLAYER INNER JOIN PERSON ON PERSON.PERSON_ID = PLAYER.PERSON_ID";
+    public ArrayList<Address> getAddresses() {
+        String sql = "SELECT * FROM LOCATION INNER JOIN ADDRESS ON ADDRESS.ADDRESS_ID = LOCATION.ADDRESS_ID";
 
-        Player tempPlayer = null;
-        ArrayList<Player> tempPlayersList = new ArrayList<Player>();
-        String player_id;
-        String normal_position;
-        String number;
-        String team_id;
+        Address tempAddress = null;
+        ArrayList<Address> tempAddressList = new ArrayList<Address>();
 
         try (Connection conn = this.connect();
              Statement stmt = conn.createStatement();
@@ -48,24 +49,25 @@ public class DatabaseManager {
 
             // loop through the result set
             while (rs.next()) {
-                id = Integer.toString(rs.getInt("PERSON_ID"));
-                firstname = rs.getString("FIRST_NAME");
-                lastname = rs.getString("LAST_NAME");
-                date = rs.getString("DATE_OF_BIRTH");
-                addressid = Integer.toString(rs.getInt("ADDRESS_ID"));
-                player_id = Integer.toString(rs.getInt("PLAYER_ID"));
-                normal_position = rs.getString("NORMAL_POSITION");
-                number = rs.getString("NUMBER");
-                team_id = Integer.toString(rs.getInt("TEAM_ID"));
+                address_id = Integer.toString(rs.getInt("ADDRESS_ID"));
+                address_line_1 = rs.getString("address_line_1");
+                address_line_2 = rs.getString("address_line_2");
+                address_line_3 = rs.getString("address_line_3");
+                postal_code = rs.getString("POSTAL_CODE");
+                city = rs.getString("CITY");
+                country = rs.getString("COUNTRY");
+                location_id = rs.getString("LOCATION_ID");
+                location_name = rs.getString("NAME");
+                description = rs.getString("DESCRIPTION");
 
-                tempPlayer = new Player(id,firstname,lastname,date,addressid, player_id, normal_position, number, team_id);
-                tempPlayersList.add(tempPlayer);
+                tempAddress = new Address(address_id, address_line_1, address_line_2, address_line_3, postal_code, city, country, location_id,location_name,description);
+                tempAddressList.add(tempAddress);
             }
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return tempPlayersList;
+        return tempAddressList;
     }
 
 
