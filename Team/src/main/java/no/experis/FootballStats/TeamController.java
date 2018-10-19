@@ -15,11 +15,12 @@ public class TeamController {
         return teams;
     }
 
-    @GetMapping("/showOneTeam")
-    public Team showOneTeam(){
-        String teamid = "1";      // TODO: Change the var to proper springboot GET variable
-        Team team = teamService.displayOneTeam(teamid);
+    @GetMapping("/showOneTeam/{someID}")
+    public Team showOneTeam(@PathVariable(value="someID") String id){
+        Team team = teamService.displayOneTeam(id);
         return team;
     }
+
+
 
 }

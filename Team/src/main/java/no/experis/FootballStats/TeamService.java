@@ -12,11 +12,11 @@ public class TeamService {
 
     // Teams
     public List<Team> displayAllTeams() {
-        ArrayList<Team> people = new ArrayList<Team>();
+        ArrayList<Team> teams = new ArrayList<Team>();
 
-        people.addAll(dbManager.getTeams());
+        teams.addAll(dbManager.getTeams());
 
-        return people;
+        return teams;
     }
 
 

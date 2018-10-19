@@ -1,0 +1,5 @@
+no\experis\FootballStats\FootballStatsApplication.class
+no\experis\FootballStats\Match.class
+no\experis\FootballStats\DatabaseManager.class
+no\experis\FootballStats\MatchController.class
+no\experis\FootballStats\MatchService.class
