@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class PersonController {
+public class AddressController {
 
     private AddressService addressService = new AddressService();
 
