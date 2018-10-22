@@ -15,10 +15,9 @@ public class PersonController {
         return players;
     }
 
-    @GetMapping("/showOnePlayer")
-    public Player showOnePlayer(){
-        String playerid = "1";      // TODO: Change the var to proper springboot GET variable
-        Player player = personService.displayOnePlayer(playerid);
+    @GetMapping("/showOnePlayer/{someID}")
+    public Player showOnePlayer(@PathVariable(value="someID") String id){
+        Player player = personService.displayOnePlayer(id);
         return player;
     }
 
@@ -29,10 +28,9 @@ public class PersonController {
         return coaches;
     }
 
-    @GetMapping("/showOneCoach")
-    public Coach showOneCoach(){
-        String coachid = "2";      // TODO: Change the var to proper springboot GET variable
-        Coach coach = personService.displayOneCoach(coachid);
+    @GetMapping("/showOneCoach/{someID}")
+    public Coach showOneCoach(@PathVariable(value="someID") String id){
+        Coach coach = personService.displayOneCoach(id);
         return coach;
     }
 
@@ -42,10 +40,9 @@ public class PersonController {
         return owners;
     }
 
-    @GetMapping("/showOneOwner")
-    public Owner showOneOwner(){
-        String ownerid = "3";      // TODO: Change the var to proper springboot GET variable
-        Owner owner = personService.displayOneOwner(ownerid);
+    @GetMapping("/showOneOwner/{someID}")
+    public Owner showOneOwner(@PathVariable(value="someID") String id){
+        Owner owner = personService.displayOneOwner(id);
         return owner;
     }
 
@@ -53,6 +50,5 @@ public class PersonController {
     public void test() {
         personService.updateTest();
     }
-
 
 }

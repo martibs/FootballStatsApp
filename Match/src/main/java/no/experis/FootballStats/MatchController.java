@@ -17,7 +17,6 @@ public class MatchController {
 
     @GetMapping("/showOneMatch/{someID}")
     public Match showMatch(@PathVariable(value="someID") String id) {
-
         Match match = matchService.displayOneMatch(id);
         return match;
     }
