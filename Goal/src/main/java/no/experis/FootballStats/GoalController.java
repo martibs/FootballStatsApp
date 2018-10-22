@@ -15,11 +15,9 @@ public class GoalController {
         return goals;
     }
 
-    @GetMapping("/showOneGoal")
-    public Goal showOneGoal(){
-        String Goalid = "1";      // TODO: Change the var to proper springboot GET variable
-        Goal goal = goalService.displayOneGoal(Goalid);
+    @GetMapping("/showOneGoal/{someID}")
+    public Goal showOneGoal(@PathVariable(value="someID") String id){
+        Goal goal = goalService.displayOneGoal(id);
         return goal;
     }
-
 }

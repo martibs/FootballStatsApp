@@ -15,11 +15,9 @@ public class SeasonController {
         return seasons;
     }
 
-    @GetMapping("/showOneSeason")
-    public Season showOneSeason() {
-        String match_id = "1"; // TODO: CHANG TO A CORRECT SPRING BOOT GET VARIABLE!
-
-        Season season = seasonService.displayOneSeason(match_id);
+    @GetMapping("/showOneSeason/{someID}")
+    public Season showOneSeason(@PathVariable(value="someID") String id) {
+        Season season = seasonService.displayOneSeason(id);
         return season;
     }
 

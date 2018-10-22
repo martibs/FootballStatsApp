@@ -15,11 +15,9 @@ public class AddressController {
         return addresses;
     }
 
-    @GetMapping("/showOneAddress")
-    public Address showAddress(){
-        String addressid = "1";      // TODO: Change the var to proper springboot GET variable
-        Address address = addressService.displayOneAddress(addressid);
+    @GetMapping("/showOneAddress/{someID}")
+    public Address showAddress(@PathVariable(value="someID") String id){
+        Address address = addressService.displayOneAddress(id);
         return address;
     }
-
 }

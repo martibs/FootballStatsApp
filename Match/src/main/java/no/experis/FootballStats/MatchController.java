@@ -15,12 +15,10 @@ public class MatchController {
         return matches;
     }
 
-    @GetMapping("/showOneMatch")
-    public Match showMatch() {
-        String match_id = "1"; // TODO: CHANG TO A CORRECT SPRING BOOT GET VARIABLE!
+    @GetMapping("/showOneMatch/{someID}")
+    public Match showMatch(@PathVariable(value="someID") String id) {
 
-        Match match = matchService.displayOneMatch(match_id);
+        Match match = matchService.displayOneMatch(id);
         return match;
     }
-
 }
