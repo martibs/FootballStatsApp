@@ -5,13 +5,6 @@ import java.util.ArrayList;
 
 public class AdminDatabaseManager {
 
-    private final String DB_HOST = "case1234.cqjagjopuiru.eu-central-1.rds.amazonaws.com";
-    private final String DB_PORT = "5432";
-    private final String DB_USER = "case1234";
-    private final String DB_PASSWD = "case1234";
-    private final String DB_NAME = "caseDB";
-    private final String DB_URL = "jdbc:postgresql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME;
-
     private Connection conn = null;
 
     private String id;
@@ -21,7 +14,15 @@ public class AdminDatabaseManager {
     private String addressid;
 
 
-    public Connection connect() {
+    // MAIN DB CONNECTION
+    public Connection connectToMainDB() {
+        final String DB_HOST = "case1234.cqjagjopuiru.eu-central-1.rds.amazonaws.com";
+        final String DB_PORT = "5432";
+        final String DB_USER = "case1234";
+        final String DB_PASSWD = "case1234";
+        final String DB_NAME = "caseDB";
+        final String DB_URL = "jdbc:postgresql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME;
+
         try {
             Class.forName("org.postgresql.Driver");
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
@@ -32,13 +33,61 @@ public class AdminDatabaseManager {
         return conn;
     }
 
-    // TODO: INsert statements ...
+    // USER DB CONNECTION
+    public Connection connectToUserDB() {
+        final String DB_HOST = "users.cqjagjopuiru.eu-central-1.rds.amazonaws.com";
+        final String DB_PORT = "5432";
+        final String DB_USER = "users";
+        final String DB_PASSWD = "users123";
+        final String DB_NAME = "usersDB";
+        final String DB_URL = "jdbc:postgresql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME;
+
+        try {
+            Class.forName("org.postgresql.Driver");
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
+        } catch (ClassNotFoundException | SQLException ex) {
+            //log.error(ex);
+            System.out.println(ex.getMessage());
+        }
+        return conn;
+    }
+
+    // TODO: Insert statements ...
+
+    // USER STATEMENTS
+    public void createUser() {
+
+        String sql = "INSERT INTO USER ...";
+
+
+        try (Connection conn = this.connectToMainDB();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            // loop through the result set
+            while (rs.next()) {
+                id = Integer.toString(rs.getInt("PERSON_ID"));
+                firstname = rs.getString("FIRST_NAME");
+                lastname = rs.getString("LAST_NAME");
+                date = rs.getString("DATE_OF_BIRTH");
+                addressid = Integer.toString(rs.getInt("ADDRESS_ID"));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+
+    // ADMIN STATEMENTS
+
+    // TODO: Insert statements ...
     public void insertPerson() {
 
         String sql = "INSERT ";
 
 
-        try (Connection conn = this.connect();
+        try (Connection conn = this.connectToMainDB();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 

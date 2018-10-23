@@ -12,15 +12,7 @@ public class AdminController {
 
     @GetMapping("/admin")
     public String showAdmin() {
-
         return "{Admin: adminStuff}";
     }
-/*
-    @GetMapping("/showOnePlayer/{someID}")
-    public UserSetup showOnePlayer(@PathVariable(value="someID") String id){
-        UserSetup player = adminService.displayOnePlayer(id);
-        return player;
-    }
-*/
 
 }

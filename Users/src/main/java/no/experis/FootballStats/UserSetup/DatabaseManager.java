@@ -5,13 +5,6 @@ import java.util.ArrayList;
 
 public class DatabaseManager {
 
-    private final String DB_HOST = "case1234.cqjagjopuiru.eu-central-1.rds.amazonaws.com";
-    private final String DB_PORT = "5432";
-    private final String DB_USER = "case1234";
-    private final String DB_PASSWD = "case1234";
-    private final String DB_NAME = "caseDB";
-    private final String DB_URL = "jdbc:postgresql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME;
-
     private Connection conn = null;
 
     private String id;
@@ -20,8 +13,14 @@ public class DatabaseManager {
     private String date;
     private String addressid;
 
-
     public Connection connect() {
+        final String DB_HOST = "users.cqjagjopuiru.eu-central-1.rds.amazonaws.com";
+        final String DB_PORT = "5432";
+        final String DB_USER = "users";
+        final String DB_PASSWD = "users123";
+        final String DB_NAME = "usersDB";
+        final String DB_URL = "jdbc:postgresql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME;
+
         try {
             Class.forName("org.postgresql.Driver");
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
