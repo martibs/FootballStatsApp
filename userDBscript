@@ -1,0 +1,50 @@
+-- Database: "User_db"
+
+-- DROP DATABASE "User_db";
+
+CREATE DATABASE "User_db"
+  WITH OWNER = postgres
+       ENCODING = 'UTF8'
+       TABLESPACE = pg_default
+       LC_COLLATE = 'en_US.UTF-8'
+       LC_CTYPE = 'en_US.UTF-8'
+       CONNECTION LIMIT = -1;
+
+-- Schema: public
+
+-- DROP SCHEMA public;
+
+CREATE SCHEMA public
+  AUTHORIZATION postgres;
+
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO public;
+COMMENT ON SCHEMA public
+  IS 'standard public schema';
+
+-- Table: public.users
+
+-- DROP TABLE public.users;
+
+CREATE TABLE users
+(
+  user_id integer NOT NULL,
+  email character varying(64) NOT NULL,
+  password character varying(64) NOT NULL,
+  CONSTRAINT users_pkey PRIMARY KEY (user_id),
+  CONSTRAINT users_email_key UNIQUE (email)
+);
+ CREATE TABLE player_watchlist
+(
+  player_watch_id integer NOT NULL,
+  user_id integer NOT NULL,
+  CONSTRAINT player_user_pkey PRIMARY KEY (player_watch_id,user_id),
+  CONSTRAINT player_user_fkey FOREIGN KEY(user_id) REFERENCES users(user_id)
+);
+ CREATE TABLE team_watchlist
+(
+  team_watch_id integer NOT NULL,
+  user_id integer NOT NULL,
+  CONSTRAINT team_user_pkey PRIMARY KEY (team_watch_id,user_id),
+  CONSTRAINT team_user_fkey FOREIGN KEY(user_id) REFERENCES users(user_id)
+);
