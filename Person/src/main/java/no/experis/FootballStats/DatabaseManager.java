@@ -353,10 +353,10 @@ public class DatabaseManager {
                 "\n" +
                 "\n" +
                 "-- INSERT ASSOCIATION\n" +
-                "INSERT INTO association(name,description) VALUES ('Association1','Description of Association1...');\n" +
-                "INSERT INTO association(name,description) VALUES ('Association2','Description of Association2...');\n" +
-                "INSERT INTO association(name,description) VALUES ('Association3','Description of Association3...');\n" +
-                "INSERT INTO association(name,description) VALUES ('Association4','Description of Association4...');\n" +
+                "INSERT INTO association(name,description) VALUES ('Manchester City','Description of Association1...');\n" +
+                "INSERT INTO association(name,description) VALUES ('Manchester United','Description of Association2...');\n" +
+                "INSERT INTO association(name,description) VALUES ('Liverpool','Description of Association3...');\n" +
+                "INSERT INTO association(name,description) VALUES ('Chelsea','Description of Association4...');\n" +
                 "\n" +
                 "\n" +
                 "-- INSERT PERSON\n" +
@@ -364,6 +364,10 @@ public class DatabaseManager {
                 "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Martin','Martinsen','1993-05-16',2);\n" +
                 "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Thor','Thordenlund','1991-03-26',3);\n" +
                 "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Harald','Hudini','1989-02-08',4);\n" +
+                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Gunnar','Gunnarsen','1989-02-08',1);\n" +
+                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Svein','Svendsen','1989-02-08',2);\n" +
+                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Gjert','Gjertsen','1989-02-08',3);\n" +
+                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Mads','Madsen','1989-02-08',4);\n" +
                 "\n" +
                 "-- INSERT GOAL_TYPE\n" +
                 "INSERT INTO goal_type(type) VALUES ('Penalty');\n" +
@@ -413,6 +417,10 @@ public class DatabaseManager {
                 "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Attack','1',1,1);\n" +
                 "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Defence','2',2,2);\n" +
                 "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Center','3',3,3);\n" +
+                "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Attack','9',4,3);\n" +
+                "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Attack','9',5,2);\n" +
+                "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Center','5',6,2);\n" +
+                "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Center','6',7,2);\n" +
                 "\n" +
                 "-- INSERT MATCH_POSITION\n" +
                 "INSERT INTO MATCH_POSITION(position,player_id,match_id) VALUES ('Attack',1,1);\n" +
