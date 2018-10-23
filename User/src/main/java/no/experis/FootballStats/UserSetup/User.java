@@ -1,6 +1,5 @@
-package no.experis.FootballStats;
+package no.experis.FootballStats.UserSetup;
 
-import javax.validation.constraints.Email;
 import java.util.ArrayList;
 
 public class User {

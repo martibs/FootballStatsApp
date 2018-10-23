@@ -1,9 +1,6 @@
-package no.experis.FootballStats;
+package no.experis.FootballStats.UserSetup;
 
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class UserService {
@@ -17,7 +14,7 @@ public class UserService {
             dbManager.insertUserInDB();
         }else{
             // TODO: Handle errors
-            System.out.println("ERROR, User input was incorrect!");
+            System.out.println("ERROR, UserSetup input was incorrect!");
         }
     }
 

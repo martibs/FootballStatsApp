@@ -1,4 +1,4 @@
-package no.experis.FootballStats;
+package no.experis.FootballStats.UserSetup;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -60,7 +60,7 @@ public class DatabaseManager {
                 number = rs.getString("NUMBER");
                 team_id = Integer.toString(rs.getInt("TEAM_ID"));
 
-                //tempUser = new User(id,firstname,lastname,date,addressid, player_id, normal_position, number, team_id);
+                //tempUser = new UserSetup(id,firstname,lastname,date,addressid, player_id, normal_position, number, team_id);
                 tempUserList.add(tempUser);
             }
 
@@ -98,7 +98,7 @@ public class DatabaseManager {
                 team_id = Integer.toString(rs.getInt("TEAM_ID"));
 
                 // TODO: Create user
-                //tempUser = new User();
+                //tempUser = new UserSetup();
                 tempUserList.add(tempUser);
             }
 
