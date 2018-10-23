@@ -31,6 +31,19 @@ public class PersonService {
         }
         return null;
     }
+    public List<Player> displayAllPlayersInTeam(String team_id){
+        List<Player> players = displayAllPlayers();
+
+        ArrayList<Player> playersInTeamList = new ArrayList<Player>();
+
+        for (Player player : players){
+            if(player.getTeam_id().equals(team_id)){
+                playersInTeamList.add(player);
+            }
+
+        }
+        return playersInTeamList;
+    }
 
     // Coaches
 
@@ -54,6 +67,7 @@ public class PersonService {
         }
         return null;
     }
+
 
     // Owners
 

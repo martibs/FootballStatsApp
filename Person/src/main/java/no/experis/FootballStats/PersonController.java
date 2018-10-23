@@ -21,6 +21,11 @@ public class PersonController {
         return player;
     }
 
+    @GetMapping("/showPlayersInTeam/{someID}")
+    public List displayAllPlayersInTeam(@PathVariable(value="someID") String id){
+        List<Player> players = personService.displayAllPlayersInTeam(id);
+        return players;
+    }
 
     @GetMapping("/showCoaches")
     public List showCoaches() {
