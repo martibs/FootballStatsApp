@@ -92,9 +92,9 @@ public class PersonService {
     }
 
 
-    // Test method for updating the database
-    public void updateTest(){
-        dbManager.updateTest();
+    // Creates a new database
+    public void createNewDatabase(){
+        dbManager.createNewDatabase();
     }
 
 }
