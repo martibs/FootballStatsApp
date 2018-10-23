@@ -57,10 +57,10 @@ public class AdminDatabaseManager {
     // USER STATEMENTS
     public void createUser() {
 
-        String sql = "INSERT INTO USER ...";
+        String sql = "INSERT INTO address(address_id,address_line_1,address_line_2,address_line_3,postal_code,city,country) VALUES(?,?,?,?,?,?,?)";
 
 
-        try (Connection conn = this.connectToMainDB();
+        try (Connection conn = this.connectToUserDB();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 

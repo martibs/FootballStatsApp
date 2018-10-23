@@ -28,7 +28,7 @@ COMMENT ON SCHEMA public
 
 CREATE TABLE users
 (
-  user_id integer NOT NULL,
+  user_id SERIAL NOT NULL,
   email character varying(64) NOT NULL,
   password character varying(64) NOT NULL,
   CONSTRAINT users_pkey PRIMARY KEY (user_id),
