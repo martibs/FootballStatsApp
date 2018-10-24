@@ -12,7 +12,8 @@ public class UserService {
     public void registerUser(){
         if(validateUserInput()){
             dbManager.insertUserInDB();
-        }else{
+        }
+        else{
             // TODO: Handle errors
             System.out.println("ERROR, UserSetup input was incorrect!");
         }
@@ -26,4 +27,6 @@ public class UserService {
             return false;
         }
     }
+
+
 }
