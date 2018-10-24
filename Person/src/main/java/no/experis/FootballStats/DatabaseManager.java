@@ -21,6 +21,8 @@ public class DatabaseManager {
     private String addressid;
 
 
+    // TODO: CHECK CONNECTION POOLING!
+
     public Connection connect() {
         try {
             Class.forName("org.postgresql.Driver");

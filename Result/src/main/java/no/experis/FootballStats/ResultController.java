@@ -11,14 +11,12 @@ public class ResultController {
 
     @GetMapping("/showResults")
     public List showAddresses() {
-        List<Result> results = resultService.displayAllResults();
-        return results;
+        return resultService.displayAllResults();
     }
 
     @GetMapping("/showOneResult/{someID}")
     public Result showAddress(@PathVariable(value="someID") String id){
-        Result result = resultService.displayOneResult(id);
-        return result;
+        return resultService.displayOneResult(id);
     }
 
 }

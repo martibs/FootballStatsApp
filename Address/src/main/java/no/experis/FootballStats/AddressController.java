@@ -11,13 +11,11 @@ public class AddressController {
 
     @GetMapping("/showAddresses")
     public List showAddresses() {
-        List<Address> addresses = addressService.displayAllAddresses();
-        return addresses;
+        return addressService.displayAllAddresses();
     }
 
     @GetMapping("/showOneAddress/{someID}")
     public Address showAddress(@PathVariable(value="someID") String id){
-        Address address = addressService.displayOneAddress(id);
-        return address;
+        return addressService.displayOneAddress(id);
     }
 }

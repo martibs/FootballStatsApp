@@ -9,46 +9,45 @@ public class PersonController {
 
     private PersonService personService = new PersonService();
 
+    // PLAYERS
+
     @GetMapping("/showPlayers")
     public List showPlayers() {
-        List<Player> players = personService.displayAllPlayers();
-        return players;
+        return personService.displayAllPlayers();
     }
 
     @GetMapping("/showOnePlayer/{someID}")
     public Player showOnePlayer(@PathVariable(value="someID") String id){
-        Player player = personService.displayOnePlayer(id);
-        return player;
+        return personService.displayOnePlayer(id);
     }
 
     @GetMapping("/showPlayersInTeam/{someID}")
     public List displayAllPlayersInTeam(@PathVariable(value="someID") String id){
-        List<Player> players = personService.displayAllPlayersInTeam(id);
-        return players;
+        return personService.displayAllPlayersInTeam(id);
     }
+
+    // COACHES
 
     @GetMapping("/showCoaches")
     public List showCoaches() {
-        List<Coach> coaches = personService.displayAllCoaches();
-        return coaches;
+        return personService.displayAllCoaches();
     }
 
     @GetMapping("/showOneCoach/{someID}")
     public Coach showOneCoach(@PathVariable(value="someID") String id){
-        Coach coach = personService.displayOneCoach(id);
-        return coach;
+        return personService.displayOneCoach(id);
     }
+
+    // OWNERS
 
     @GetMapping("/showOwners")
     public List showOwners() {
-        List<Owner> owners = personService.displayAllOwners();
-        return owners;
+        return personService.displayAllOwners();
     }
 
     @GetMapping("/showOneOwner/{someID}")
     public Owner showOneOwner(@PathVariable(value="someID") String id){
-        Owner owner = personService.displayOneOwner(id);
-        return owner;
+        return personService.displayOneOwner(id);
     }
 
     @GetMapping("/test")

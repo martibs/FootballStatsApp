@@ -11,14 +11,12 @@ public class TeamController {
 
     @GetMapping("/showTeams")
     public List showTeams() {
-        List<Team> teams = teamService.displayAllTeams();
-        return teams;
+        return teamService.displayAllTeams();
     }
 
     @GetMapping("/showOneTeam/{someID}")
     public Team showOneTeam(@PathVariable(value="someID") String id){
-        Team team = teamService.displayOneTeam(id);
-        return team;
+        return teamService.displayOneTeam(id);
     }
 
 

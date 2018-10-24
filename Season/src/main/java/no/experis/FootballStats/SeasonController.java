@@ -11,14 +11,12 @@ public class SeasonController {
 
     @GetMapping("/showSeasons")
     public List showSeasons() {
-        List<Season> seasons = seasonService.displayAllSeasons();
-        return seasons;
+        return seasonService.displayAllSeasons();
     }
 
     @GetMapping("/showOneSeason/{someID}")
     public Season showOneSeason(@PathVariable(value="someID") String id) {
-        Season season = seasonService.displayOneSeason(id);
-        return season;
+        return seasonService.displayOneSeason(id);
     }
 
 }

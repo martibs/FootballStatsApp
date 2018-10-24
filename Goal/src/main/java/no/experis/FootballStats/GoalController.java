@@ -11,13 +11,11 @@ public class GoalController {
 
     @GetMapping("/showGoals")
     public List showGoals() {
-        List<Goal> goals = goalService.displayAllGoals();
-        return goals;
+        return goalService.displayAllGoals();
     }
 
     @GetMapping("/showOneGoal/{someID}")
     public Goal showOneGoal(@PathVariable(value="someID") String id){
-        Goal goal = goalService.displayOneGoal(id);
-        return goal;
+        return goalService.displayOneGoal(id);
     }
 }

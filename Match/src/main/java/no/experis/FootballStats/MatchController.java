@@ -11,13 +11,11 @@ public class MatchController {
 
     @GetMapping("/showMatches")
     public List showMatches() {
-        List<Match> matches = matchService.displayAllMatches();
-        return matches;
+        return matchService.displayAllMatches();
     }
 
     @GetMapping("/showOneMatch/{someID}")
     public Match showMatch(@PathVariable(value="someID") String id) {
-        Match match = matchService.displayOneMatch(id);
-        return match;
+        return matchService.displayOneMatch(id);
     }
 }
