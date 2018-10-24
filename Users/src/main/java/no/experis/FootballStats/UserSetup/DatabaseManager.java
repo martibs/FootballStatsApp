@@ -7,13 +7,14 @@ public class DatabaseManager {
 
     private Connection conn = null;
 
-    private String id;
-    private String firstname;
-    private String lastname;
-    private String date;
-    private String addressid;
+    private String userId;
+    private String email;
+    private String password;
+    private ArrayList<String> player_watchlist;
+    private ArrayList<String> team_watchlist;
 
-    public Connection connect() {
+    // USER DB CONNECTION
+    public Connection connectToUserDB() {
         final String DB_HOST = "users.cqjagjopuiru.eu-central-1.rds.amazonaws.com";
         final String DB_PORT = "5432";
         final String DB_USER = "users";
@@ -31,37 +32,17 @@ public class DatabaseManager {
         return conn;
     }
 
+
     // TODO: Store user data when the user registers their account.
     public void insertUserInDB() {
 
-        String sql = "INSERT ";
+        String sql = "INSERT INTO USERS(email,password) VALUES(?,?)";
 
-        User tempUser = null;
-        ArrayList<User> tempUserList = new ArrayList<User>();
-        String player_id;
-        String normal_position;
-        String number;
-        String team_id;
-
-        try (Connection conn = this.connect();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-
-            // loop through the result set
-            while (rs.next()) {
-                id = Integer.toString(rs.getInt("PERSON_ID"));
-                firstname = rs.getString("FIRST_NAME");
-                lastname = rs.getString("LAST_NAME");
-                date = rs.getString("DATE_OF_BIRTH");
-                addressid = Integer.toString(rs.getInt("ADDRESS_ID"));
-                player_id = Integer.toString(rs.getInt("PLAYER_ID"));
-                normal_position = rs.getString("NORMAL_POSITION");
-                number = rs.getString("NUMBER");
-                team_id = Integer.toString(rs.getInt("TEAM_ID"));
-
-                //tempUser = new UserSetup(id,firstname,lastname,date,addressid, player_id, normal_position, number, team_id);
-                tempUserList.add(tempUser);
-            }
+        try (Connection conn = this.connectToUserDB();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, email);
+            pstmt.setString(2, password);
+            pstmt.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -71,30 +52,20 @@ public class DatabaseManager {
     // TODO: Get user data from the database.
     public ArrayList<User> getUsersFromDb() {
 
-        String sql = "SELECT * FROM USER ";
+        String sql = "SELECT * FROM USERS ";
 
         User tempUser = null;
         ArrayList<User> tempUserList = new ArrayList<User>();
-        String player_id;
-        String normal_position;
-        String number;
-        String team_id;
 
-        try (Connection conn = this.connect();
+        try (Connection conn = this.connectToUserDB();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
             // loop through the result set
             while (rs.next()) {
-                id = Integer.toString(rs.getInt("PERSON_ID"));
-                firstname = rs.getString("FIRST_NAME");
-                lastname = rs.getString("LAST_NAME");
-                date = rs.getString("DATE_OF_BIRTH");
-                addressid = Integer.toString(rs.getInt("ADDRESS_ID"));
-                player_id = Integer.toString(rs.getInt("PLAYER_ID"));
-                normal_position = rs.getString("NORMAL_POSITION");
-                number = rs.getString("NUMBER");
-                team_id = Integer.toString(rs.getInt("TEAM_ID"));
+
+                email = rs.getString("EMAIL");
+                password = rs.getString("PASSWORD");
 
                 // TODO: Create user
                 //tempUser = new UserSetup();
@@ -105,6 +76,18 @@ public class DatabaseManager {
             System.out.println(e.getMessage());
         }
         return tempUserList;
+    }
+
+    public void deleteUserWatchPlayer(int player_watch_id,int user_id) {
+        String sql = "DELETE FROM player_watchlist WHERE player_watch_id = user_id";
+
+        try (Connection conn = this.connectToUserDB();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }
