@@ -74,7 +74,6 @@ public class AdminDatabaseManager {
     public void createUserWatchPlayer(int player_watch_id,int user_id) {
         String sql = "INSERT INTO player_watchlist(player_watch_id,user_id) VALUES(?,?)";
 
-
         try (Connection conn = this.connectToUserDB();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, player_watch_id);
@@ -96,7 +95,6 @@ public class AdminDatabaseManager {
             pstmt.setInt(1, team_watch_id);
             pstmt.setInt(2, user_id);
             pstmt.executeUpdate();
-
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -375,7 +373,7 @@ public class AdminDatabaseManager {
         String sql = "INSERT ";
 
 
-        try (Connection conn = this.connectToMainDB();
+        try (Connection conn = this.connectToMainDB();  // Main db
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -392,6 +390,7 @@ public class AdminDatabaseManager {
             System.out.println(e.getMessage());
         }
     }
-    */
+
+*/
 
 }

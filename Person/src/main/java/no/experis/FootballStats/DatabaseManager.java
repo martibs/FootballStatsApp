@@ -156,25 +156,25 @@ public class DatabaseManager {
         System.out.println("started to create a table");
 
         String sql = "DROP TABLE IF EXISTS MATCH_GOAL;\n" +
-                     "DROP TABLE IF EXISTS MATCH_POSITION;\n" +
-                     "DROP TABLE IF EXISTS PLAYER;\n" +
-                     "DROP TABLE IF EXISTS RESULT;\n" +
-                     "DROP TABLE IF EXISTS MATCH;\n" +
-                     "DROP TABLE IF EXISTS TEAM;\n" +
-                     "DROP TABLE IF EXISTS COACH;\n" +
-                     "DROP TABLE IF EXISTS OWNER;\n" +
-                     "DROP TABLE IF EXISTS CONTACT;\n" +
-                     "DROP TABLE IF EXISTS GOAL_TYPE;\n" +
-                     "DROP TABLE IF EXISTS PERSON;\n" +
-                     "DROP TABLE IF EXISTS ASSOCIATION;\n" +
-                     "DROP TABLE IF EXISTS LOCATION;\n" +
-                     "DROP TABLE IF EXISTS SEASON;\n" +
-                     "DROP TABLE IF EXISTS ADDRESS;\n" +
+                "DROP TABLE IF EXISTS MATCH_POSITION;\n" +
+                "DROP TABLE IF EXISTS PLAYER;\n" +
+                "DROP TABLE IF EXISTS RESULT;\n" +
+                "DROP TABLE IF EXISTS MATCH;\n" +
+                "DROP TABLE IF EXISTS TEAM;\n" +
+                "DROP TABLE IF EXISTS COACH;\n" +
+                "DROP TABLE IF EXISTS OWNER;\n" +
+                "DROP TABLE IF EXISTS CONTACT;\n" +
+                "DROP TABLE IF EXISTS GOAL_TYPE;\n" +
+                "DROP TABLE IF EXISTS PERSON;\n" +
+                "DROP TABLE IF EXISTS ASSOCIATION;\n" +
+                "DROP TABLE IF EXISTS LOCATION;\n" +
+                "DROP TABLE IF EXISTS SEASON;\n" +
+                "DROP TABLE IF EXISTS ADDRESS;\n" +
                 "\n" +
                 "\n" +
                 "CREATE TABLE ADDRESS\n" +
                 "(\n" +
-                "  address_id VARCHAR(64) NOT NULL,\n" +
+                "  address_id SERIAL NOT NULL,\n" +
                 "  address_line_1 VARCHAR(64) NOT NULL,\n" +
                 "  address_line_2 VARCHAR(64),\n" +
                 "  postal_code VARCHAR(8) NOT NULL,\n" +
@@ -186,7 +186,7 @@ public class DatabaseManager {
                 "\n" +
                 "CREATE TABLE SEASON\n" +
                 "(\n" +
-                "  season_id INT NOT NULL,\n" +
+                "  season_id SERIAL NOT NULL,\n" +
                 "  start_date DATE NOT NULL,\n" +
                 "  end_date DATE NOT NULL,\n" +
                 "  name VARCHAR(64) NOT NULL,\n" +
@@ -196,17 +196,17 @@ public class DatabaseManager {
                 "\n" +
                 "CREATE TABLE LOCATION\n" +
                 "(\n" +
-                "  location_id INT NOT NULL,\n" +
+                "  location_id SERIAL NOT NULL,\n" +
                 "  name VARCHAR(64) NOT NULL,\n" +
                 "  description VARCHAR(64),\n" +
-                "  address_id VARCHAR(64) NOT NULL,\n" +
+                "  address_id integer NOT NULL,\n" +
                 "  PRIMARY KEY (location_id),\n" +
                 "  FOREIGN KEY (address_id) REFERENCES ADDRESS(address_id)\n" +
                 ");\n" +
                 "\n" +
                 "CREATE TABLE ASSOCIATION\n" +
                 "(\n" +
-                "  association_id INT NOT NULL,\n" +
+                "  association_id SERIAL NOT NULL,\n" +
                 "  name VARCHAR(64) NOT NULL,\n" +
                 "  description VARCHAR(64) NOT NULL,\n" +
                 "  PRIMARY KEY (association_id)\n" +
@@ -214,25 +214,25 @@ public class DatabaseManager {
                 "\n" +
                 "CREATE TABLE PERSON\n" +
                 "(\n" +
-                "  person_id INT NOT NULL,\n" +
+                "  person_id SERIAL NOT NULL,\n" +
                 "  first_name VARCHAR(64) NOT NULL,\n" +
                 "  last_name VARCHAR(64) NOT NULL,\n" +
                 "  date_of_birth DATE NOT NULL,\n" +
-                "  address_id VARCHAR(64),\n" +
+                "  address_id integer,\n" +
                 "  PRIMARY KEY (person_id),\n" +
                 "  FOREIGN KEY (address_id) REFERENCES ADDRESS(address_id)\n" +
                 ");\n" +
                 "\n" +
                 "CREATE TABLE GOAL_TYPE\n" +
                 "(\n" +
-                "  goal_type_id INT NOT NULL,\n" +
+                "  goal_type_id SERIAL NOT NULL,\n" +
                 "  type VARCHAR(64) NOT NULL,\n" +
                 "  PRIMARY KEY (goal_type_id)\n" +
                 ");\n" +
                 "\n" +
                 "CREATE TABLE CONTACT\n" +
                 "(\n" +
-                "  contact_id INT NOT NULL,\n" +
+                "  contact_id SERIAL NOT NULL,\n" +
                 "  contact_type VARCHAR(64) NOT NULL,\n" +
                 "  contact_detail VARCHAR(64) NOT NULL,\n" +
                 "  person_id INT NOT NULL,\n" +
@@ -242,7 +242,7 @@ public class DatabaseManager {
                 "\n" +
                 "CREATE TABLE OWNER\n" +
                 "(\n" +
-                "  owner_id INT NOT NULL,\n" +
+                "  owner_id SERIAL NOT NULL,\n" +
                 "  person_id INT NOT NULL,\n" +
                 "  PRIMARY KEY (owner_id),\n" +
                 "  FOREIGN KEY (person_id) REFERENCES PERSON(person_id)\n" +
@@ -250,7 +250,7 @@ public class DatabaseManager {
                 "\n" +
                 "CREATE TABLE COACH\n" +
                 "(\n" +
-                "  coach_id INT NOT NULL,\n" +
+                "  coach_id SERIAL NOT NULL,\n" +
                 "  person_id INT NOT NULL,\n" +
                 "  PRIMARY KEY (coach_id),\n" +
                 "  FOREIGN KEY (person_id) REFERENCES PERSON(person_id)\n" +
@@ -258,7 +258,7 @@ public class DatabaseManager {
                 "\n" +
                 "CREATE TABLE TEAM\n" +
                 "(\n" +
-                "  team_id INT NOT NULL,\n" +
+                "  team_id SERIAL NOT NULL,\n" +
                 "  owner_id INT NOT NULL,\n" +
                 "  association_id INT NOT NULL,\n" +
                 "  coach_id INT NOT NULL,\n" +
@@ -272,7 +272,7 @@ public class DatabaseManager {
                 "\n" +
                 "CREATE TABLE MATCH\n" +
                 "(\n" +
-                "  match_id INT NOT NULL,\n" +
+                "  match_id SERIAL NOT NULL,\n" +
                 "  match_date DATE NOT NULL,\n" +
                 "  season_id INT NOT NULL,\n" +
                 "  location_id INT NOT NULL,\n" +
@@ -298,7 +298,7 @@ public class DatabaseManager {
                 "\n" +
                 "CREATE TABLE PLAYER\n" +
                 "(\n" +
-                "  player_id INT NOT NULL,\n" +
+                "  player_id SERIAL NOT NULL,\n" +
                 "  normal_position VARCHAR(64),\n" +
                 "  number VARCHAR(8),\n" +
                 "  person_id INT NOT NULL,\n" +
@@ -320,7 +320,7 @@ public class DatabaseManager {
                 "\n" +
                 "CREATE TABLE MATCH_GOAL\n" +
                 "(\n" +
-                "  goal_id INT NOT NULL,\n" +
+                "  goal_id SERIAL NOT NULL,\n" +
                 "  description VARCHAR(64),\n" +
                 "  goal_type_id INT NOT NULL,\n" +
                 "  match_id INT NOT NULL,\n" +
@@ -332,72 +332,76 @@ public class DatabaseManager {
                 ");\n" +
                 "\n" +
                 "-- INSERT ADDRESS\n" +
-                "INSERT INTO address(address_id,address_line_1,address_line_2,address_line_3,postal_code,city,country) VALUES(1,'Granfaret 32',NULL,NULL,'1405','Langhus','Norway');\n" +
-                "INSERT INTO address(address_id,address_line_1,address_line_2,address_line_3,postal_code,city,country) VALUES(2,'Aasveien 33',NULL,NULL,'1430','Aas','Norway');\n" +
-                "INSERT INTO address(address_id,address_line_1,address_line_2,address_line_3,postal_code,city,country) VALUES(3,'Skiveien 34',NULL,NULL,'1400','Ski','Norway');\n" +
-                "INSERT INTO address(address_id,address_line_1,address_line_2,address_line_3,postal_code,city,country) VALUES(4,'Bergenveien 35',NULL,NULL,'1300','Bergen','Norway');\n" +
+                "INSERT INTO address(address_line_1,address_line_2,address_line_3,postal_code,city,country) VALUES('Granfaret 32',NULL,NULL,'1405','Langhus','Norway');\n" +
+                "INSERT INTO address(address_line_1,address_line_2,address_line_3,postal_code,city,country) VALUES('Aasveien 33',NULL,NULL,'1430','Aas','Norway');\n" +
+                "INSERT INTO address(address_line_1,address_line_2,address_line_3,postal_code,city,country) VALUES('Skiveien 34',NULL,NULL,'1400','Ski','Norway');\n" +
+                "INSERT INTO address(address_line_1,address_line_2,address_line_3,postal_code,city,country) VALUES('Bergenveien 35',NULL,NULL,'1300','Bergen','Norway');\n" +
                 "\n" +
                 "\n" +
                 "-- INSERT SEASON\n" +
-                "INSERT INTO season(season_id,start_date,end_date,name,description) VALUES (1,'2018-01-01','2018-12-31','Season1','First Season');\n" +
-                "INSERT INTO season(season_id,start_date,end_date,name,description) VALUES (2,'2019-01-01','2019-12-31','Season2','Second Season');\n" +
-                "INSERT INTO season(season_id,start_date,end_date,name,description) VALUES (3,'2020-01-01','2020-12-31','Season3','Third Season');\n" +
+                "INSERT INTO season(start_date,end_date,name,description) VALUES ('2018-01-01','2018-12-31','Season1','First Season');\n" +
+                "INSERT INTO season(start_date,end_date,name,description) VALUES ('2019-01-01','2019-12-31','Season2','Second Season');\n" +
+                "INSERT INTO season(start_date,end_date,name,description) VALUES ('2020-01-01','2020-12-31','Season3','Third Season');\n" +
                 "\n" +
                 "\n" +
                 "-- INSERT LOCATION\n" +
-                "INSERT INTO location(location_id,name,description,address_id) VALUES (1,'Langhus','Description of Langhus...',1);\n" +
-                "INSERT INTO location(location_id,name,description,address_id) VALUES (2,'Aas','Description of Aas...',2);\n" +
-                "INSERT INTO location(location_id,name,description,address_id) VALUES (3,'Ski','Description of Ski...',3);\n" +
-                "INSERT INTO location(location_id,name,description,address_id) VALUES (4,'Bergen','Description of Bergen...',4);\n" +
+                "INSERT INTO location(name,description,address_id) VALUES ('Langhus','Description of Langhus...',1);\n" +
+                "INSERT INTO location(name,description,address_id) VALUES ('Aas','Description of Aas...',2);\n" +
+                "INSERT INTO location(name,description,address_id) VALUES ('Ski','Description of Ski...',3);\n" +
+                "INSERT INTO location(name,description,address_id) VALUES ('Bergen','Description of Bergen...',4);\n" +
                 "\n" +
                 "\n" +
                 "\n" +
                 "-- INSERT ASSOCIATION\n" +
-                "INSERT INTO association(association_id,name,description) VALUES (1,'Association1','Description of Association1...');\n" +
-                "INSERT INTO association(association_id,name,description) VALUES (2,'Association2','Description of Association2...');\n" +
-                "INSERT INTO association(association_id,name,description) VALUES (3,'Association3','Description of Association3...');\n" +
-                "INSERT INTO association(association_id,name,description) VALUES (4,'Association4','Description of Association4...');\n" +
+                "INSERT INTO association(name,description) VALUES ('Manchester City','Description of Association1...');\n" +
+                "INSERT INTO association(name,description) VALUES ('Manchester United','Description of Association2...');\n" +
+                "INSERT INTO association(name,description) VALUES ('Liverpool','Description of Association3...');\n" +
+                "INSERT INTO association(name,description) VALUES ('Chelsea','Description of Association4...');\n" +
                 "\n" +
                 "\n" +
                 "-- INSERT PERSON\n" +
-                "INSERT INTO person(person_id,first_name,last_name,date_of_birth,address_id) VALUES (1,'Gabriel','Aunan','1991-03-26',1);\n" +
-                "INSERT INTO person(person_id,first_name,last_name,date_of_birth,address_id) VALUES (2,'Martin','Martinsen','1993-05-16',2);\n" +
-                "INSERT INTO person(person_id,first_name,last_name,date_of_birth,address_id) VALUES (3,'Thor','Thordenlund','1991-03-26',3);\n" +
-                "INSERT INTO person(person_id,first_name,last_name,date_of_birth,address_id) VALUES (4,'Harald','Hudini','1989-02-08',4);\n" +
+                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Gabriel','Aunan','1991-03-26',1);\n" +
+                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Martin','Martinsen','1993-05-16',2);\n" +
+                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Thor','Thordenlund','1991-03-26',3);\n" +
+                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Harald','Hudini','1989-02-08',4);\n" +
+                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Gunnar','Gunnarsen','1989-02-08',1);\n" +
+                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Svein','Svendsen','1989-02-08',2);\n" +
+                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Gjert','Gjertsen','1989-02-08',3);\n" +
+                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Mads','Madsen','1989-02-08',4);\n" +
                 "\n" +
                 "-- INSERT GOAL_TYPE\n" +
-                "INSERT INTO goal_type(goal_type_id,type) VALUES (1,'Penalty');\n" +
-                "INSERT INTO goal_type(goal_type_id,type) VALUES (2,'Free kick');\n" +
-                "INSERT INTO goal_type(goal_type_id,type) VALUES (3,'Corner');\n" +
+                "INSERT INTO goal_type(type) VALUES ('Penalty');\n" +
+                "INSERT INTO goal_type(type) VALUES ('Free kick');\n" +
+                "INSERT INTO goal_type(type) VALUES ('Corner');\n" +
                 "\n" +
                 "-- INSERT CONTACT\n" +
-                "INSERT INTO contact(contact_id,contact_type,contact_detail, person_id) VALUES (1,'Cell','98047957',1);\n" +
-                "INSERT INTO contact(contact_id,contact_type,contact_detail, person_id) VALUES (2,'Cell','98076487',2);\n" +
-                "INSERT INTO contact(contact_id,contact_type,contact_detail, person_id) VALUES (3,'Cell','98968473',3);\n" +
+                "INSERT INTO contact(contact_type,contact_detail, person_id) VALUES ('Cell','98047957',1);\n" +
+                "INSERT INTO contact(contact_type,contact_detail, person_id) VALUES ('Cell','98076487',2);\n" +
+                "INSERT INTO contact(contact_type,contact_detail, person_id) VALUES ('Cell','98968473',3);\n" +
                 "\n" +
                 "-- INSERT OWNER\n" +
-                "INSERT INTO owner(owner_id,person_id) VALUES (1,1);\n" +
-                "INSERT INTO owner(owner_id,person_id) VALUES (2,2);\n" +
-                "INSERT INTO owner(owner_id,person_id) VALUES (3,3);\n" +
+                "INSERT INTO owner(person_id) VALUES (1);\n" +
+                "INSERT INTO owner(person_id) VALUES (2);\n" +
+                "INSERT INTO owner(person_id) VALUES (3);\n" +
                 "\n" +
                 "-- INSERT COACH\n" +
-                "INSERT INTO coach(coach_id,person_id) VALUES (1,1);\n" +
-                "INSERT INTO coach(coach_id,person_id) VALUES (2,2);\n" +
-                "INSERT INTO coach(coach_id,person_id) VALUES (3,3);\n" +
+                "INSERT INTO coach(person_id) VALUES (1);\n" +
+                "INSERT INTO coach(person_id) VALUES (2);\n" +
+                "INSERT INTO coach(person_id) VALUES (3);\n" +
                 "\n" +
                 "-- INSERT TEAM\n" +
-                "INSERT INTO team(team_id,owner_id,association_id,coach_id,location_id) VALUES (1,1,1,1,1);\n" +
-                "INSERT INTO team(team_id,owner_id,association_id,coach_id,location_id) VALUES (2,2,2,2,2);\n" +
-                "INSERT INTO team(team_id,owner_id,association_id,coach_id,location_id) VALUES (3,3,3,3,3);\n" +
+                "INSERT INTO team(owner_id,association_id,coach_id,location_id) VALUES (1,1,1,1);\n" +
+                "INSERT INTO team(owner_id,association_id,coach_id,location_id) VALUES (2,2,2,2);\n" +
+                "INSERT INTO team(owner_id,association_id,coach_id,location_id) VALUES (3,3,3,3);\n" +
                 "\n" +
                 "-- INESRT MACTCH\n" +
-                "INSERT INTO match(match_id,match_date,season_id,location_id,home_team_id,away_team_id) VALUES (1,'2018-06-01',1,1,1,2);\n" +
-                "INSERT INTO match(match_id,match_date,season_id,location_id,home_team_id,away_team_id) VALUES (2,'2018-06-01',1,2,2,3);\n" +
-                "INSERT INTO match(match_id,match_date,season_id,location_id,home_team_id,away_team_id) VALUES (3,'2018-06-01',1,3,3,1);\n" +
+                "INSERT INTO match(match_date,season_id,location_id,home_team_id,away_team_id) VALUES ('2018-06-01',1,1,1,2);\n" +
+                "INSERT INTO match(match_date,season_id,location_id,home_team_id,away_team_id) VALUES ('2018-06-01',1,2,2,3);\n" +
+                "INSERT INTO match(match_date,season_id,location_id,home_team_id,away_team_id) VALUES ('2018-06-01',1,3,3,1);\n" +
                 "\n" +
-                "INSERT INTO match(match_id,match_date,season_id,location_id,home_team_id,away_team_id) VALUES (4,'2019-06-01',2,1,1,2);\n" +
-                "INSERT INTO match(match_id,match_date,season_id,location_id,home_team_id,away_team_id) VALUES (5,'2019-06-01',2,2,2,3);\n" +
-                "INSERT INTO match(match_id,match_date,season_id,location_id,home_team_id,away_team_id) VALUES (6,'2019-06-01',2,3,3,1);\n" +
+                "INSERT INTO match(match_date,season_id,location_id,home_team_id,away_team_id) VALUES ('2019-06-01',2,1,1,2);\n" +
+                "INSERT INTO match(match_date,season_id,location_id,home_team_id,away_team_id) VALUES ('2019-06-01',2,2,2,3);\n" +
+                "INSERT INTO match(match_date,season_id,location_id,home_team_id,away_team_id) VALUES ('2019-06-01',2,3,3,1);\n" +
                 "\n" +
                 "-- INSERT RESULT\n" +
                 "INSERT INTO result(score,result,match_id,team_id) VALUES (3,'Win',1,1);\n" +
@@ -410,9 +414,13 @@ public class DatabaseManager {
                 "INSERT INTO result(score,result,match_id,team_id) VALUES (1,'Loss',3,3);\n" +
                 "\n" +
                 "-- INSERT PLAYER\n" +
-                "INSERT INTO Player(player_id,normal_position,number,person_id,team_id) VALUES (1,'Attack','1',1,1);\n" +
-                "INSERT INTO Player(player_id,normal_position,number,person_id,team_id) VALUES (2,'Defence','2',2,2);\n" +
-                "INSERT INTO Player(player_id,normal_position,number,person_id,team_id) VALUES (3,'Center','3',3,3);\n" +
+                "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Attack','1',1,1);\n" +
+                "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Defence','2',2,2);\n" +
+                "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Center','3',3,3);\n" +
+                "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Attack','9',4,3);\n" +
+                "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Attack','9',5,2);\n" +
+                "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Center','5',6,2);\n" +
+                "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Center','6',7,2);\n" +
                 "\n" +
                 "-- INSERT MATCH_POSITION\n" +
                 "INSERT INTO MATCH_POSITION(position,player_id,match_id) VALUES ('Attack',1,1);\n" +
@@ -425,22 +433,21 @@ public class DatabaseManager {
                 "INSERT INTO MATCH_POSITION(position,player_id,match_id) VALUES ('Attack',1,3);\n" +
                 "\n" +
                 "-- INSERT MATCH_GOAL\n" +
-                "INSERT INTO MATCH_GOAL(goal_id,description,goal_type_id,match_id,player_id) VALUES (1,'Corner goal',3,1,1);\n" +
-                "INSERT INTO MATCH_GOAL(goal_id,description,goal_type_id,match_id,player_id) VALUES (2,'Free-kick goal',2,1,1);\n" +
-                "INSERT INTO MATCH_GOAL(goal_id,description,goal_type_id,match_id,player_id) VALUES (3,'Penalty goal',1,1,1);\n" +
-                "INSERT INTO MATCH_GOAL(goal_id,description,goal_type_id,match_id,player_id) VALUES (4,'Corner goal',3,1,2);\n" +
-                "INSERT INTO MATCH_GOAL(goal_id,description,goal_type_id,match_id,player_id) VALUES (5,'Free-kick goal',2,1,2);\n" +
+                "INSERT INTO MATCH_GOAL(description,goal_type_id,match_id,player_id) VALUES ('Corner goal',3,1,1);\n" +
+                "INSERT INTO MATCH_GOAL(description,goal_type_id,match_id,player_id) VALUES ('Free-kick goal',2,1,1);\n" +
+                "INSERT INTO MATCH_GOAL(description,goal_type_id,match_id,player_id) VALUES ('Penalty goal',1,1,1);\n" +
+                "INSERT INTO MATCH_GOAL(description,goal_type_id,match_id,player_id) VALUES ('Corner goal',3,1,2);\n" +
+                "INSERT INTO MATCH_GOAL(description,goal_type_id,match_id,player_id) VALUES ('Free-kick goal',2,1,2);\n" +
                 "\n" +
-                "INSERT INTO MATCH_GOAL(goal_id,description,goal_type_id,match_id,player_id) VALUES (6,'Corner goal',3,2,2);\n" +
-                "INSERT INTO MATCH_GOAL(goal_id,description,goal_type_id,match_id,player_id) VALUES (7,'Free-kick goal',2,2,2);\n" +
-                "INSERT INTO MATCH_GOAL(goal_id,description,goal_type_id,match_id,player_id) VALUES (8,'Penalty goal',1,2,3);\n" +
-                "INSERT INTO MATCH_GOAL(goal_id,description,goal_type_id,match_id,player_id) VALUES (9,'Free-kick goal',2,2,3);\n" +
+                "INSERT INTO MATCH_GOAL(description,goal_type_id,match_id,player_id) VALUES ('Corner goal',3,2,2);\n" +
+                "INSERT INTO MATCH_GOAL(description,goal_type_id,match_id,player_id) VALUES ('Free-kick goal',2,2,2);\n" +
+                "INSERT INTO MATCH_GOAL(description,goal_type_id,match_id,player_id) VALUES ('Penalty goal',1,2,3);\n" +
+                "INSERT INTO MATCH_GOAL(description,goal_type_id,match_id,player_id) VALUES ('Free-kick goal',2,2,3);\n" +
                 "\n" +
-                "INSERT INTO MATCH_GOAL(goal_id,description,goal_type_id,match_id,player_id) VALUES (10,'Corner goal',3,3,1);\n" +
-                "INSERT INTO MATCH_GOAL(goal_id,description,goal_type_id,match_id,player_id) VALUES (11,'Free-kick goal',2,3,1);\n" +
-                "INSERT INTO MATCH_GOAL(goal_id,description,goal_type_id,match_id,player_id) VALUES (12,'Corner goal',3,3,1);\n" +
-                "INSERT INTO MATCH_GOAL(goal_id,description,goal_type_id,match_id,player_id) VALUES (13,'Free-kick goal',2,3,3);";
-
+                "INSERT INTO MATCH_GOAL(description,goal_type_id,match_id,player_id) VALUES ('Corner goal',3,3,1);\n" +
+                "INSERT INTO MATCH_GOAL(description,goal_type_id,match_id,player_id) VALUES ('Free-kick goal',2,3,1);\n" +
+                "INSERT INTO MATCH_GOAL(description,goal_type_id,match_id,player_id) VALUES ('Corner goal',3,3,1);\n" +
+                "INSERT INTO MATCH_GOAL(description,goal_type_id,match_id,player_id) VALUES ('Free-kick goal',2,3,3);\n";
 
                 try (Connection conn = this.connect();
                      Statement stmt = conn.createStatement()) {
