@@ -91,9 +91,10 @@ public class AdminDatabaseManager {
     // ADMIN STATEMENTS
 
     // TODO: Insert statements ...
-    public void createAddress(String address_line_1,String address_line_2,String address_line_3,String postal_code,String city,String country) {
+    public Address createAddress(String address_line_1,String address_line_2,String address_line_3,String postal_code,String city,String country) {
         String sql = "INSERT INTO address(address_line_1,address_line_2,address_line_3,postal_code,city,country) VALUES(?,?,?,?,?,?)";
 
+        Address tempAddress = new Address(address_line_1,address_line_2,address_line_3,postal_code,city,country, location_id, location_name, description, address_id);
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -109,6 +110,8 @@ public class AdminDatabaseManager {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+
+        return tempAddress;
     }
 
     public void createSeason(String start_date,String end_date,String name,String description) {
@@ -351,10 +354,11 @@ public class AdminDatabaseManager {
     }
 
 
-/*
+/* ************* SELECT STATEMENT **************
+
     public void insertPerson() {
 
-        String sql = "INSERT ";
+        String sql = "SELECT ";
 
 
         try (Connection conn = this.connect();  // Main db
@@ -441,7 +445,7 @@ public class AdminDatabaseManager {
         String sql = "DELETE FROM address WHERE address_id = ?";
 
 
-        try (Connection conn = this.connectToMainDB();
+        try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1,address_id);
             pstmt.executeUpdate();

@@ -35,7 +35,7 @@ public class AdminController {
     @PostMapping("/address")
     ResponseEntity<Address> createGroup(@Valid @RequestBody Address address) throws URISyntaxException {
         log.info("Request to create group: {}", address);
-        Address result = adminDatabase.createAddress();
+        Address result = adminDatabase.createAddress(address.getAddress_line_1(), address.getAddress_line_2(), address.getAddress_line_3(), address.getPostal_code(),address.getCity(), address.getCountry());
         return ResponseEntity.created(new URI("/address" + result.getAddress_id())).body(result);
     }
 
@@ -50,7 +50,7 @@ public class AdminController {
     @DeleteMapping("/deleteAddress/{id}")
     public ResponseEntity<?> deleteGroup(@PathVariable String id) {
         log.info("Request to delete group: {}", id);
-        adminDatabase.deleteAddress();
+        adminDatabase.deleteAddress(id);
         return ResponseEntity.ok().build();
     }
 
