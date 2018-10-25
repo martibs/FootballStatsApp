@@ -39,15 +39,15 @@ public class AdminController {
         return ResponseEntity.created(new URI("/address" + result.getAddress_id())).body(result);
     }
 
-    @PutMapping("/address/{id}")
-    ResponseEntity<Address> updateGroup(@PathVariable String id, @Valid @RequestBody Address address) {
+    @PutMapping("/updateAddress/{id}")
+    ResponseEntity<Address> updateAddress(@PathVariable String id, @Valid @RequestBody Address address) {
         address.setAddress_id(id);
         log.info("Request to update group: {}", address);
-        Address result = adminDatabase.updateAddress();
+        Address result = adminDatabase.updateAddress(address.getAddress_line_1(), address.getAddress_line_2(), address.getAddress_line_3(), address.getPostal_code(),address.getCity(), address.getCountry(), address.getAddress_id());
         return ResponseEntity.ok().body(result);
     }
 
-    @DeleteMapping("/address/{id}")
+    @DeleteMapping("/deleteAddress/{id}")
     public ResponseEntity<?> deleteGroup(@PathVariable String id) {
         log.info("Request to delete group: {}", id);
         adminDatabase.deleteAddress();
