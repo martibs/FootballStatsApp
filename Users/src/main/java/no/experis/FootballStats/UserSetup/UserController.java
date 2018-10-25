@@ -10,7 +10,10 @@ public class UserController {
 
     private UserService userService = new UserService();
 
-    // TODO: Call User logic
+    @GetMapping("/user")
+    public String showUser() {
+        return "{User: userStuff}";
+    }
 
     }
 

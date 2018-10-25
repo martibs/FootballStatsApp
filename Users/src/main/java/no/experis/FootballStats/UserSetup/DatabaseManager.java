@@ -15,13 +15,12 @@ public class DatabaseManager {
 
     // USER DB CONNECTION
     public Connection connectToUserDB() {
-        final String DB_HOST = "users.cqjagjopuiru.eu-central-1.rds.amazonaws.com";
-        final String DB_PORT = "5432";
-        final String DB_USER = "users";
-        final String DB_PASSWD = "users123";
-        final String DB_NAME = "usersDB";
-        final String DB_URL = "jdbc:postgresql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME;
-
+        private final String DB_HOST = "ec2-46-51-184-229.eu-west-1.compute.amazonaws.com";
+        private final String DB_PORT = "5432";
+        private final String DB_USER = "uvmyugpkrtubxx";
+        private final String DB_PASSWD = "a42ebfe205e754d8b170f120ab30d5679bf64a324b80b2bc429c3e2e90f9f353";
+        private final String DB_NAME = "d5togjfivbt4tr";
+        private final String DB_URL = "jdbc:postgresql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME;
         try {
             Class.forName("org.postgresql.Driver");
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
@@ -89,5 +88,20 @@ public class DatabaseManager {
             System.out.println(e.getMessage());
         }
     }
+
+    public void deleteUserWatchTeam(int team_watch_id,int user_id) {
+        String sql = "DELETE FROM team_watchlist WHERE team_watch_id = user_id";
+
+
+        try (Connection conn = this.connectToUserDB();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+
 
 }
