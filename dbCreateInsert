@@ -44,7 +44,8 @@ CREATE TABLE LOCATION
   description VARCHAR(64),
   address_id integer NOT NULL,
   PRIMARY KEY (location_id),
-  FOREIGN KEY (address_id) REFERENCES ADDRESS(address_id)
+  FOREIGN KEY (address_id) REFERENCES ADDRESS(address_id) MATCH SIMPLE
+      ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 CREATE TABLE ASSOCIATION
@@ -63,7 +64,8 @@ CREATE TABLE PERSON
   date_of_birth DATE NOT NULL,
   address_id integer,
   PRIMARY KEY (person_id),
-  FOREIGN KEY (address_id) REFERENCES ADDRESS(address_id)
+  FOREIGN KEY (address_id) REFERENCES ADDRESS(address_id) MATCH SIMPLE
+      ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 CREATE TABLE GOAL_TYPE
@@ -80,7 +82,7 @@ CREATE TABLE CONTACT
   contact_detail VARCHAR(64) NOT NULL,
   person_id INT NOT NULL,
   PRIMARY KEY (contact_id),
-  FOREIGN KEY (person_id) REFERENCES PERSON(person_id)
+  FOREIGN KEY (person_id) REFERENCES PERSON(person_id) 
 );
 
 CREATE TABLE OWNER
