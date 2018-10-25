@@ -392,5 +392,27 @@ public class AdminDatabaseManager {
     }
 
 */
+    // TODO: Update statements ...
+    public void updateAddress(String address_line_1,String address_line_2,String address_line_3,String postal_code,String city,String country, int address_id) {
+        String sql = "UPDATE address set address_line_1 = ? ,address_line_2 = ? , address_line_3 = ? , postal_code = ?, city = ? , country = ? WHERE address_id = ?";
 
+
+        try (Connection conn = this.connectToMainDB();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, address_line_1);
+            pstmt.setString(2, address_line_2);
+            pstmt.setString(3, address_line_3);
+            pstmt.setString(4, postal_code);
+            pstmt.setString(5, city);
+            pstmt.setString(6, country);
+            pstmt.setInt(7,address_id);
+            pstmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    // TODO: Delete statements ...
 }
