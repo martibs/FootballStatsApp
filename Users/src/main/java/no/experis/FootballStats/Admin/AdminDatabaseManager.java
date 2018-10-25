@@ -415,4 +415,19 @@ public class AdminDatabaseManager {
     }
 
     // TODO: Delete statements ...
+
+    public void deleteAddress(String address_id) {
+        String sql = "DELETE FROM address WHERE address_id = ?";
+
+
+        try (Connection conn = this.connectToMainDB();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1,address_id);
+            pstmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
