@@ -15,12 +15,13 @@ public class DatabaseManager {
 
     // USER DB CONNECTION
     public Connection connectToUserDB() {
-        private final String DB_HOST = "ec2-46-51-184-229.eu-west-1.compute.amazonaws.com";
-        private final String DB_PORT = "5432";
-        private final String DB_USER = "uvmyugpkrtubxx";
-        private final String DB_PASSWD = "a42ebfe205e754d8b170f120ab30d5679bf64a324b80b2bc429c3e2e90f9f353";
-        private final String DB_NAME = "d5togjfivbt4tr";
-        private final String DB_URL = "jdbc:postgresql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME;
+        final String DB_HOST = "ec2-46-51-184-229.eu-west-1.compute.amazonaws.com";
+        final String DB_PORT = "5432";
+        final String DB_USER = "uvmyugpkrtubxx";
+        final String DB_PASSWD = "a42ebfe205e754d8b170f120ab30d5679bf64a324b80b2bc429c3e2e90f9f353";
+        final String DB_NAME = "d5togjfivbt4tr";
+        final String DB_URL = "jdbc:postgresql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME;
+
         try {
             Class.forName("org.postgresql.Driver");
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
