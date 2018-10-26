@@ -4,7 +4,6 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class AdminDatabaseManager {
-
     private Connection conn = null;
 
     private final String DB_HOST = "ec2-46-51-184-229.eu-west-1.compute.amazonaws.com";
@@ -354,7 +353,9 @@ public class AdminDatabaseManager {
     }
 
 
-/* ************* SELECT STATEMENT **************
+/*
+
+* ************* SELECT STATEMENT **************
 
     public void insertPerson() {
 
@@ -447,7 +448,7 @@ public class AdminDatabaseManager {
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1,address_id);
+            pstmt.setInt(1, Integer.parseInt(address_id));
             pstmt.executeUpdate();
 
 

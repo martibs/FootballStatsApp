@@ -1,12 +1,6 @@
 package no.experis.FootballStats.Admin;
 
-import lombok.*;
-import org.springframework.data.annotation.Id;
-
-@Data
-
 public class Address {
-
 
     private String address_id;
     private String address_line_1;

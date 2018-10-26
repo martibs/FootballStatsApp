@@ -3,7 +3,6 @@ package no.experis.FootballStats.UserSetup;
 import java.util.ArrayList;
 
 public class User {
-
     private String userId;
     private String email;
     private String password;

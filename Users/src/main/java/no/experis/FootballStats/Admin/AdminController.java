@@ -12,23 +12,18 @@ import java.util.List;
 
 @RestController
 public class AdminController {
-
     private AdminDatabaseManager adminDatabase = new AdminDatabaseManager();
-    private AdminService addressService = new AdminService();
-
+    private AdminService adminService = new AdminService();
 
     private final Logger log = LoggerFactory.getLogger(AdminController.class);
-
-    // TODO: Call login logic
-
     @GetMapping("/showAddresses")
     public List showAddresses() {
-        return addressService.displayAllAddresses();
+        return adminService.displayAllAddresses();
     }
 
     @GetMapping("/showOneAddress/{someID}")
     public Address showAddress(@PathVariable(value="someID") String id){
-        return addressService.displayOneAddress(id);
+        return adminService.displayOneAddress(id);
     }
 
 
@@ -48,10 +43,9 @@ public class AdminController {
     }
 
     @DeleteMapping("/deleteAddress/{id}")
-    public ResponseEntity<?> deleteGroup(@PathVariable String id) {
+    public ResponseEntity<Address> deleteAddress(@PathVariable /*(value="id") */ String id) {
         log.info("Request to delete group: {}", id);
-        adminDatabase.deleteAddress(id);
+        adminService.deleteAddress(id);
         return ResponseEntity.ok().build();
     }
-
 }

@@ -7,7 +7,6 @@ import java.util.List;
 
 @Service
 public class AdminService {
-
     // TODO: **** Buisness Logic ****
 
     private AdminDatabaseManager adminDbManager = new AdminDatabaseManager();
@@ -33,4 +32,7 @@ public class AdminService {
         return null;
     }
 
+    public void deleteAddress(String address_id){
+        adminDbManager.deleteAddress(address_id);
+    }
 }
