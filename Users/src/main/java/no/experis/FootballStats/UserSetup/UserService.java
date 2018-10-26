@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     // TODO: **** Buisness Logic ****
-
     private DatabaseManager dbManager = new DatabaseManager();
 
     public void registerUser(){
@@ -27,6 +26,5 @@ public class UserService {
             return false;
         }
     }
-
 
 }

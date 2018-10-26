@@ -4,25 +4,29 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class AdminDatabaseManager {
-
     private Connection conn = null;
 
-    private String id;
-    private String firstname;
-    private String lastname;
-    private String date;
-    private String addressid;
+    private final String DB_HOST = "ec2-46-51-184-229.eu-west-1.compute.amazonaws.com";
+    private final String DB_PORT = "5432";
+    private final String DB_USER = "uvmyugpkrtubxx";
+    private final String DB_PASSWD = "a42ebfe205e754d8b170f120ab30d5679bf64a324b80b2bc429c3e2e90f9f353";
+    private final String DB_NAME = "d5togjfivbt4tr";
+    private final String DB_URL = "jdbc:postgresql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME;
+
+    private String address_id;
+    private String address_line_1;
+    private String address_line_2;
+    private String address_line_3;
+    private String postal_code;
+    private String city;
+    private String country;
+    private String location_id;
+    private String location_name;
+    private String description;
 
 
-    // MAIN DB CONNECTION
-    public Connection connectToMainDB() {
-        final String DB_HOST = "case1234.cqjagjopuiru.eu-central-1.rds.amazonaws.com";
-        final String DB_PORT = "5432";
-        final String DB_USER = "case1234";
-        final String DB_PASSWD = "case1234";
-        final String DB_NAME = "caseDB";
-        final String DB_URL = "jdbc:postgresql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME;
-
+    // DB CONNECTION
+    public Connection connect() {
         try {
             Class.forName("org.postgresql.Driver");
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
@@ -32,34 +36,13 @@ public class AdminDatabaseManager {
         }
         return conn;
     }
-
-    // USER DB CONNECTION
-    public Connection connectToUserDB() {
-        final String DB_HOST = "users.cqjagjopuiru.eu-central-1.rds.amazonaws.com";
-        final String DB_PORT = "5432";
-        final String DB_USER = "users";
-        final String DB_PASSWD = "users123";
-        final String DB_NAME = "usersDB";
-        final String DB_URL = "jdbc:postgresql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME;
-
-        try {
-            Class.forName("org.postgresql.Driver");
-            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
-        } catch (ClassNotFoundException | SQLException ex) {
-            //log.error(ex);
-            System.out.println(ex.getMessage());
-        }
-        return conn;
-    }
-
-    // TODO: Insert statements ...
 
     // USER STATEMENTS
     public void createUser(String email,String password) {
         String sql = "INSERT INTO users(email,password) VALUES(?,?)";
 
 
-        try (Connection conn = this.connectToUserDB();
+        try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, email);
             pstmt.setString(2, password);
@@ -74,7 +57,7 @@ public class AdminDatabaseManager {
     public void createUserWatchPlayer(int player_watch_id,int user_id) {
         String sql = "INSERT INTO player_watchlist(player_watch_id,user_id) VALUES(?,?)";
 
-        try (Connection conn = this.connectToUserDB();
+        try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, player_watch_id);
             pstmt.setInt(2, user_id);
@@ -90,7 +73,7 @@ public class AdminDatabaseManager {
         String sql = "INSERT INTO team_watchlist(team_watch_id,user_id) VALUES(?,?)";
 
 
-        try (Connection conn = this.connectToUserDB();
+        try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, team_watch_id);
             pstmt.setInt(2, user_id);
@@ -107,11 +90,12 @@ public class AdminDatabaseManager {
     // ADMIN STATEMENTS
 
     // TODO: Insert statements ...
-    public void createAddress(String address_line_1,String address_line_2,String address_line_3,String postal_code,String city,String country) {
+    public Address createAddress(String address_line_1,String address_line_2,String address_line_3,String postal_code,String city,String country) {
         String sql = "INSERT INTO address(address_line_1,address_line_2,address_line_3,postal_code,city,country) VALUES(?,?,?,?,?,?)";
 
+        Address tempAddress = new Address(address_line_1,address_line_2,address_line_3,postal_code,city,country, location_id, location_name, description, address_id);
 
-        try (Connection conn = this.connectToMainDB();
+        try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, address_line_1);
             pstmt.setString(2, address_line_2);
@@ -125,13 +109,15 @@ public class AdminDatabaseManager {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+
+        return tempAddress;
     }
 
     public void createSeason(String start_date,String end_date,String name,String description) {
         String sql = "INSERT INTO season(start_date,end_date,name,description) VALUES (?,?,?,?)";
 
 
-        try (Connection conn = this.connectToMainDB();
+        try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, start_date);
             pstmt.setString(2, end_date);
@@ -149,7 +135,7 @@ public class AdminDatabaseManager {
         String sql = "INSERT INTO location(name,description,address_id) VALUES (?,?,?)";
 
 
-        try (Connection conn = this.connectToMainDB();
+        try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, name);
             pstmt.setString(2, description);
@@ -166,7 +152,7 @@ public class AdminDatabaseManager {
         String sql = "INSERT INTO association(name,description) VALUES (?,?)";
 
 
-        try (Connection conn = this.connectToMainDB();
+        try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, name);
             pstmt.setString(2, description);
@@ -182,7 +168,7 @@ public class AdminDatabaseManager {
         String sql = "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES (?,?,?,?)";
 
 
-        try (Connection conn = this.connectToMainDB();
+        try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, first_name);
             pstmt.setString(2, last_name);
@@ -200,7 +186,7 @@ public class AdminDatabaseManager {
         String sql = "INSERT INTO goal_type(type) VALUES (?)";
 
 
-        try (Connection conn = this.connectToMainDB();
+        try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, type);
             pstmt.executeUpdate();
@@ -215,7 +201,7 @@ public class AdminDatabaseManager {
         String sql = "INSERT INTO contact(contact_type,contact_detail, person_id) VALUES (?,?,?)";
 
 
-        try (Connection conn = this.connectToMainDB();
+        try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, contact_type);
             pstmt.setString(2, contact_detail);
@@ -232,7 +218,7 @@ public class AdminDatabaseManager {
         String sql = "INSERT INTO owner(person_id) VALUES (?)";
 
 
-        try (Connection conn = this.connectToMainDB();
+        try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, person_id);
             pstmt.executeUpdate();
@@ -247,7 +233,7 @@ public class AdminDatabaseManager {
         String sql = "INSERT INTO coach(person_id) VALUES (?)";
 
 
-        try (Connection conn = this.connectToMainDB();
+        try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, person_id);
             pstmt.executeUpdate();
@@ -262,7 +248,7 @@ public class AdminDatabaseManager {
         String sql = "INSERT INTO team(owner_id,association_id,coach_id,location_id) VALUES (?,?,?,?)";
 
 
-        try (Connection conn = this.connectToMainDB();
+        try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, owner_id);
             pstmt.setInt(2, association_id);
@@ -280,7 +266,7 @@ public class AdminDatabaseManager {
         String sql = "INSERT INTO match(match_date,season_id,location_id,home_team_id,away_team_id) VALUES (?,?,?,?,?)";
 
 
-        try (Connection conn = this.connectToMainDB();
+        try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, match_date);
             pstmt.setInt(2, season_id);
@@ -299,7 +285,7 @@ public class AdminDatabaseManager {
         String sql = "INSERT INTO result(score,result,match_id,team_id) VALUES (?,?,?,?)";
 
 
-        try (Connection conn = this.connectToMainDB();
+        try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, score);
             pstmt.setString(2, result);
@@ -317,7 +303,7 @@ public class AdminDatabaseManager {
         String sql = "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES (?,?,?,?)";
 
 
-        try (Connection conn = this.connectToMainDB();
+        try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, normal_position);
             pstmt.setString(2, number);
@@ -335,7 +321,7 @@ public class AdminDatabaseManager {
         String sql = "INSERT INTO MATCH_POSITION(position,player_id,match_id) VALUES (?,?,?)";
 
 
-        try (Connection conn = this.connectToMainDB();
+        try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, position);
             pstmt.setInt(2, player_id);
@@ -352,7 +338,7 @@ public class AdminDatabaseManager {
         String sql = "INSERT INTO MATCH_GOAL(description,goal_type_id,match_id,player_id) VALUES (?,?,?,?);";
 
 
-        try (Connection conn = this.connectToMainDB();
+        try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, description);
             pstmt.setInt(2, goal_type_id);
@@ -368,12 +354,15 @@ public class AdminDatabaseManager {
 
 
 /*
+
+* ************* SELECT STATEMENT **************
+
     public void insertPerson() {
 
-        String sql = "INSERT ";
+        String sql = "SELECT ";
 
 
-        try (Connection conn = this.connectToMainDB();  // Main db
+        try (Connection conn = this.connect();  // Main db
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -393,4 +382,78 @@ public class AdminDatabaseManager {
 
 */
 
+    public ArrayList<Address> getAddresses() {
+        String sql = "SELECT * FROM LOCATION INNER JOIN ADDRESS ON ADDRESS.ADDRESS_ID = LOCATION.ADDRESS_ID";
+
+        Address tempAddress = null;
+        ArrayList<Address> tempAddressList = new ArrayList<Address>();
+
+        try (Connection conn = this.connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            // loop through the result set
+            while (rs.next()) {
+                address_id = Integer.toString(rs.getInt("ADDRESS_ID"));
+                address_line_1 = rs.getString("address_line_1");
+                address_line_2 = rs.getString("address_line_2");
+                address_line_3 = rs.getString("address_line_3");
+                postal_code = rs.getString("POSTAL_CODE");
+                city = rs.getString("CITY");
+                country = rs.getString("COUNTRY");
+                location_id = rs.getString("LOCATION_ID");
+                location_name = rs.getString("NAME");
+                description = rs.getString("DESCRIPTION");
+
+                tempAddress = new Address(address_id, address_line_1, address_line_2, address_line_3, postal_code, city, country, location_id,location_name,description);
+                tempAddressList.add(tempAddress);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return tempAddressList;
+    }
+
+
+    // TODO: Update statements ...
+    public Address updateAddress(String address_line_1,String address_line_2,String address_line_3,String postal_code,String city,String country, String address_id) {
+        String sql = "UPDATE address set address_line_1 = ? ,address_line_2 = ? , address_line_3 = ? , postal_code = ?, city = ? , country = ? WHERE address_id = ?";
+
+        Address tempAddress = new Address(address_line_1,address_line_2,address_line_3,postal_code,city,country, location_id, location_name, description, address_id);
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, address_line_1);
+            pstmt.setString(2, address_line_2);
+            pstmt.setString(3, address_line_3);
+            pstmt.setString(4, postal_code);
+            pstmt.setString(5, city);
+            pstmt.setString(6, country);
+            pstmt.setString(7, address_id);
+            pstmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return tempAddress;
+    }
+
+    // TODO: Delete statements ...
+
+    public void deleteAddress(String address_id) {
+        String sql = "DELETE FROM address WHERE address_id = ?";
+
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, Integer.parseInt(address_id));
+            pstmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
