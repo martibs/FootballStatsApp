@@ -225,10 +225,44 @@ INSERT INTO season(start_date,end_date,name,description) VALUES ('2020-01-01','2
 
 
 -- INSERT LOCATION
-INSERT INTO location(name,description,address_id) VALUES ('Langhus','Description of Langhus...',1);
-INSERT INTO location(name,description,address_id) VALUES ('Aas','Description of Aas...',2);
-INSERT INTO location(name,description,address_id) VALUES ('Ski','Description of Ski...',3);
-INSERT INTO location(name,description,address_id) VALUES ('Bergen','Description of Bergen...',4);
+insert into location (name, description, address_id) values ('Granby', 'id ornare imperdiet sapien urna', 1);
+insert into location (name, description, address_id) values ('Valley Edge', 'semper rutrum nulla nunc purus phasellus in', 2);
+insert into location (name, description, address_id) values ('Brickson Park', null, 3);
+insert into location (name, description, address_id) values ('Artisan', 'non mauris morbi non lectus', 4);
+insert into location (name, description, address_id) values ('Walton', 'tempus vel pede morbi porttitor', 5);
+insert into location (name, description, address_id) values ('Onsgard', 'porttitor id consequat in consequat', 6);
+insert into location (name, description, address_id) values ('Carpenter', 'diam nam tristique tortor eu pede', 7);
+insert into location (name, description, address_id) values ('Fair Oaks', 'odio elementum eu interdum eu', 8);
+insert into location (name, description, address_id) values ('Hallows', 'nisi eu orci mauris lacinia sapien quis', 9);
+insert into location (name, description, address_id) values ('Schurz', 'eros vestibulum ac est lacinia nisi', 10);
+insert into location (name, description, address_id) values ('Leroy', 'vestibulum vestibulum ante ipsum primis in faucibus', 11);
+insert into location (name, description, address_id) values ('Sullivan', null, 12);
+insert into location (name, description, address_id) values ('Briar Crest', 'praesent id massa id nisl', 13);
+insert into location (name, description, address_id) values ('Ruskin', null, 14);
+insert into location (name, description, address_id) values ('Steensland', 'pharetra magna vestibulum aliquet ultrices erat tortor', 15);
+insert into location (name, description, address_id) values ('Golden Leaf', null, 16);
+insert into location (name, description, address_id) values ('Springview', 'proin leo odio porttitor id consequat in', 17);
+insert into location (name, description, address_id) values ('Gale', 'vulputate elementum nullam varius nulla facilisi cras', 18);
+insert into location (name, description, address_id) values ('Bellgrove', 'nibh in quis justo maecenas rhoncus', 19);
+insert into location (name, description, address_id) values ('Beilfuss', 'pellentesque quisque porta volutpat erat quisque erat', 20);
+insert into location (name, description, address_id) values ('Butterfield', null, 21);
+insert into location (name, description, address_id) values ('Upham', 'integer a nibh in quis justo maecenas', 22);
+insert into location (name, description, address_id) values ('Erie', null, 23);
+insert into location (name, description, address_id) values ('Esch', null, 24);
+insert into location (name, description, address_id) values ('Bayside', 'platea dictumst aliquam augue quam sollicitudin', 25);
+insert into location (name, description, address_id) values ('Banding', null, 26);
+insert into location (name, description, address_id) values ('Vera', 'ut massa quis augue luctus tincidunt', 27);
+insert into location (name, description, address_id) values ('Cordelia', 'adipiscing lorem vitae mattis nibh ligula nec', 28);
+insert into location (name, description, address_id) values ('Mockingbird', 'ut mauris eget massa tempor convallis', 29);
+insert into location (name, description, address_id) values ('Del Sol', 'diam id ornare imperdiet sapien urna', 30);
+insert into location (name, description, address_id) values ('8th', 'neque aenean auctor gravida sem', 31);
+insert into location (name, description, address_id) values ('4th', 'nulla elit ac nulla sed vel enim', 32);
+insert into location (name, description, address_id) values ('Old Shore', 'porta volutpat erat quisque erat eros viverra', 33);
+
+INSERT INTO location(name,description,address_id) VALUES ('Langhus','Description of Langhus...',34);
+INSERT INTO location(name,description,address_id) VALUES ('Aas','Description of Aas...',35);
+INSERT INTO location(name,description,address_id) VALUES ('Ski','Description of Ski...',36);
+INSERT INTO location(name,description,address_id) VALUES ('Bergen','Description of Bergen...',37);
 
 
 
