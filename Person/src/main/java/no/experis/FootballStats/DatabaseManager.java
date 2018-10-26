@@ -5,11 +5,11 @@ import java.util.ArrayList;
 
 public class DatabaseManager {
 
-    private final String DB_HOST = "case1234.cqjagjopuiru.eu-central-1.rds.amazonaws.com";
+    private final String DB_HOST = "ec2-46-51-184-229.eu-west-1.compute.amazonaws.com";
     private final String DB_PORT = "5432";
-    private final String DB_USER = "case1234";
-    private final String DB_PASSWD = "case1234";
-    private final String DB_NAME = "caseDB";
+    private final String DB_USER = "uvmyugpkrtubxx";
+    private final String DB_PASSWD = "a42ebfe205e754d8b170f120ab30d5679bf64a324b80b2bc429c3e2e90f9f353";
+    private final String DB_NAME = "d5togjfivbt4tr";
     private final String DB_URL = "jdbc:postgresql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME;
 
     private Connection conn = null;
@@ -155,8 +155,6 @@ public class DatabaseManager {
     public void createNewDatabase() {
         // SQL statement for creating a new table
 
-        System.out.println("started to create a table");
-
         String sql = "DROP TABLE IF EXISTS MATCH_GOAL;\n" +
                 "DROP TABLE IF EXISTS MATCH_POSITION;\n" +
                 "DROP TABLE IF EXISTS PLAYER;\n" +
@@ -203,7 +201,8 @@ public class DatabaseManager {
                 "  description VARCHAR(64),\n" +
                 "  address_id integer NOT NULL,\n" +
                 "  PRIMARY KEY (location_id),\n" +
-                "  FOREIGN KEY (address_id) REFERENCES ADDRESS(address_id)\n" +
+                "  FOREIGN KEY (address_id) REFERENCES ADDRESS(address_id) MATCH SIMPLE\n" +
+                "      ON DELETE SET NULL ON UPDATE CASCADE\n" +
                 ");\n" +
                 "\n" +
                 "CREATE TABLE ASSOCIATION\n" +
@@ -222,7 +221,8 @@ public class DatabaseManager {
                 "  date_of_birth DATE NOT NULL,\n" +
                 "  address_id integer,\n" +
                 "  PRIMARY KEY (person_id),\n" +
-                "  FOREIGN KEY (address_id) REFERENCES ADDRESS(address_id)\n" +
+                "  FOREIGN KEY (address_id) REFERENCES ADDRESS(address_id) MATCH SIMPLE\n" +
+                "      ON DELETE SET NULL ON UPDATE CASCADE\n" +
                 ");\n" +
                 "\n" +
                 "CREATE TABLE GOAL_TYPE\n" +
@@ -239,7 +239,7 @@ public class DatabaseManager {
                 "  contact_detail VARCHAR(64) NOT NULL,\n" +
                 "  person_id INT NOT NULL,\n" +
                 "  PRIMARY KEY (contact_id),\n" +
-                "  FOREIGN KEY (person_id) REFERENCES PERSON(person_id)\n" +
+                "  FOREIGN KEY (person_id) REFERENCES PERSON(person_id) \n" +
                 ");\n" +
                 "\n" +
                 "CREATE TABLE OWNER\n" +
@@ -355,21 +355,21 @@ public class DatabaseManager {
                 "\n" +
                 "\n" +
                 "-- INSERT ASSOCIATION\n" +
-                "INSERT INTO association(name,description) VALUES ('Manchester City','Description of Association1...');\n" +
-                "INSERT INTO association(name,description) VALUES ('Manchester United','Description of Association2...');\n" +
-                "INSERT INTO association(name,description) VALUES ('Liverpool','Description of Association3...');\n" +
-                "INSERT INTO association(name,description) VALUES ('Chelsea','Description of Association4...');\n" +
+                "INSERT INTO association(name,description) VALUES ('Liverpool','Description of Association1...');\n" +
+                "INSERT INTO association(name,description) VALUES ('Barcelona','Description of Association2...');\n" +
+                "INSERT INTO association(name,description) VALUES ('Manchester United','Description of Association3...');\n" +
+                "INSERT INTO association(name,description) VALUES ('Manchester City','Description of Association4...');\n" +
                 "\n" +
                 "\n" +
                 "-- INSERT PERSON\n" +
                 "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Gabriel','Aunan','1991-03-26',1);\n" +
                 "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Martin','Martinsen','1993-05-16',2);\n" +
                 "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Thor','Thordenlund','1991-03-26',3);\n" +
-                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Harald','Hudini','1989-02-08',4);\n" +
-                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Gunnar','Gunnarsen','1989-02-08',1);\n" +
-                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Svein','Svendsen','1989-02-08',2);\n" +
-                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Gjert','Gjertsen','1989-02-08',3);\n" +
-                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Mads','Madsen','1989-02-08',4);\n" +
+                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Christiano','Ronaldo','1989-02-08',4);\n" +
+                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Romelu','Lukaku','1992-02-08',1);\n" +
+                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Sergio','Aguero','1987-02-08',2);\n" +
+                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('David','Beckham','1989-02-08',3);\n" +
+                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Lional','Messi','1988-02-08',4);\n" +
                 "\n" +
                 "-- INSERT GOAL_TYPE\n" +
                 "INSERT INTO goal_type(type) VALUES ('Penalty');\n" +
@@ -385,16 +385,19 @@ public class DatabaseManager {
                 "INSERT INTO owner(person_id) VALUES (1);\n" +
                 "INSERT INTO owner(person_id) VALUES (2);\n" +
                 "INSERT INTO owner(person_id) VALUES (3);\n" +
+                "INSERT INTO owner(person_id) VALUES (4);\n" +
                 "\n" +
                 "-- INSERT COACH\n" +
                 "INSERT INTO coach(person_id) VALUES (1);\n" +
                 "INSERT INTO coach(person_id) VALUES (2);\n" +
                 "INSERT INTO coach(person_id) VALUES (3);\n" +
+                "INSERT INTO coach(person_id) VALUES (4);\n" +
                 "\n" +
                 "-- INSERT TEAM\n" +
                 "INSERT INTO team(owner_id,association_id,coach_id,location_id) VALUES (1,1,1,1);\n" +
                 "INSERT INTO team(owner_id,association_id,coach_id,location_id) VALUES (2,2,2,2);\n" +
                 "INSERT INTO team(owner_id,association_id,coach_id,location_id) VALUES (3,3,3,3);\n" +
+                "INSERT INTO team(owner_id,association_id,coach_id,location_id) VALUES (4,4,4,4);\n" +
                 "\n" +
                 "-- INESRT MACTCH\n" +
                 "INSERT INTO match(match_date,season_id,location_id,home_team_id,away_team_id) VALUES ('2018-06-01',1,1,1,2);\n" +
@@ -419,10 +422,11 @@ public class DatabaseManager {
                 "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Attack','1',1,1);\n" +
                 "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Defence','2',2,2);\n" +
                 "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Center','3',3,3);\n" +
-                "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Attack','9',4,3);\n" +
-                "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Attack','9',5,2);\n" +
-                "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Center','5',6,2);\n" +
-                "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Center','6',7,2);\n" +
+                "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Attack','7',4,3);\n" +
+                "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Attack','9',5,3);\n" +
+                "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Attack','9',6,4);\n" +
+                "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Attack','7',7,1);\n" +
+                "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Attack','10',8,1);\n" +
                 "\n" +
                 "-- INSERT MATCH_POSITION\n" +
                 "INSERT INTO MATCH_POSITION(position,player_id,match_id) VALUES ('Attack',1,1);\n" +
@@ -450,6 +454,8 @@ public class DatabaseManager {
                 "INSERT INTO MATCH_GOAL(description,goal_type_id,match_id,player_id) VALUES ('Free-kick goal',2,3,1);\n" +
                 "INSERT INTO MATCH_GOAL(description,goal_type_id,match_id,player_id) VALUES ('Corner goal',3,3,1);\n" +
                 "INSERT INTO MATCH_GOAL(description,goal_type_id,match_id,player_id) VALUES ('Free-kick goal',2,3,3);\n";
+
+        System.out.println("started to create a table");
 
                 try (Connection conn = this.connect();
                      Statement stmt = conn.createStatement()) {

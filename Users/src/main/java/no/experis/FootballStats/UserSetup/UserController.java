@@ -7,13 +7,11 @@ import java.util.List;
 
 @RestController
 public class UserController {
-
     private UserService userService = new UserService();
 
     @GetMapping("/user")
     public String showUser() {
         return "{User: userStuff}";
     }
-
-    }
+}
 
