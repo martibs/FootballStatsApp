@@ -267,10 +267,10 @@ INSERT INTO location(name,description,address_id) VALUES ('Bergen','Description 
 
 
 -- INSERT ASSOCIATION
-INSERT INTO association(name,description) VALUES ('Association1','Description of Association1...');
-INSERT INTO association(name,description) VALUES ('Association2','Description of Association2...');
-INSERT INTO association(name,description) VALUES ('Association3','Description of Association3...');
-INSERT INTO association(name,description) VALUES ('Association4','Description of Association4...');
+INSERT INTO association(name,description) VALUES ('Liverpool','Description of Association1...');
+INSERT INTO association(name,description) VALUES ('Manchester United','Description of Association2...');
+INSERT INTO association(name,description) VALUES ('Barcelona','Description of Association3...');
+INSERT INTO association(name,description) VALUES ('Real Madrid','Description of Association4...');
 
 
 -- INSERT PERSON
