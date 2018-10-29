@@ -14,15 +14,15 @@ public class AdminDatabaseManager {
     private final String DB_NAME = "d5togjfivbt4tr";
     private final String DB_URL = "jdbc:postgresql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME;
 
-    private String address_id;
-    private String address_line_1;
-    private String address_line_2;
-    private String address_line_3;
-    private String postal_code;
+    private String addressId;
+    private String addressLine1;
+    private String addressLine2;
+    private String addressLine3;
+    private String postalCode;
     private String city;
     private String country;
-    private String location_id;
-    private String location_name;
+    private String locationId;
+    private String locationName;
     private String description;
 
 
