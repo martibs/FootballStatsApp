@@ -106,18 +106,11 @@ public class AdminDatabaseManager {
             pstmt.setString(6, country);
             pstmt.execute();
 
-            System.out.println("1");
-
             ResultSet rs = pstmt.getResultSet();
-
-            System.out.println("2");
 
             while(rs.next()) {
                 addressIdFromRS = rs.getInt(1);
-                System.out.println("resultSetId = " + rs.getInt(1));
             }
-
-            System.out.println("3");
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
