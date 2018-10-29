@@ -382,10 +382,44 @@ public class DatabaseManager {
                 "\n" +
                 "\n" +
                 "-- INSERT LOCATION\n" +
-                "INSERT INTO location(name,description,address_id) VALUES ('Langhus','Description of Langhus...',1);\n" +
-                "INSERT INTO location(name,description,address_id) VALUES ('Aas','Description of Aas...',2);\n" +
-                "INSERT INTO location(name,description,address_id) VALUES ('Ski','Description of Ski...',3);\n" +
-                "INSERT INTO location(name,description,address_id) VALUES ('Bergen','Description of Bergen...',4);\n" +
+                "insert into location (name, description, address_id) values ('Granby', 'id ornare imperdiet sapien urna', 1);\n" +
+                "insert into location (name, description, address_id) values ('Valley Edge', 'semper rutrum nulla nunc purus phasellus in', 2);\n" +
+                "insert into location (name, description, address_id) values ('Brickson Park', null, 3);\n" +
+                "insert into location (name, description, address_id) values ('Artisan', 'non mauris morbi non lectus', 4);\n" +
+                "insert into location (name, description, address_id) values ('Walton', 'tempus vel pede morbi porttitor', 5);\n" +
+                "insert into location (name, description, address_id) values ('Onsgard', 'porttitor id consequat in consequat', 6);\n" +
+                "insert into location (name, description, address_id) values ('Carpenter', 'diam nam tristique tortor eu pede', 7);\n" +
+                "insert into location (name, description, address_id) values ('Fair Oaks', 'odio elementum eu interdum eu', 8);\n" +
+                "insert into location (name, description, address_id) values ('Hallows', 'nisi eu orci mauris lacinia sapien quis', 9);\n" +
+                "insert into location (name, description, address_id) values ('Schurz', 'eros vestibulum ac est lacinia nisi', 10);\n" +
+                "insert into location (name, description, address_id) values ('Leroy', 'vestibulum vestibulum ante ipsum primis in faucibus', 11);\n" +
+                "insert into location (name, description, address_id) values ('Sullivan', null, 12);\n" +
+                "insert into location (name, description, address_id) values ('Briar Crest', 'praesent id massa id nisl', 13);\n" +
+                "insert into location (name, description, address_id) values ('Ruskin', null, 14);\n" +
+                "insert into location (name, description, address_id) values ('Steensland', 'pharetra magna vestibulum aliquet ultrices erat tortor', 15);\n" +
+                "insert into location (name, description, address_id) values ('Golden Leaf', null, 16);\n" +
+                "insert into location (name, description, address_id) values ('Springview', 'proin leo odio porttitor id consequat in', 17);\n" +
+                "insert into location (name, description, address_id) values ('Gale', 'vulputate elementum nullam varius nulla facilisi cras', 18);\n" +
+                "insert into location (name, description, address_id) values ('Bellgrove', 'nibh in quis justo maecenas rhoncus', 19);\n" +
+                "insert into location (name, description, address_id) values ('Beilfuss', 'pellentesque quisque porta volutpat erat quisque erat', 20);\n" +
+                "insert into location (name, description, address_id) values ('Butterfield', null, 21);\n" +
+                "insert into location (name, description, address_id) values ('Upham', 'integer a nibh in quis justo maecenas', 22);\n" +
+                "insert into location (name, description, address_id) values ('Erie', null, 23);\n" +
+                "insert into location (name, description, address_id) values ('Esch', null, 24);\n" +
+                "insert into location (name, description, address_id) values ('Bayside', 'platea dictumst aliquam augue quam sollicitudin', 25);\n" +
+                "insert into location (name, description, address_id) values ('Banding', null, 26);\n" +
+                "insert into location (name, description, address_id) values ('Vera', 'ut massa quis augue luctus tincidunt', 27);\n" +
+                "insert into location (name, description, address_id) values ('Cordelia', 'adipiscing lorem vitae mattis nibh ligula nec', 28);\n" +
+                "insert into location (name, description, address_id) values ('Mockingbird', 'ut mauris eget massa tempor convallis', 29);\n" +
+                "insert into location (name, description, address_id) values ('Del Sol', 'diam id ornare imperdiet sapien urna', 30);\n" +
+                "insert into location (name, description, address_id) values ('8th', 'neque aenean auctor gravida sem', 31);\n" +
+                "insert into location (name, description, address_id) values ('4th', 'nulla elit ac nulla sed vel enim', 32);\n" +
+                "insert into location (name, description, address_id) values ('Old Shore', 'porta volutpat erat quisque erat eros viverra', 33);\n" +
+                "\n" +
+                "INSERT INTO location(name,description,address_id) VALUES ('Langhus','Description of Langhus...',34);\n" +
+                "INSERT INTO location(name,description,address_id) VALUES ('Aas','Description of Aas...',35);\n" +
+                "INSERT INTO location(name,description,address_id) VALUES ('Ski','Description of Ski...',36);\n" +
+                "INSERT INTO location(name,description,address_id) VALUES ('Bergen','Description of Bergen...',37);\n" +
                 "\n" +
                 "\n" +
                 "\n" +
