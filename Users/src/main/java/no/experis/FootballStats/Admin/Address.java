@@ -9,12 +9,29 @@ public class Address {
     private String postal_code;
     private String city;
     private String country;
-    private String location_id;
-    private String location_name;
+    private int location_id;
+    private String name;
     private String description;
 
-    public Address(String address_id, String address_line_1, String address_line_2, String address_line_3, String postal_code, String city, String country, String location_id, String location_name, String description) {
-        this.address_id = address_id;
+    public Address(){
+
+    }
+
+    public Address(String name, String description){
+        this.name = name;
+        this.description = description;
+    }
+
+    public Address(String address_line_1, String address_line_2, String address_line_3, String postal_code, String city, String country) {
+        this.address_line_1 = address_line_1;
+        this.address_line_2 = address_line_2;
+        this.address_line_3 = address_line_3;
+        this.postal_code = postal_code;
+        this.city = city;
+        this.country = country;
+    }
+
+    public Address(String address_line_1, String address_line_2, String address_line_3, String postal_code, String city, String country, int location_id, String name, String description) {
         this.address_line_1 = address_line_1;
         this.address_line_2 = address_line_2;
         this.address_line_3 = address_line_3;
@@ -22,7 +39,28 @@ public class Address {
         this.city = city;
         this.country = country;
         this.location_id = location_id;
-        this.location_name = location_name;
+        this.name = name;
+        this.description = description;
+    }
+
+    public Address(String address_id, String address_line_1, String address_line_2, String address_line_3, String postal_code, String city, String country) {
+        this.address_id = address_id;
+        this.address_line_1 = address_line_1;
+        this.address_line_2 = address_line_2;
+        this.address_line_3 = address_line_3;
+        this.postal_code = postal_code;
+        this.city = city;
+        this.country = country;
+    }
+
+    public Address(String address_line_1, String address_line_2, String address_line_3, String postal_code, String city, String country, String name, String description) {
+        this.address_line_1 = address_line_1;
+        this.address_line_2 = address_line_2;
+        this.address_line_3 = address_line_3;
+        this.postal_code = postal_code;
+        this.city = city;
+        this.country = country;
+        this.name = name;
         this.description = description;
     }
 
@@ -55,18 +93,6 @@ public class Address {
         return country;
     }
 
-    public String getLocation_id() {
-        return location_id;
-    }
-
-    public String getLocation_name() {
-        return location_name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
     public void setAddress_id(String address_id) {
         this.address_id = address_id;
     }
@@ -95,15 +121,15 @@ public class Address {
         this.country = country;
     }
 
-    public void setLocation_id(String location_id) {
-        this.location_id = location_id;
+    public String getName() {
+        return name;
     }
 
-    public void setLocation_name(String location_name) {
-        this.location_name = location_name;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public int getLocation_id() {
+        return location_id;
     }
 }

@@ -90,27 +90,39 @@ public class AdminDatabaseManager {
     // ADMIN STATEMENTS
 
     // TODO: Insert statements ...
-    public Address createAddress(String address_line_1,String address_line_2,String address_line_3,String postal_code,String city,String country) {
-        String sql = "INSERT INTO address(address_line_1,address_line_2,address_line_3,postal_code,city,country) VALUES(?,?,?,?,?,?)";
+    public int createAddress(String address_line_1,String address_line_2,String address_line_3,String postal_code,String city,String country) {
+        String sql = "INSERT INTO address(address_line_1,address_line_2,address_line_3,postal_code,city,country) VALUES(?,?,?,?,?,?) RETURNING address_id";
 
-        Address tempAddress = new Address(address_line_1,address_line_2,address_line_3,postal_code,city,country, location_id, location_name, description, address_id);
+        int addressIdFromRS = -1;
 
         try (Connection conn = this.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, address_line_1);
             pstmt.setString(2, address_line_2);
             pstmt.setString(3, address_line_3);
             pstmt.setString(4, postal_code);
             pstmt.setString(5, city);
             pstmt.setString(6, country);
-            pstmt.executeUpdate();
+            pstmt.execute();
 
+            System.out.println("1");
+
+            ResultSet rs = pstmt.getResultSet();
+
+            System.out.println("2");
+
+            while(rs.next()) {
+                addressIdFromRS = rs.getInt(1);
+                System.out.println("resultSetId = " + rs.getInt(1));
+            }
+
+            System.out.println("3");
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 
-        return tempAddress;
+        return addressIdFromRS;
     }
 
     public void createSeason(String start_date,String end_date,String name,String description) {
@@ -134,18 +146,17 @@ public class AdminDatabaseManager {
     public void createLocation(String name,String description,int address_id) {
         String sql = "INSERT INTO location(name,description,address_id) VALUES (?,?,?)";
 
-
         try (Connection conn = this.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, name);
             pstmt.setString(2, description);
             pstmt.setInt(3, address_id);
             pstmt.executeUpdate();
 
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+
     }
 
     public void createAssociation(String name,String description) {
@@ -382,55 +393,21 @@ public class AdminDatabaseManager {
 
 */
 
-    public ArrayList<Address> getAddresses() {
-        String sql = "SELECT * FROM LOCATION INNER JOIN ADDRESS ON ADDRESS.ADDRESS_ID = LOCATION.ADDRESS_ID";
-
-        Address tempAddress = null;
-        ArrayList<Address> tempAddressList = new ArrayList<Address>();
-
-        try (Connection conn = this.connect();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-
-            // loop through the result set
-            while (rs.next()) {
-                address_id = Integer.toString(rs.getInt("ADDRESS_ID"));
-                address_line_1 = rs.getString("address_line_1");
-                address_line_2 = rs.getString("address_line_2");
-                address_line_3 = rs.getString("address_line_3");
-                postal_code = rs.getString("POSTAL_CODE");
-                city = rs.getString("CITY");
-                country = rs.getString("COUNTRY");
-                location_id = rs.getString("LOCATION_ID");
-                location_name = rs.getString("NAME");
-                description = rs.getString("DESCRIPTION");
-
-                tempAddress = new Address(address_id, address_line_1, address_line_2, address_line_3, postal_code, city, country, location_id,location_name,description);
-                tempAddressList.add(tempAddress);
-            }
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return tempAddressList;
-    }
-
-
     // TODO: Update statements ...
-    public Address updateAddress(String address_line_1,String address_line_2,String address_line_3,String postal_code,String city,String country, String address_id) {
+    public Address updateAddress(String address_line_1,String address_line_2,String address_line_3,String postal_code,String city,String country, int real_id) {
         String sql = "UPDATE address set address_line_1 = ? ,address_line_2 = ? , address_line_3 = ? , postal_code = ?, city = ? , country = ? WHERE address_id = ?";
 
-        Address tempAddress = new Address(address_line_1,address_line_2,address_line_3,postal_code,city,country, location_id, location_name, description, address_id);
+        Address tempAddress = new Address(address_line_1,address_line_2,address_line_3,postal_code,city,country);
 
         try (Connection conn = this.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, address_line_1);
             pstmt.setString(2, address_line_2);
             pstmt.setString(3, address_line_3);
             pstmt.setString(4, postal_code);
             pstmt.setString(5, city);
             pstmt.setString(6, country);
-            pstmt.setString(7, address_id);
+            pstmt.setInt(7, real_id);
             pstmt.executeUpdate();
 
 
@@ -438,6 +415,25 @@ public class AdminDatabaseManager {
             System.out.println(e.getMessage());
         }
         return tempAddress;
+    }
+
+    public Address updateLocation(String location_name, String description, int real_id) {
+        String sql = "UPDATE location set name = ? , description = ? WHERE location_id = ?";
+
+        Address tempLocation = new Address(location_name, description);
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, location_name);
+            pstmt.setString(2, description);
+            pstmt.setInt(3, real_id);
+            pstmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return tempLocation;
     }
 
     // TODO: Delete statements ...

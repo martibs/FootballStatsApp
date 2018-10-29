@@ -53,7 +53,7 @@ public class PersonController {
     @GetMapping("/test")
     public void test() {
         //    REMOVE COMMENT TO CREATE A NEW DATABASE
-        // personService.createNewDatabase();
+        personService.createNewDatabase();
     }
 
 }

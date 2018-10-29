@@ -199,7 +199,7 @@ public class DatabaseManager {
                 "  location_id SERIAL NOT NULL,\n" +
                 "  name VARCHAR(64) NOT NULL,\n" +
                 "  description VARCHAR(64),\n" +
-                "  address_id integer NOT NULL,\n" +
+                "  address_id integer NOT NUll,\n" +
                 "  PRIMARY KEY (location_id),\n" +
                 "  FOREIGN KEY (address_id) REFERENCES ADDRESS(address_id) MATCH SIMPLE\n" +
                 "      ON DELETE SET NULL ON UPDATE CASCADE\n" +
@@ -334,6 +334,41 @@ public class DatabaseManager {
                 ");\n" +
                 "\n" +
                 "-- INSERT ADDRESS\n" +
+                "\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('713 Tony Place', '41 Brickson Park Drive', '3518 Walton Street', '353508', 'Temryuk', 'Russia');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('4 Hoffman Center', null, null, '4105', 'Noveleta', 'Philippines');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('9 Eagan Terrace', null, null, '32505', 'Pensacola', 'United States');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('5 Main Junction', null, null, '54673', 'Bryukhovychi', 'Ukraine');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('969 Arkansas Trail', '616 Maryland Crossing', null, '49010', 'Angers', 'France');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('8935 Continental Junction', null, null, '85729', 'Temanjang', 'Indonesia');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('87 Lotheville Point', null, null, '10294', 'Handan', 'China');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('098 Nancy Circle', '90 Corben Drive', null, '902311', 'Haebaru', 'Japan');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('1 Stone Corner Trail', null, null, '404436', 'Surovikino', 'Russia');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('16 Thompson Court', '06518 Sheridan Junction', '02 Loeprich Drive', '493005', 'Arão', 'Portugal');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('18 Forster Hill', '8 Veith Alley', null, '56342', 'Ifakara', 'Tanzania');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('83652 Mandrake Lane', '22652 Boyd Terrace', null, '98634', 'Bungereng', 'Indonesia');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('3904 Main Hill', null, '428 Stang Road', '132 30', 'Saltsjö-Boo', 'Sweden');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('0168 Kim Place', null, null, '43254', 'Krzyżowice', 'Poland');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('30570 Prairie Rose Avenue', '5146 Mitchell Pass', null, '03234', 'Khulo', 'Georgia');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('68 Clove Drive', null, null, '90958', 'Shanghu', 'China');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('8 Macpherson Trail', '185 Dunning Hill', '73460 North Parkway', '43465', 'Beni Khiar', 'Tunisia');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('176 Heffernan Parkway', '99 Caliangt Trail', null, '45467', 'Paojan', 'Indonesia');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('362 Thierer Drive', null, null, '5929', 'Hernando', 'Argentina');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('91 Browning Way', '39027 Pine View Place', null, '509147', 'Kakamigahara', 'Japan');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('162 Mosinee Avenue', null, null, '43211', 'Piasek', 'Poland');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('601 Cottonwood Park', null, '09262 Thompson Lane', '4634', 'Jujur', 'Indonesia');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('00186 Carpenter Point', null, null, '42575', 'Strzyżowice', 'Poland');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('6 Rowland Plaza', '18 Westend Place', null, '2364', 'Purabaya', 'Indonesia');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('041 Eastwood Lane', null, null, '8716', 'Adtugan', 'Philippines');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('8354 Trailsway Trail', null, '35549 High Crossing Parkway', '23463', 'Campechuela', 'Cuba');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('03 Little Fleur Trail', null, null, '58028', 'Nevers', 'France');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('45 Summerview Court', null, null, '48372', 'Al Quşayr', 'Egypt');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('87058 International Park', '1228 Charing Cross Parkway', null, '75110', 'Samut Songkhram', 'Thailand');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('6659 6th Point', '60369 Stuart Avenue', null, '69649', 'Caluire-et-Cuire', 'France');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('0001 Stephen Place', null, null, '98471', 'Governor’s Harbour', 'Bahamas');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('39913 Starling Crossing', '98 Gale Avenue', null, '91735', 'Uitiuhtuan', 'Indonesia');\n" +
+                "insert into address (address_line_1, address_line_2, address_line_3, postal_code, city, country) values ('36 Oneill Place', null, '530 Mosinee Junction', '56722', 'Sambonggede', 'Indonesia');\n" +
+                "\n" +
                 "INSERT INTO address(address_line_1,address_line_2,address_line_3,postal_code,city,country) VALUES('Granfaret 32',NULL,NULL,'1405','Langhus','Norway');\n" +
                 "INSERT INTO address(address_line_1,address_line_2,address_line_3,postal_code,city,country) VALUES('Aasveien 33',NULL,NULL,'1430','Aas','Norway');\n" +
                 "INSERT INTO address(address_line_1,address_line_2,address_line_3,postal_code,city,country) VALUES('Skiveien 34',NULL,NULL,'1400','Ski','Norway');\n" +
@@ -356,20 +391,50 @@ public class DatabaseManager {
                 "\n" +
                 "-- INSERT ASSOCIATION\n" +
                 "INSERT INTO association(name,description) VALUES ('Liverpool','Description of Association1...');\n" +
-                "INSERT INTO association(name,description) VALUES ('Barcelona','Description of Association2...');\n" +
-                "INSERT INTO association(name,description) VALUES ('Manchester United','Description of Association3...');\n" +
-                "INSERT INTO association(name,description) VALUES ('Manchester City','Description of Association4...');\n" +
+                "INSERT INTO association(name,description) VALUES ('Manchester United','Description of Association2...');\n" +
+                "INSERT INTO association(name,description) VALUES ('Barcelona','Description of Association3...');\n" +
+                "INSERT INTO association(name,description) VALUES ('Real Madrid','Description of Association4...');\n" +
                 "\n" +
                 "\n" +
                 "-- INSERT PERSON\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (1, 'Addia', 'Southon', '1987-07-05');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (2, 'Nil', 'Asher', '2010-01-28');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (3, 'Ashil', 'Strover', '1997-01-03');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (4, 'Pinchas', 'Leahy', '1993-05-10');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (5, 'Julienne', 'Treffrey', '2012-10-24');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (6, 'Faythe', 'Burnham', '2009-12-20');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (7, 'Benetta', 'Kimbrough', '1977-07-01');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (8, 'Rhea', 'Cullingworth', '2010-09-23');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (9, 'Gilberte', 'Caldaro', '2007-06-11');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (10, 'Eimile', 'Shaddock', '2011-02-01');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (11, 'Milly', 'Waycot', '2017-04-28');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (12, 'Elianore', 'Lohan', '2007-12-27');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (13, 'Armando', 'Duligall', '1990-04-14');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (14, 'Laural', 'Wogan', '2000-01-31');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (15, 'Bryan', 'Cypler', '2015-05-14');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (16, 'Brier', 'Maseres', '2017-01-03');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (17, 'Rochette', 'Spelwood', '1992-07-09');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (18, 'Germain', 'Webling', '2012-08-06');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (19, 'Tobit', 'Marl', '1990-06-02');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (20, 'Alfie', 'Garatty', '1983-10-16');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (21, 'Anissa', 'Erskine Sandys', '1999-01-05');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (22, 'Geri', 'Mannooch', '1991-04-03');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (23, 'Marrilee', 'Lindores', '1982-08-22');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (24, 'Donelle', 'Timmermann', '1988-11-04');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (25, 'Everett', 'Abramowitz', '2007-10-04');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (26, 'Neall', 'Grigolon', '1993-06-07');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (27, 'Delia', 'Pregel', '2017-09-22');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (28, 'Billie', 'Jan', '2009-08-15');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (29, 'Kermie', 'Beatens', '2012-08-23');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (30, 'Rossy', 'Flintoffe', '1991-04-22');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (31, 'Arabela', 'Tourle', '2007-07-03');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (32, 'Damon', 'MacGilpatrick', '1989-01-22');\n" +
+                "insert into person (address_id, first_name, last_name, date_of_birth) values (33, 'Jacinthe', 'Halfacre', '1985-04-23');\n" +
+                "\n" +
                 "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Gabriel','Aunan','1991-03-26',1);\n" +
                 "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Martin','Martinsen','1993-05-16',2);\n" +
                 "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Thor','Thordenlund','1991-03-26',3);\n" +
-                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Christiano','Ronaldo','1989-02-08',4);\n" +
-                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Romelu','Lukaku','1992-02-08',1);\n" +
-                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Sergio','Aguero','1987-02-08',2);\n" +
-                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('David','Beckham','1989-02-08',3);\n" +
-                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Lional','Messi','1988-02-08',4);\n" +
+                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES ('Harald','Hudini','1989-02-08',4);\n" +
                 "\n" +
                 "-- INSERT GOAL_TYPE\n" +
                 "INSERT INTO goal_type(type) VALUES ('Penalty');\n" +
@@ -385,19 +450,16 @@ public class DatabaseManager {
                 "INSERT INTO owner(person_id) VALUES (1);\n" +
                 "INSERT INTO owner(person_id) VALUES (2);\n" +
                 "INSERT INTO owner(person_id) VALUES (3);\n" +
-                "INSERT INTO owner(person_id) VALUES (4);\n" +
                 "\n" +
                 "-- INSERT COACH\n" +
                 "INSERT INTO coach(person_id) VALUES (1);\n" +
                 "INSERT INTO coach(person_id) VALUES (2);\n" +
                 "INSERT INTO coach(person_id) VALUES (3);\n" +
-                "INSERT INTO coach(person_id) VALUES (4);\n" +
                 "\n" +
                 "-- INSERT TEAM\n" +
                 "INSERT INTO team(owner_id,association_id,coach_id,location_id) VALUES (1,1,1,1);\n" +
                 "INSERT INTO team(owner_id,association_id,coach_id,location_id) VALUES (2,2,2,2);\n" +
                 "INSERT INTO team(owner_id,association_id,coach_id,location_id) VALUES (3,3,3,3);\n" +
-                "INSERT INTO team(owner_id,association_id,coach_id,location_id) VALUES (4,4,4,4);\n" +
                 "\n" +
                 "-- INESRT MACTCH\n" +
                 "INSERT INTO match(match_date,season_id,location_id,home_team_id,away_team_id) VALUES ('2018-06-01',1,1,1,2);\n" +
@@ -419,14 +481,43 @@ public class DatabaseManager {
                 "INSERT INTO result(score,result,match_id,team_id) VALUES (1,'Loss',3,3);\n" +
                 "\n" +
                 "-- INSERT PLAYER\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Attack', '35', 2, 1);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Attack', '29', 1, 2);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Attack', '44', 3, 2);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Attack', '50', 4, 1);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Attack', '25', 5, 3);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Attack', '43', 6, 3);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Attack', '27', 7, 2);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Attack', '46', 8, 2);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Attack', '3', 9, 3);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Attack', '21', 10, 3);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Defence', '49', 11, 1);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Defence', '33', 12, 2);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Defence', '30', 13, 1);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Defence', '21', 14, 3);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Defence', '32', 15, 3);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Defence', '11', 16, 1);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Defence', '40', 17, 1);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Defence', '43', 18, 3);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Defence', '42', 19, 3);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Defence', '19', 20, 1);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Center', '48', 21, 2);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Center', '2', 22, 1);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Center', '15', 23, 2);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Keeper', '16', 24, 3);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Center', '6', 25, 1);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Center', '35', 26, 3);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Center', '27', 27, 1);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Center', '43', 28, 1);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Center', '12', 29, 1);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Center', '17', 30, 2);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Center', '14', 31, 1);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Keeper', '9', 32, 2);\n" +
+                "insert into player ( normal_position, number, person_id, team_id) values ('Keeper', '2', 33, 1);\n" +
+                "\n" +
                 "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Attack','1',1,1);\n" +
                 "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Defence','2',2,2);\n" +
                 "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Center','3',3,3);\n" +
-                "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Attack','7',4,3);\n" +
-                "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Attack','9',5,3);\n" +
-                "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Attack','9',6,4);\n" +
-                "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Attack','7',7,1);\n" +
-                "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES ('Attack','10',8,1);\n" +
                 "\n" +
                 "-- INSERT MATCH_POSITION\n" +
                 "INSERT INTO MATCH_POSITION(position,player_id,match_id) VALUES ('Attack',1,1);\n" +
