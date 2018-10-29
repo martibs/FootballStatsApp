@@ -1,16 +1,20 @@
 package no.experis.FootballStats.Admin.Models;
 
 import java.util.ArrayList;
+import java.sql.Date;
 
 public abstract class Person {
     private String person_id;
     private String first_name;
     private String last_name;
-    private String date_of_birth;
-    private String address_id;
+    private Date date_of_birth;
+    private int address_id;
 
+    public Person(){
 
-    public Person(String person_id, String first_name, String last_name, String date_of_birth, String address_id) {
+    }
+
+    public Person(String person_id, String first_name, String last_name, Date date_of_birth, int address_id) {
         this.person_id = person_id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -30,11 +34,11 @@ public abstract class Person {
         return last_name;
     }
 
-    public String getDate_of_birth() {
+    public Date getDate_of_birth() {
         return date_of_birth;
     }
 
-    public String getAddress_id() {
+    public int getAddress_id() {
         return address_id;
     }
 
