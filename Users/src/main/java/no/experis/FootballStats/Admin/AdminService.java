@@ -11,7 +11,7 @@ public class AdminService {
 
     private AdminDatabaseManager adminDbManager = new AdminDatabaseManager();
 
-
+/*
     // Addresses
     public List<Address> displayAllAddresses(){
         ArrayList<Address> addresses = new ArrayList<Address>();
@@ -31,6 +31,14 @@ public class AdminService {
         }
         return null;
     }
+*/
+
+    public void createAddress(Address address){
+        int id = adminDbManager.createAddress(address.getAddress_line_1(), address.getAddress_line_2(), address.getAddress_line_3(), address.getPostal_code(),address.getCity(), address.getCountry());
+        System.out.println("ID is: " + id);
+        adminDbManager.createLocation(address.getName(), address.getDescription(), id);
+    }
+
 
     public void deleteAddress(String address_id){
         adminDbManager.deleteAddress(address_id);
