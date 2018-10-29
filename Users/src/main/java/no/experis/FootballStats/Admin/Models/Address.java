@@ -1,4 +1,4 @@
-package no.experis.FootballStats.Admin;
+package no.experis.FootballStats.Admin.Models;
 
 public class Address {
 

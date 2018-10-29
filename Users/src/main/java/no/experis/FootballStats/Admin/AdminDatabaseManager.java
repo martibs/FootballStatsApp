@@ -1,7 +1,8 @@
 package no.experis.FootballStats.Admin;
 
+import no.experis.FootballStats.Admin.Models.Address;
+
 import java.sql.*;
-import java.util.ArrayList;
 
 public class AdminDatabaseManager {
     private Connection conn = null;
@@ -394,7 +395,7 @@ public class AdminDatabaseManager {
 */
 
     // TODO: Update statements ...
-    public Address updateAddress(String address_line_1,String address_line_2,String address_line_3,String postal_code,String city,String country, int real_id) {
+    public Address updateAddress(String address_line_1, String address_line_2, String address_line_3, String postal_code, String city, String country, int real_id) {
         String sql = "UPDATE address set address_line_1 = ? ,address_line_2 = ? , address_line_3 = ? , postal_code = ?, city = ? , country = ? WHERE address_id = ?";
 
         Address tempAddress = new Address(address_line_1,address_line_2,address_line_3,postal_code,city,country);
@@ -440,7 +441,6 @@ public class AdminDatabaseManager {
 
     public void deleteAddress(String address_id) {
         String sql = "DELETE FROM address WHERE address_id = ?";
-
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
