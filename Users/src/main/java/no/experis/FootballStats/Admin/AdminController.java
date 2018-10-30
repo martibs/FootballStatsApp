@@ -3,6 +3,7 @@ package no.experis.FootballStats.Admin;
 import no.experis.FootballStats.Admin.AdminDatabaseManager;
 import no.experis.FootballStats.Admin.AdminService;
 import no.experis.FootballStats.Admin.Models.Address;
+import no.experis.FootballStats.Admin.Models.Player;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,13 +43,6 @@ public class AdminController {
         return ResponseEntity.ok().body(result);
     }
 
-    @DeleteMapping("/deleteAddress/{id}")
-    public ResponseEntity<Address> deleteAddress(@PathVariable String id) {
-        log.info("Request to delete group: {}", id);
-        adminService.deleteAddress(id);
-        return ResponseEntity.ok().build();
-    }
-}
 */
 
 @Controller
@@ -56,6 +50,8 @@ public class AdminController{
 
     private AdminDatabaseManager adminDatabase = new AdminDatabaseManager();
     private AdminService adminService = new AdminService();
+
+    // ADDRESS
 
     @RequestMapping(method = RequestMethod.PUT, value = "/updateAddress/{addressId}")
     @ResponseBody
@@ -71,4 +67,26 @@ public class AdminController{
     }
 
 
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteAddress/{id}")
+    @ResponseBody
+    public void deleteAddress(@PathVariable String id) {
+        adminService.deleteAddress(id);
+    }
+
+
+    // PLAYER
+
+    @RequestMapping(method = RequestMethod.POST, value = "/createPlayer")
+    @ResponseBody
+    public void createPlayer(@RequestBody Player player){
+        adminService.createPlayer(player);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/updatePlayer/{personId}")
+    @ResponseBody
+    public void updatePlayer(@PathVariable int personId, @RequestBody Player player) {
+        adminService.updatePlayer(player);
+    }
+
+    
 }

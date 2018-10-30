@@ -1,8 +1,10 @@
 package no.experis.FootballStats.Admin;
 
 import no.experis.FootballStats.Admin.Models.Address;
+import no.experis.FootballStats.Admin.Models.Person;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 
 public class AdminDatabaseManager {
     private Connection conn = null;
@@ -240,16 +242,69 @@ public class AdminDatabaseManager {
 
 
     // ***** PERSON *****
-    public void createPerson(String first_name,String last_name,String date_of_birth,int address_id) {
-        String sql = "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES (?,?,?,?)";
+    public int createPerson(String first_name,String last_name, Date date_of_birth,int address_id) {
+        String sql = "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES (?,?,?,?) RETURNING person_id";
 
+        int lastPerson = -1;
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, first_name);
             pstmt.setString(2, last_name);
-            pstmt.setString(3, date_of_birth);
+            pstmt.setDate(3, date_of_birth);
             pstmt.setInt(4, address_id);
+            pstmt.execute();
+
+            ResultSet rs = pstmt.getResultSet();
+
+            while(rs.next()) {
+                lastPerson = rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return lastPerson;
+    }
+
+    public int updatePerson(String first_name,String last_name, Date date_of_birth,int real_id) {
+        String sql = "UPDATE Person set first_name = ? ,last_name = ?, date_of_birth = ? WHERE person_id = ? RETURNING person_id";
+
+        int lastPerson = -1;
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, first_name);
+            pstmt.setString(2, last_name);
+            pstmt.setDate(3, date_of_birth);
+            pstmt.setInt(4, real_id);
+            pstmt.execute();
+
+            ResultSet rs = pstmt.getResultSet();
+
+            while(rs.next()) {
+                lastPerson = rs.getInt(1);
+            }
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return lastPerson;
+
+    }
+
+    public void updatePlayer(String normal_position, String number, int team_id, int real_id) {
+        String sql = "UPDATE Player set normal_position = ? ,number = ?, team_id = ? WHERE person_id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, normal_position);
+            pstmt.setString(2, number);
+            pstmt.setInt(3, team_id);
+            pstmt.setInt(4, real_id);
             pstmt.executeUpdate();
 
 
@@ -275,6 +330,8 @@ public class AdminDatabaseManager {
             System.out.println(e.getMessage());
         }
     }
+
+
 
     public void createOwner(int person_id) {
         String sql = "INSERT INTO owner(person_id) VALUES (?)";
