@@ -2,10 +2,7 @@ package no.experis.FootballStats.Admin;
 
 import no.experis.FootballStats.Admin.AdminDatabaseManager;
 import no.experis.FootballStats.Admin.AdminService;
-import no.experis.FootballStats.Admin.Models.Address;
-import no.experis.FootballStats.Admin.Models.Coach;
-import no.experis.FootballStats.Admin.Models.Owner;
-import no.experis.FootballStats.Admin.Models.Player;
+import no.experis.FootballStats.Admin.Models.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,14 +50,8 @@ public class AdminController{
     private AdminDatabaseManager adminDatabase = new AdminDatabaseManager();
     private AdminService adminService = new AdminService();
 
-    // ADDRESS
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/updateAddress/{addressId}")
-    @ResponseBody
-    public void updateAddress(@PathVariable int addressId, @RequestBody Address address) {
-        adminDatabase.updateAddress(address.getAddress_line_1(), address.getAddress_line_2(), address.getAddress_line_3(), address.getPostal_code(),address.getCity(), address.getCountry(), addressId);
-        adminDatabase.updateLocation(address.getName(), address.getDescription(), address.getLocation_id());
-    }
+    // ADDRESS
 
     @RequestMapping(method = RequestMethod.POST, value = "/createAddress")
     @ResponseBody
@@ -68,6 +59,11 @@ public class AdminController{
         adminService.createAddress(address);
     }
 
+    @RequestMapping(method = RequestMethod.PUT, value = "/updateAddress/{addressId}")
+    @ResponseBody
+    public void updateAddress(@PathVariable int addressId, @RequestBody Address address) {
+        adminService.updateAddress(address, addressId);
+    }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteAddress/{id}")
     @ResponseBody
@@ -111,7 +107,7 @@ public class AdminController{
     }
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/updatePlayer/{personId}")
+    @RequestMapping(method = RequestMethod.PUT, value = "/updateOwner/{personId}")
     @ResponseBody
     public void updateOwner(@PathVariable int personId, @RequestBody Owner owner) {
         adminService.updateOwner(owner);
@@ -121,6 +117,18 @@ public class AdminController{
 
     // GOAL
 
+    @RequestMapping(method = RequestMethod.POST, value = "/createGoal")
+    @ResponseBody
+    public void createGoal(@RequestBody Goal goal){
+        adminService.createGoal(goal);
+    }
+
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/updateGoal/{goal_id}")
+    @ResponseBody
+    public void updateGoal(@PathVariable int goal_id, @RequestBody Goal goal) {
+        adminService.updateGoal(goal);
+    }
 
 
     // MATCH

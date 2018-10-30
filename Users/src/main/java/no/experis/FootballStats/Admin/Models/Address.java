@@ -10,7 +10,7 @@ public class Address {
     private String city;
     private String country;
     private int location_id;
-    private String name;
+    private String name;        //TODO: CHANGE TO LOCATION_NAME
     private String description;
 
     public Address(){
