@@ -52,12 +52,12 @@ public class AdminService {
 
     public void updateCoach(Coach coach){
         int id = adminDbManager.updatePerson(coach.getFirst_name(), coach.getLast_name(), coach.getDate_of_birth(), coach.getAddress_id());
-        adminDbManager.updateCoach(id);
+        adminDbManager.updateCoach(id, coach.getCoach_id());
     }
 
     public void updateOwner(Owner owner){
         int id = adminDbManager.updatePerson(owner.getFirst_name(), owner.getLast_name(), owner.getDate_of_birth(), owner.getAddress_id());
-        adminDbManager.updateOwner(id);
+        adminDbManager.updateOwner(id, owner.getOwner_id());
     }
 
 

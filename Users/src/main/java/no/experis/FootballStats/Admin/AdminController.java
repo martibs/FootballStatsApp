@@ -113,7 +113,7 @@ public class AdminController{
         adminService.updateOwner(owner);
     }
 
-
+/*
 
     // GOAL
 
@@ -129,7 +129,7 @@ public class AdminController{
     public void updateGoal(@PathVariable int goal_id, @RequestBody Goal goal) {
         adminService.updateGoal(goal);
     }
-
+*/
 
     // MATCH
 
