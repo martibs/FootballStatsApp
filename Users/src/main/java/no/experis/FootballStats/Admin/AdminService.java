@@ -19,6 +19,11 @@ public class AdminService {
         adminDbManager.createLocation(address.getName(), address.getDescription(), id);
     }
 
+    public void updateAddress(Address address, int addressId){
+        adminDbManager.updateAddress(address.getAddress_line_1(), address.getAddress_line_2(), address.getAddress_line_3(), address.getPostal_code(),address.getCity(), address.getCountry(), addressId);
+        adminDbManager.updateLocation(address.getName(), address.getDescription(), address.getLocation_id());
+    }
+
     public void deleteAddress(String address_id){
         adminDbManager.deleteAddress(address_id);
     }
@@ -47,13 +52,33 @@ public class AdminService {
 
     public void updateCoach(Coach coach){
         int id = adminDbManager.updatePerson(coach.getFirst_name(), coach.getLast_name(), coach.getDate_of_birth(), coach.getAddress_id());
-        adminDbManager.updateCoach();
+        adminDbManager.updateCoach(id);
     }
 
     public void updateOwner(Owner owner){
         int id = adminDbManager.updatePerson(owner.getFirst_name(), owner.getLast_name(), owner.getDate_of_birth(), owner.getAddress_id());
         adminDbManager.updateOwner(id);
     }
+
+
+    // GOAL
+
+
+
+    // MATCH
+
+
+
+    // RESULT
+
+
+
+    // SEASON
+
+
+
+    // TEAM
+
 
 
 
