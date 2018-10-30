@@ -109,6 +109,24 @@ public class AdminDatabaseManager {
         }
     }
 
+    public void updateSeason(String start_date,String end_date,String name,String description, int season_id) {
+        String sql = "UPDATE SEASON set start_date = ? ,end_date = ?, name = ?, description = ? WHERE season_id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, start_date);
+            pstmt.setString(2, end_date);
+            pstmt.setString(3, name);
+            pstmt.setString(4, description);
+            pstmt.setInt(5,season_id);
+            pstmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     // **** TEAM *****
 
     public void createAssociation(String name,String description) {
@@ -119,6 +137,22 @@ public class AdminDatabaseManager {
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, name);
             pstmt.setString(2, description);
+            pstmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void updateAssociation(String name,String description, int association_id) {
+        String sql = "UPDATE MATCH_GOAL set name = ? ,description = ? WHERE association_id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, name);
+            pstmt.setString(2, description);
+            pstmt.setInt(3, association_id);
             pstmt.executeUpdate();
 
 
@@ -145,6 +179,36 @@ public class AdminDatabaseManager {
         }
     }
 
+    public int updateTeam(int owner_id,int association_id, int coach_id, int location_id,int team_id) {
+        String sql = "UPDATE TEAM set owner_id = ? ,association_id = ?, coach_id = ?, location_id = ? WHERE team_id = ? RETURNING association_id";
+
+        int lastTeam = -1;
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, owner_id);
+            pstmt.setInt(2, association_id);
+            pstmt.setInt(3, coach_id);
+            pstmt.setInt(4, location_id);
+            pstmt.setInt(5, location_id);
+            pstmt.setInt(6, team_id);
+            pstmt.execute();
+
+            ResultSet rs = pstmt.getResultSet();
+
+            while(rs.next()) {
+                lastTeam = rs.getInt(1);
+            }
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return lastTeam;
+
+    }
+
 
     // **** GOAL *****
     public void createGoalType(String type) {
@@ -154,6 +218,21 @@ public class AdminDatabaseManager {
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, type);
+            pstmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void updateGoalType(String type, int goal_type_id) {
+        String sql = "UPDATE Player set type = ? WHERE goal_type_id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, type);
+            pstmt.setInt(2, goal_type_id);
             pstmt.executeUpdate();
 
 
@@ -172,6 +251,24 @@ public class AdminDatabaseManager {
             pstmt.setInt(2, goal_type_id);
             pstmt.setInt(3, match_id);
             pstmt.setInt(4, player_id);
+            pstmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void updateMatchGoal(String description,int goal_type_id, int match_id, int player_id, int goal_id) {
+        String sql = "UPDATE MATCH_GOAL set description = ? ,goal_type_id = ?, match_id = ?, player_id = ? WHERE goal_id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, description);
+            pstmt.setInt(2, goal_type_id);
+            pstmt.setInt(3, match_id);
+            pstmt.setInt(4, player_id);
+            pstmt.setInt(5,goal_id);
             pstmt.executeUpdate();
 
 
@@ -202,6 +299,25 @@ public class AdminDatabaseManager {
         }
     }
 
+    public void updateMatch(String match_date, int season_id,int location_id, int home_team_id, int away_team_id, int match_id) {
+        String sql = "UPDATE MATCH set match_date = ? ,season_id = ?, location_id = ?, home_team_id = ?, away_team_id = ?  WHERE match_id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, match_date);
+            pstmt.setInt(2, season_id);
+            pstmt.setInt(3, location_id);
+            pstmt.setInt(4, home_team_id);
+            pstmt.setInt(5,away_team_id);
+            pstmt.setInt(6,match_id);
+            pstmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public void createMatchPosition(String position,int player_id, int match_id) {
         String sql = "INSERT INTO MATCH_POSITION(position,player_id,match_id) VALUES (?,?,?)";
 
@@ -211,6 +327,24 @@ public class AdminDatabaseManager {
             pstmt.setString(1, position);
             pstmt.setInt(2, player_id);
             pstmt.setInt(3, match_id);
+            pstmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void updateMatchPosition(String position,int new_player_id, int new_match_id,int player_id, int match_id) {
+        String sql = "UPDATE MATCH_POSITION set position = ? ,player_id = ?, match_id = ? WHERE match_id = ? and player_id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, position);
+            pstmt.setInt(2, new_player_id);
+            pstmt.setInt(3, new_match_id);
+            pstmt.setInt(4, match_id);
+            pstmt.setInt(5,player_id);
             pstmt.executeUpdate();
 
 
@@ -232,6 +366,25 @@ public class AdminDatabaseManager {
             pstmt.setString(2, result);
             pstmt.setInt(3, match_id);
             pstmt.setInt(4, team_id);
+            pstmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void updateResult(int score,String result, int new_match_id, int new_team_id, int match_id, int team_id) {
+        String sql = "UPDATE RESULT set score = ? ,result = ?, match_id = ?, team_id = ? WHERE match_id = ? and team_id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, score);
+            pstmt.setString(2, result);
+            pstmt.setInt(3, new_match_id);
+            pstmt.setInt(4, new_team_id);
+            pstmt.setInt(5,match_id);
+            pstmt.setInt(5,team_id);
             pstmt.executeUpdate();
 
 
@@ -348,6 +501,21 @@ public class AdminDatabaseManager {
         }
     }
 
+    public void updateOwner(int person_id, int owner_id) {
+        String sql = "UPDATE owner set person_id = ? WHERE owner_id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, person_id);
+            pstmt.setInt(2, owner_id);
+            pstmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public void createCoach(int person_id) {
         String sql = "INSERT INTO coach(person_id) VALUES (?)";
 
@@ -355,6 +523,21 @@ public class AdminDatabaseManager {
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, person_id);
+            pstmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void updateCoach(int person_id, int coach_id) {
+        String sql = "UPDATE owner set person_id = ? WHERE coach_id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, person_id);
+            pstmt.setInt(2, coach_id);
             pstmt.executeUpdate();
 
 
