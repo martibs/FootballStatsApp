@@ -3,6 +3,8 @@ package no.experis.FootballStats.Admin;
 import no.experis.FootballStats.Admin.AdminDatabaseManager;
 import no.experis.FootballStats.Admin.AdminService;
 import no.experis.FootballStats.Admin.Models.Address;
+import no.experis.FootballStats.Admin.Models.Coach;
+import no.experis.FootballStats.Admin.Models.Owner;
 import no.experis.FootballStats.Admin.Models.Player;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -74,7 +76,7 @@ public class AdminController{
     }
 
 
-    // PLAYER
+    // PERSON
 
     @RequestMapping(method = RequestMethod.POST, value = "/createPlayer")
     @ResponseBody
@@ -82,11 +84,60 @@ public class AdminController{
         adminService.createPlayer(player);
     }
 
+    @RequestMapping(method = RequestMethod.POST, value = "/createCoach")
+    @ResponseBody
+    public void createCoach(@RequestBody Coach coach){
+        adminService.createCoach(coach);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/createOwner")
+    @ResponseBody
+    public void createOwner(@RequestBody Owner owner){
+        adminService.createOwner(owner);
+    }
+
+
     @RequestMapping(method = RequestMethod.PUT, value = "/updatePlayer/{personId}")
     @ResponseBody
     public void updatePlayer(@PathVariable int personId, @RequestBody Player player) {
         adminService.updatePlayer(player);
     }
 
-    
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/updateCoach/{personId}")
+    @ResponseBody
+    public void updateCoach(@PathVariable int personId, @RequestBody Coach coach) {
+        adminService.updateCoach(coach);
+    }
+
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/updatePlayer/{personId}")
+    @ResponseBody
+    public void updateOwner(@PathVariable int personId, @RequestBody Owner owner) {
+        adminService.updateOwner(owner);
+    }
+
+
+
+    // GOAL
+
+
+
+    // MATCH
+
+
+
+    // RESULT
+
+
+
+    // SEASON
+
+
+
+    // TEAM
+
+
+
+
 }
