@@ -51,6 +51,8 @@ public class AdminController{
     private AdminDatabaseManager adminDatabase = new AdminDatabaseManager();
     private AdminService adminService = new AdminService();
 
+    // ADDRESS
+
     @RequestMapping(method = RequestMethod.PUT, value = "/updateAddress/{addressId}")
     @ResponseBody
     public void updateAddress(@PathVariable int addressId, @RequestBody Address address) {
@@ -72,6 +74,8 @@ public class AdminController{
     }
 
 
+    // PLAYER
+
     @RequestMapping(method = RequestMethod.POST, value = "/createPlayer")
     @ResponseBody
     public void createPlayer(@RequestBody Player player){
@@ -84,4 +88,5 @@ public class AdminController{
         adminService.updatePlayer(player);
     }
 
+    
 }
