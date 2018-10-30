@@ -2,7 +2,7 @@ package no.experis.FootballStats.Admin.Models;
 
 public class Address {
 
-    private String address_id;
+    private int address_id;
     private String address_line_1;
     private String address_line_2;
     private String address_line_3;
@@ -10,15 +10,15 @@ public class Address {
     private String city;
     private String country;
     private int location_id;
-    private String name;        //TODO: CHANGE TO LOCATION_NAME
+    private String location_name;        //TODO: CHANGE TO LOCATION_NAME
     private String description;
 
     public Address(){
 
     }
 
-    public Address(String name, String description){
-        this.name = name;
+    public Address(String location_name, String description){
+        this.location_name = location_name;
         this.description = description;
     }
 
@@ -31,7 +31,7 @@ public class Address {
         this.country = country;
     }
 
-    public Address(String address_line_1, String address_line_2, String address_line_3, String postal_code, String city, String country, int location_id, String name, String description) {
+    public Address(String address_line_1, String address_line_2, String address_line_3, String postal_code, String city, String country, int location_id, String location_name, String description) {
         this.address_line_1 = address_line_1;
         this.address_line_2 = address_line_2;
         this.address_line_3 = address_line_3;
@@ -39,11 +39,11 @@ public class Address {
         this.city = city;
         this.country = country;
         this.location_id = location_id;
-        this.name = name;
+        this.location_name = location_name;
         this.description = description;
     }
 
-    public Address(String address_id, String address_line_1, String address_line_2, String address_line_3, String postal_code, String city, String country) {
+    public Address(int address_id, String address_line_1, String address_line_2, String address_line_3, String postal_code, String city, String country) {
         this.address_id = address_id;
         this.address_line_1 = address_line_1;
         this.address_line_2 = address_line_2;
@@ -53,19 +53,19 @@ public class Address {
         this.country = country;
     }
 
-    public Address(String address_line_1, String address_line_2, String address_line_3, String postal_code, String city, String country, String name, String description) {
+    public Address(String address_line_1, String address_line_2, String address_line_3, String postal_code, String city, String country, String location_name, String description) {
         this.address_line_1 = address_line_1;
         this.address_line_2 = address_line_2;
         this.address_line_3 = address_line_3;
         this.postal_code = postal_code;
         this.city = city;
         this.country = country;
-        this.name = name;
+        this.location_name = location_name;
         this.description = description;
     }
 
 
-    public String getAddress_id() {
+    public int getAddress_id() {
         return address_id;
     }
 
@@ -93,7 +93,7 @@ public class Address {
         return country;
     }
 
-    public void setAddress_id(String address_id) {
+    public void setAddress_id(int address_id) {
         this.address_id = address_id;
     }
 
@@ -121,8 +121,8 @@ public class Address {
         this.country = country;
     }
 
-    public String getName() {
-        return name;
+    public String getLocation_name() {
+        return location_name;
     }
 
     public String getDescription() {

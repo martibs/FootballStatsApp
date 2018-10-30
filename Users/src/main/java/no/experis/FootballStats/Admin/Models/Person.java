@@ -10,10 +10,6 @@ public abstract class Person {
     private Date date_of_birth;
     private int address_id;
 
-    public Person(){
-
-    }
-
     public Person(String person_id, String first_name, String last_name, Date date_of_birth, int address_id) {
         this.person_id = person_id;
         this.first_name = first_name;

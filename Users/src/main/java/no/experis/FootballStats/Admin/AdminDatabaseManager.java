@@ -1,7 +1,8 @@
 package no.experis.FootballStats.Admin;
 
 import no.experis.FootballStats.Admin.Models.Address;
-import no.experis.FootballStats.Admin.Models.Person;
+
+
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
@@ -91,14 +92,14 @@ public class AdminDatabaseManager {
 
     // ***** SEASON *****
 
-    public void createSeason(String start_date,String end_date,String name,String description) {
+    public void createSeason(Date start_date,Date end_date,String name,String description) {
         String sql = "INSERT INTO season(start_date,end_date,name,description) VALUES (?,?,?,?)";
 
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, start_date);
-            pstmt.setString(2, end_date);
+            pstmt.setDate(1, start_date);
+            pstmt.setDate(2, end_date);
             pstmt.setString(3, name);
             pstmt.setString(4, description);
             pstmt.executeUpdate();
@@ -109,13 +110,13 @@ public class AdminDatabaseManager {
         }
     }
 
-    public void updateSeason(String start_date,String end_date,String name,String description, int season_id) {
+    public void updateSeason(Date start_date,Date end_date,String name,String description, int season_id) {
         String sql = "UPDATE SEASON set start_date = ? ,end_date = ?, name = ?, description = ? WHERE season_id = ?";
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, start_date);
-            pstmt.setString(2, end_date);
+            pstmt.setDate(1, start_date);
+            pstmt.setDate(2, end_date);
             pstmt.setString(3, name);
             pstmt.setString(4, description);
             pstmt.setInt(5,season_id);

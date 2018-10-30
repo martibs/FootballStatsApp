@@ -1,9 +1,6 @@
 package no.experis.FootballStats.Admin;
 
-import no.experis.FootballStats.Admin.Models.Address;
-import no.experis.FootballStats.Admin.Models.Coach;
-import no.experis.FootballStats.Admin.Models.Owner;
-import no.experis.FootballStats.Admin.Models.Player;
+import no.experis.FootballStats.Admin.Models.*;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,12 +13,12 @@ public class AdminService {
 
     public void createAddress(Address address){
         int id = adminDbManager.createAddress(address.getAddress_line_1(), address.getAddress_line_2(), address.getAddress_line_3(), address.getPostal_code(),address.getCity(), address.getCountry());
-        adminDbManager.createLocation(address.getName(), address.getDescription(), id);
+        adminDbManager.createLocation(address.getLocation_name(), address.getDescription(), id);
     }
 
-    public void updateAddress(Address address, int addressId){
-        adminDbManager.updateAddress(address.getAddress_line_1(), address.getAddress_line_2(), address.getAddress_line_3(), address.getPostal_code(),address.getCity(), address.getCountry(), addressId);
-        adminDbManager.updateLocation(address.getName(), address.getDescription(), address.getLocation_id());
+    public void updateAddress(Address address){
+        adminDbManager.updateAddress(address.getAddress_line_1(), address.getAddress_line_2(), address.getAddress_line_3(), address.getPostal_code(),address.getCity(), address.getCountry(), address.getAddress_id());
+        adminDbManager.updateLocation(address.getLocation_name(), address.getDescription(), address.getLocation_id());
     }
 
     public void deleteAddress(String address_id){
@@ -62,23 +59,57 @@ public class AdminService {
 
 
     // GOAL
+    public void createGoal(Goal goal){
+        adminDbManager.createMatchGoal(goal.getDescription(), goal.getGoal_type_id(), goal.getMatch_id(), goal.getPlayer_id());
+    }
 
+    public void updateGoal(Goal goal){
+        adminDbManager.updateMatchGoal(goal.getDescription(), goal.getGoal_type_id(), goal.getMatch_id(), goal.getPlayer_id(), goal.getGoal_id());
+    }
 
 
     // MATCH
 
+    public void createMatch(Match match){
+        adminDbManager.createMatch(match.getMatch_date(), match.getSeason_id(), match.getLocation_id(), match.getHome_team_id(), match.getAway_team_id());
+    }
 
+    public void updateMatch(Match match){
+        adminDbManager.updateMatch(match.getMatch_date(), match.getSeason_id(), match.getLocation_id(), match.getHome_team_id(), match.getAway_team_id(), match.getMatch_id());
+    }
 
     // RESULT
 
+    public void createResult(Result result){
+        adminDbManager.createResult(result.getScore(), result.getResult(), result.getMatch_id(), result.getTeam_id());
+    }
+
+    public void updateResult(Result result, int old_team_id, int old_match_id){
+        adminDbManager.updateResult(result.getScore(), result.getResult(), result.getMatch_id(), result.getTeam_id(), old_team_id, old_match_id);
+    }
 
 
     // SEASON
 
+    public void createSeason(Season season){
+        adminDbManager.createSeason(season.getStart_date(), season.getEnd_date(), season.getName(), season.getDescription());
+    }
+
+    public void updateSeason(Season season){
+        adminDbManager.updateSeason(season.getStart_date(), season.getEnd_date(), season.getName(), season.getDescription(), season.getSeason_id());
+    }
+
 
 
     // TEAM
+    public void createTeam(Team team){
+        adminDbManager.createTeam(team.getOwner_id(), team.getAssociation_id(), team.getCoach_id(), team.getLocation_id());
+    }
 
+    public void updateTeam(Team team){
+        int id = adminDbManager.updateTeam(team.getOwner_id(), team.getAssociation_id(), team.getCoach_id(), team.getLocation_id(), team.getTeam_id());
+        adminDbManager.updateAssociation(team.getAssociation_name(), team.getAssociation_description(), id);
+    }
 
 
 

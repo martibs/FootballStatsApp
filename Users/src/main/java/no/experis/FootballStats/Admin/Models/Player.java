@@ -10,11 +10,6 @@ public class Player extends Person{
     private int team_id;
 
 
-    public Player(){
-
-    }
-
-
     public Player(String person_id, String first_name, String last_name, Date date_of_birth, int address_id) {
         super(person_id, first_name, last_name, date_of_birth, address_id);
     }

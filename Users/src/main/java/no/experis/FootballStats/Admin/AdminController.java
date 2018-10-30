@@ -1,7 +1,5 @@
 package no.experis.FootballStats.Admin;
 
-import no.experis.FootballStats.Admin.AdminDatabaseManager;
-import no.experis.FootballStats.Admin.AdminService;
 import no.experis.FootballStats.Admin.Models.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -59,10 +57,10 @@ public class AdminController{
         adminService.createAddress(address);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/updateAddress/{addressId}")
+    @RequestMapping(method = RequestMethod.PUT, value = "/updateAddress")
     @ResponseBody
-    public void updateAddress(@PathVariable int addressId, @RequestBody Address address) {
-        adminService.updateAddress(address, addressId);
+    public void updateAddress(@RequestBody Address address) {
+        adminService.updateAddress(address);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteAddress/{id}")
@@ -93,27 +91,26 @@ public class AdminController{
     }
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/updatePlayer/{personId}")
+    @RequestMapping(method = RequestMethod.PUT, value = "/updatePlayer")
     @ResponseBody
-    public void updatePlayer(@PathVariable int personId, @RequestBody Player player) {
+    public void updatePlayer(@RequestBody Player player) {
         adminService.updatePlayer(player);
     }
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/updateCoach/{personId}")
+    @RequestMapping(method = RequestMethod.PUT, value = "/updateCoach")
     @ResponseBody
-    public void updateCoach(@PathVariable int personId, @RequestBody Coach coach) {
+    public void updateCoach(@RequestBody Coach coach) {
         adminService.updateCoach(coach);
     }
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/updateOwner/{personId}")
+    @RequestMapping(method = RequestMethod.PUT, value = "/updateOwner")
     @ResponseBody
-    public void updateOwner(@PathVariable int personId, @RequestBody Owner owner) {
+    public void updateOwner(@RequestBody Owner owner) {
         adminService.updateOwner(owner);
     }
 
-/*
 
     // GOAL
 
@@ -123,28 +120,68 @@ public class AdminController{
         adminService.createGoal(goal);
     }
 
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/updateGoal/{goal_id}")
+    @RequestMapping(method = RequestMethod.PUT, value = "/updateGoal")
     @ResponseBody
-    public void updateGoal(@PathVariable int goal_id, @RequestBody Goal goal) {
+    public void updateGoal(@RequestBody Goal goal) {
         adminService.updateGoal(goal);
     }
-*/
 
     // MATCH
 
+    @RequestMapping(method = RequestMethod.POST, value = "/createMatch")
+    @ResponseBody
+    public void createMatch(@RequestBody Match match){
+        adminService.createMatch(match);
+    }
 
+    @RequestMapping(method = RequestMethod.PUT, value = "/updateMatch")
+    @ResponseBody
+    public void updateMatch(@RequestBody Match match) {
+        adminService.updateMatch(match);
+    }
 
     // RESULT
 
+    @RequestMapping(method = RequestMethod.POST, value = "/createResult")
+    @ResponseBody
+    public void createResult(@RequestBody Result result){
+        adminService.createResult(result);
+    }
+
+    // **** NEEDS TO SEND THE OLD VALUE FOR TEAM_ID AND MATCH_ID ****
+    @RequestMapping(method = RequestMethod.PUT, value = "/updateResult/{old_team_id}/{old_match_id}")
+    @ResponseBody
+    public void updateResult(@PathVariable int old_team_id, int old_match_id, @RequestBody Result result) {
+        adminService.updateResult(result, old_team_id, old_match_id);
+    }
 
 
     // SEASON
+    @RequestMapping(method = RequestMethod.POST, value = "/createSeason")
+    @ResponseBody
+    public void createSeason(@RequestBody Season season){
+        adminService.createSeason(season);
+    }
 
+    @RequestMapping(method = RequestMethod.PUT, value = "/updateSeason")
+    @ResponseBody
+    public void updateMatch(@RequestBody Season season) {
+        adminService.updateSeason(season);
+    }
 
 
     // TEAM
+    @RequestMapping(method = RequestMethod.POST, value = "/createTeam")
+    @ResponseBody
+    public void createTeam(@RequestBody Team team){
+        adminService.createTeam(team);
+    }
 
+    @RequestMapping(method = RequestMethod.PUT, value = "/updateTeam")
+    @ResponseBody
+    public void updateTeam(@RequestBody Team team) {
+        adminService.updateTeam(team);
+    }
 
 
 
