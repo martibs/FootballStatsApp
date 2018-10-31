@@ -78,6 +78,8 @@ public class AdminService {
         adminDbManager.updateMatch(match.getMatch_date(), match.getSeason_id(), match.getLocation_id(), match.getHome_team_id(), match.getAway_team_id(), match.getMatch_id());
     }
 
+
+
     // RESULT
 
     public void createResult(Result result){
