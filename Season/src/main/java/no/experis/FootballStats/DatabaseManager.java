@@ -5,17 +5,17 @@ import java.util.ArrayList;
 
 public class DatabaseManager {
 
-    private final String DB_HOST = "case1234.cqjagjopuiru.eu-central-1.rds.amazonaws.com";
+    private final String DB_HOST = "ec2-46-51-184-229.eu-west-1.compute.amazonaws.com";
     private final String DB_PORT = "5432";
-    private final String DB_USER = "case1234";
-    private final String DB_PASSWD = "case1234";
-    private final String DB_NAME = "caseDB";
+    private final String DB_USER = "uvmyugpkrtubxx";
+    private final String DB_PASSWD = "a42ebfe205e754d8b170f120ab30d5679bf64a324b80b2bc429c3e2e90f9f353";
+    private final String DB_NAME = "d5togjfivbt4tr";
     private final String DB_URL = "jdbc:postgresql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME;
 
     private Connection conn = null;
 
-    private String start_date;
-    private String end_date;
+    private Date start_date;
+    private Date end_date;
     private String name;
     private String description;
     private String season_id;
@@ -45,8 +45,8 @@ public class DatabaseManager {
             // loop through the result set
             while (rs.next()) {
                 season_id = Integer.toString(rs.getInt("SEASON_ID"));
-                start_date = rs.getString("START_DATE");
-                end_date = rs.getString("END_DATE");
+                start_date = rs.getDate("START_DATE");
+                end_date = rs.getDate("END_DATE");
                 name = rs.getString("NAME");
                 description = rs.getString("DESCRIPTION");
 

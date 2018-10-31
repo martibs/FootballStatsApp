@@ -5,11 +5,12 @@ import java.util.ArrayList;
 
 public class DatabaseManager {
 
-    private final String DB_HOST = "case1234.cqjagjopuiru.eu-central-1.rds.amazonaws.com";
+
+    private final String DB_HOST = "ec2-46-51-184-229.eu-west-1.compute.amazonaws.com";
     private final String DB_PORT = "5432";
-    private final String DB_USER = "case1234";
-    private final String DB_PASSWD = "case1234";
-    private final String DB_NAME = "caseDB";
+    private final String DB_USER = "uvmyugpkrtubxx";
+    private final String DB_PASSWD = "a42ebfe205e754d8b170f120ab30d5679bf64a324b80b2bc429c3e2e90f9f353";
+    private final String DB_NAME = "d5togjfivbt4tr";
     private final String DB_URL = "jdbc:postgresql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME;
 
     private Connection conn = null;
