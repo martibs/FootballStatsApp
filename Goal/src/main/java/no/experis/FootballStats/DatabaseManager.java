@@ -1,5 +1,8 @@
 package no.experis.FootballStats;
 
+import no.experis.FootballStats.Models.Goal;
+import no.experis.FootballStats.Models.GoalType;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -36,7 +39,7 @@ public class DatabaseManager {
     }
 
     public ArrayList<Goal> getGoals() {
-        String sql = "SELECT * FROM MATCH_GOAL INNER JOIN GOAL_TYPE ON MATCH_GOAL.GOAL_TYPE_ID = GOAL_TYPE.GOAL_TYPE_ID";
+        String sql = "SELECT * FROM MATCH_GOAL";
 
         Goal tempGoal = null;
         ArrayList<Goal> tempGoalList = new ArrayList<Goal>();
@@ -45,7 +48,6 @@ public class DatabaseManager {
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
-
             // loop through the result set
             while (rs.next()) {
                 goal_id = Integer.toString(rs.getInt("GOAL_ID"));
@@ -53,10 +55,8 @@ public class DatabaseManager {
                 goal_type_id = Integer.toString(rs.getInt("GOAL_TYPE_ID"));
                 match_id = Integer.toString(rs.getInt("MATCH_ID"));
                 description = rs.getString("DESCRIPTION");
-                type = rs.getString("TYPE");
 
-
-                tempGoal = new Goal(goal_id,player_id,goal_type_id,match_id,description, type);
+                tempGoal = new Goal(goal_id,player_id,goal_type_id,match_id,description);
                 tempGoalList.add(tempGoal);
             }
 
@@ -64,6 +64,32 @@ public class DatabaseManager {
             System.out.println(e.getMessage());
         }
         return tempGoalList;
+    }
+
+
+    public ArrayList<GoalType> getGoalType() {
+        String sql = "SELECT * FROM GOAL_TYPE";
+
+        GoalType tempGoalType = null;
+        ArrayList<GoalType> tempGoalTypeList = new ArrayList<GoalType>();
+
+        try (Connection conn = this.connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            // loop through the result set
+            while (rs.next()) {
+                goal_type_id = Integer.toString(rs.getInt("GOAL_TYPE_ID"));
+                type = rs.getString("TYPE");
+
+                tempGoalType = new GoalType(goal_type_id, type);
+                tempGoalTypeList.add(tempGoalType);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return tempGoalTypeList;
     }
 
 }

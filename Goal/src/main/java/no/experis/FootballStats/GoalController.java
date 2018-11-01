@@ -1,5 +1,7 @@
 package no.experis.FootballStats;
 
+import no.experis.FootballStats.Models.Goal;
+import no.experis.FootballStats.Models.GoalType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -18,4 +20,18 @@ public class GoalController {
     public Goal showOneGoal(@PathVariable(value="someID") String id){
         return goalService.displayOneGoal(id);
     }
+
+
+    @GetMapping("/showGoalTypes")
+    public List showGoalTypes() {
+        return goalService.displayAllGoalTypes();
+    }
+
+    @GetMapping("/showGoalTypes/{someID}")
+    public GoalType showOneGoalType(@PathVariable(value="someID") String id){
+        return goalService.displayOneGoalType(id);
+    }
+
+
+
 }

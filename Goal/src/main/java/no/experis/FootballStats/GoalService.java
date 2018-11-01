@@ -1,5 +1,7 @@
 package no.experis.FootballStats;
 
+import no.experis.FootballStats.Models.Goal;
+import no.experis.FootballStats.Models.GoalType;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,13 +22,34 @@ public class GoalService {
     }
 
 
-    public Goal displayOneGoal(String player_id) {
+    public Goal displayOneGoal(String goal_id) {
         ArrayList<Goal> goals = new ArrayList<Goal>();
         goals.addAll(dbManager.getGoals());
 
         for (Goal goal : goals) {
-            if (goal.getGoal_id().equals(player_id)) {
+            if (goal.getGoal_id().equals(goal_id)) {
                 return goal;
+            }
+        }
+        return null;
+    }
+
+    public List<GoalType> displayAllGoalTypes() {
+        ArrayList<GoalType> goalTypes = new ArrayList<GoalType>();
+
+        goalTypes.addAll(dbManager.getGoalType());
+
+        return goalTypes;
+    }
+
+
+    public GoalType displayOneGoalType(String goal_type_id) {
+        ArrayList<GoalType> goalTypes = new ArrayList<GoalType>();
+        goalTypes.addAll(dbManager.getGoalType());
+
+        for (GoalType goalType : goalTypes) {
+            if (goalType.getGoal_type_id().equals(goal_type_id)) {
+                return goalType;
             }
         }
         return null;

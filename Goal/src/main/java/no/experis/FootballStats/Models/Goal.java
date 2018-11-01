@@ -1,4 +1,4 @@
-package no.experis.FootballStats;
+package no.experis.FootballStats.Models;
 
 import java.util.ArrayList;
 
@@ -9,16 +9,16 @@ public class Goal {
     private String goal_type_id;
     private String match_id;
     private String description;
-    private String type;
 
 
-    public Goal(String goal_id, String player_id, String goal_type_id, String match_id, String description, String type) {
+
+
+    public Goal(String goal_id, String player_id, String goal_type_id, String match_id, String description) {
         this.goal_id = goal_id;
         this.player_id = player_id;
         this.goal_type_id = goal_type_id;
         this.match_id = match_id;
         this.description = description;
-        this.type = type;
     }
 
     public String getGoal_id() {
@@ -41,7 +41,4 @@ public class Goal {
         return description;
     }
 
-    public String getType() {
-        return type;
-    }
 }
