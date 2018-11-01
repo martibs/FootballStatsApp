@@ -76,12 +76,10 @@ public class AdminService {
     // GOAL
     public void createGoal(Goal goal){
         adminDbManager.createMatchGoal(goal.getDescription(), goal.getGoal_type_id(), goal.getMatch_id(), goal.getPlayer_id());
-        adminDbManager.createGoalType(goal.getType());
     }
 
     public void updateGoal(Goal goal){
         adminDbManager.updateMatchGoal(goal.getDescription(), goal.getGoal_type_id(), goal.getMatch_id(), goal.getPlayer_id(), goal.getGoal_id());
-        adminDbManager.updateGoalType(goal.getType(),goal.getGoal_type_id());
     }
 
     public void deleteGoal(int goal_id){

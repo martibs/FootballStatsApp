@@ -115,6 +115,18 @@ public class AdminController{
 
     // GOAL TYPE
 
+    @RequestMapping(method = RequestMethod.POST, value = "/createGoalType")
+    @ResponseBody
+    public void createGoalType(@RequestBody Goal goal){
+        adminService.createGoalType(goal);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/updateGoalType")
+    @ResponseBody
+    public void updateGoalType(@RequestBody Goal goal) {
+        adminService.updateGoalType(goal);
+    }
+
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteGoalType/{id}")
     @ResponseBody
     public void deleteGoalType(@PathVariable int id) {
