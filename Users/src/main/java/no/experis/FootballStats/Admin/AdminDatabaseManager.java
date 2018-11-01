@@ -115,6 +115,20 @@ public class AdminDatabaseManager {
         }
     }
 
+    public void deleteSeason(int season_id) {
+        String sql = "DELETE FROM SEASON WHERE season_id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1,season_id);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+
     // **** TEAM *****
 
     public void createAssociation(String name,String description) {
@@ -143,6 +157,19 @@ public class AdminDatabaseManager {
             pstmt.setInt(3, association_id);
             pstmt.executeUpdate();
 
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void deleteAssociation(int association_id) {
+        String sql = "DELETE FROM association WHERE association_id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1,association_id);
+            pstmt.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -197,6 +224,19 @@ public class AdminDatabaseManager {
 
     }
 
+    public void deleteTeam(int team_id) {
+        String sql = "DELETE FROM TEAM WHERE team_id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1,team_id);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 
     // **** GOAL *****
     public void createGoalType(String type) {
@@ -223,6 +263,20 @@ public class AdminDatabaseManager {
             pstmt.setInt(2, goal_type_id);
             pstmt.executeUpdate();
 
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+
+    public void deleteGoalType(int goal_type_id) {
+        String sql = "DELETE FROM goal_type WHERE goal_type_id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1,goal_type_id);
+            pstmt.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -260,6 +314,19 @@ public class AdminDatabaseManager {
             pstmt.setInt(5,goal_id);
             pstmt.executeUpdate();
 
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void deleteMatchGoal(int goal_id) {
+        String sql = "DELETE FROM MATCH_GOAL WHERE goal_id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1,goal_id);
+            pstmt.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -307,6 +374,19 @@ public class AdminDatabaseManager {
         }
     }
 
+    public void deleteMatch(int match_id) {
+        String sql = "DELETE FROM MATCH_GOAL WHERE match_id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1,match_id);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public void createMatchPosition(String position,int player_id, int match_id) {
         String sql = "INSERT INTO MATCH_POSITION(position,player_id,match_id) VALUES (?,?,?)";
 
@@ -342,6 +422,19 @@ public class AdminDatabaseManager {
         }
     }
 
+    public void deleteMatchPosition(int match_id, int player_id) {
+        String sql = "DELETE FROM MATCH_GOAL WHERE match_id = ? and player_id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1,match_id);
+            pstmt.setInt(2,player_id);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     // ***** RESULT *****
 
@@ -382,6 +475,19 @@ public class AdminDatabaseManager {
         }
     }
 
+    public void deleteResult(int match_id, int team_id) {
+        String sql = "DELETE FROM RESULT WHERE match_id = ? and team_id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1,match_id);
+            pstmt.setInt(2,team_id);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     // ***** PERSON *****
     public int createPerson(String first_name,String last_name, Date date_of_birth,int address_id) {
@@ -473,6 +579,18 @@ public class AdminDatabaseManager {
         }
     }
 
+    public void deletePlayer(int person_id) {
+        String sql = "DELETE FROM Player WHERE person_id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1,person_id);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
 
     public void createOwner(int person_id) {
@@ -505,6 +623,19 @@ public class AdminDatabaseManager {
         }
     }
 
+    public void deleteOwner(int owner_id) {
+        String sql = "DELETE FROM Owner WHERE owner_id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1,owner_id);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public void createCoach(int person_id) {
         String sql = "INSERT INTO coach(person_id) VALUES (?)";
 
@@ -529,6 +660,19 @@ public class AdminDatabaseManager {
             pstmt.setInt(2, coach_id);
             pstmt.executeUpdate();
 
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void deleteCoach(int coach_id) {
+        String sql = "DELETE FROM Coach WHERE coach_id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1,coach_id);
+            pstmt.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -637,7 +781,7 @@ public class AdminDatabaseManager {
         }
     }
 
-    public void createContact(String contact_type,String contact_detail, int person_id) {
+    public void createContact(String contact_type,String contact_detail, String person_id) {
         String sql = "INSERT INTO contact(contact_type,contact_detail, person_id) VALUES (?,?,?)";
 
 
@@ -645,7 +789,7 @@ public class AdminDatabaseManager {
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, contact_type);
             pstmt.setString(2, contact_detail);
-            pstmt.setInt(3, person_id);
+            pstmt.setInt(3, Integer.parseInt(person_id));
             pstmt.executeUpdate();
 
 
@@ -655,16 +799,29 @@ public class AdminDatabaseManager {
     }
 
 
-    public void updateContact(String contact_type, String contact_detail, int person_id) {
+    public void updateContact(String contact_type, String contact_detail, String person_id) {
         String sql = "UPDATE Contact set contact_type = ? , contact_detail = ? WHERE person_id = ?";
 
         try (Connection conn = this.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, contact_type);
             pstmt.setString(2, contact_detail);
-            pstmt.setInt(3, person_id);
+            pstmt.setInt(3, Integer.parseInt(person_id));
             pstmt.executeUpdate();
 
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void deleteContact(int contact_id) {
+        String sql = "DELETE FROM Contact WHERE contact_id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1,contact_id);
+            pstmt.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -674,8 +831,8 @@ public class AdminDatabaseManager {
     public ArrayList<Contact> getContacts() {
         String sql = "SELECT * FROM Contact";
 
-        int contact_id;
-        int person_id;
+        String contact_id;
+        String person_id;
         String contact_type;
         String contact_detail;
 
@@ -690,8 +847,8 @@ public class AdminDatabaseManager {
 
             // loop through the result set
             while (rs.next()) {
-                contact_id = rs.getInt("CONTACT_ID");
-                person_id = rs.getInt("PERSON_ID");
+                contact_id = Integer.toString(rs.getInt("CONTACT_ID"));
+                person_id = Integer.toString(rs.getInt("PERSON_ID"));
                 contact_type = rs.getString("CONTACT_TYPE");
                 contact_detail = rs.getString("CONTACT_DETAIL");
 

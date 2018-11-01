@@ -75,6 +75,23 @@ public class AdminController{
         adminService.updateOwner(owner);
     }
 
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deletePlayer/{id}")
+    @ResponseBody
+    public void deletePlayer(@PathVariable int id) {
+        adminService.deletePlayer(id);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteOwner/{id}")
+    @ResponseBody
+    public void deleteOwner(@PathVariable int id) {
+        adminService.deleteOwner(id);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteCoach/{id}")
+    @ResponseBody
+    public void deleteCoach(@PathVariable int id) {
+        adminService.deleteCoach(id);
+    }
 
     // GOAL
 
@@ -90,6 +107,20 @@ public class AdminController{
         adminService.updateGoal(goal);
     }
 
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteGoal/{id}")
+    @ResponseBody
+    public void deleteGoal(@PathVariable int id) {
+        adminService.deleteGoal(id);
+    }
+
+    // GOAL TYPE
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteGoalType/{id}")
+    @ResponseBody
+    public void deleteGoalType(@PathVariable int id) {
+        adminService.deleteGoalType(id);
+    }
+
     // MATCH
 
     @RequestMapping(method = RequestMethod.POST, value = "/createMatch")
@@ -102,6 +133,12 @@ public class AdminController{
     @ResponseBody
     public void updateMatch(@RequestBody Match match) {
         adminService.updateMatch(match);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteMatch/{id}")
+    @ResponseBody
+    public void deleteMatch(@PathVariable int id) {
+        adminService.deleteMatch(id);
     }
 
     // RESULT
@@ -119,6 +156,11 @@ public class AdminController{
         adminService.updateResult(result, old_team_id, old_match_id);
     }
 
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteResult/{match_id}/{team_id}")
+    @ResponseBody
+    public void deleteResult(@PathVariable int match_id, int team_id) {
+        adminService.deleteResult(match_id, team_id);
+    }
 
     // SEASON
     @RequestMapping(method = RequestMethod.POST, value = "/createSeason")
@@ -133,6 +175,12 @@ public class AdminController{
         adminService.updateSeason(season);
     }
 
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteSeason/{id}")
+    @ResponseBody
+    public void deleteSeason(@PathVariable int id) {
+        adminService.deleteSeason(id);
+    }
+
 
     // TEAM
     @RequestMapping(method = RequestMethod.POST, value = "/createTeam")
@@ -145,6 +193,12 @@ public class AdminController{
     @ResponseBody
     public void updateTeam(@RequestBody Team team) {
         adminService.updateTeam(team);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteTeam/{id}")
+    @ResponseBody
+    public void deleteTeam(@PathVariable int id) {
+        adminService.deleteTeam(id);
     }
 
     // CONTACTS
@@ -172,6 +226,11 @@ public class AdminController{
         adminService.updateContact(contact);
     }
 
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteContact/{id}")
+    @ResponseBody
+    public void deleteContact(@PathVariable int id) {
+        adminService.deleteContact(id);
+    }
 
 
 /*

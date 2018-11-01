@@ -60,6 +60,18 @@ public class AdminService {
         adminDbManager.updateOwner(id, owner.getOwner_id());
     }
 
+    public void deletePlayer(int player_id){
+        adminDbManager.deletePlayer(player_id);
+    }
+
+    public void deleteCoach(int player_id){
+        adminDbManager.deleteCoach(player_id);
+    }
+
+    public void deleteOwner(int player_id){
+        adminDbManager.deleteOwner(player_id);
+    }
+
 
     // GOAL
     public void createGoal(Goal goal){
@@ -70,6 +82,24 @@ public class AdminService {
     public void updateGoal(Goal goal){
         adminDbManager.updateMatchGoal(goal.getDescription(), goal.getGoal_type_id(), goal.getMatch_id(), goal.getPlayer_id(), goal.getGoal_id());
         adminDbManager.updateGoalType(goal.getType(),goal.getGoal_type_id());
+    }
+
+    public void deleteGoal(int goal_id){
+        adminDbManager.deleteMatchGoal(goal_id);
+    }
+
+    // GOAL TYPE
+
+    public void createGoalType(Goal goal){
+        adminDbManager.createGoalType(goal.getType());
+    }
+
+    public void updateGoalType(Goal goal){
+        adminDbManager.updateGoalType(goal.getType(),goal.getGoal_type_id());
+    }
+
+    public void deleteGoalType(int goal_id){
+        adminDbManager.deleteGoalType(goal_id);
     }
 
 
@@ -83,7 +113,9 @@ public class AdminService {
         adminDbManager.updateMatch(match.getMatch_date(), match.getSeason_id(), match.getLocation_id(), match.getHome_team_id(), match.getAway_team_id(), match.getMatch_id());
     }
 
-
+    public void deleteMatch(int match_id){
+        adminDbManager.deleteMatch(match_id);
+    }
 
     // RESULT
 
@@ -93,6 +125,10 @@ public class AdminService {
 
     public void updateResult(Result result, int old_team_id, int old_match_id){
         adminDbManager.updateResult(result.getScore(), result.getResult(), result.getMatch_id(), result.getTeam_id(), old_team_id, old_match_id);
+    }
+
+    public void deleteResult(int match_id, int team_id){
+        adminDbManager.deleteResult(match_id, team_id);
     }
 
 
@@ -106,6 +142,9 @@ public class AdminService {
         adminDbManager.updateSeason(season.getStart_date(), season.getEnd_date(), season.getName(), season.getDescription(), season.getSeason_id());
     }
 
+    public void deleteSeason(int season_id){
+        adminDbManager.deleteSeason(season_id);
+    }
 
 
     // TEAM
@@ -117,6 +156,10 @@ public class AdminService {
     public void updateTeam(Team team){
         int id = adminDbManager.updateTeam(team.getOwner_id(), team.getAssociation_id(), team.getCoach_id(), team.getLocation_id(), team.getTeam_id());
         adminDbManager.updateAssociation(team.getAssociation_name(), team.getAssociation_description(), id);
+    }
+
+    public void deleteTeam(int team_id){
+        adminDbManager.deleteTeam(team_id);
     }
 
 
@@ -133,7 +176,7 @@ public class AdminService {
         contacts.addAll(adminDbManager.getContacts());
 
         for(Contact contact : contacts){
-            if(contact.getPerson_id() == id){
+            if(contact.getPerson_id().equals(id)){
                 return contact;
             }
         }
@@ -148,5 +191,8 @@ public class AdminService {
         adminDbManager.updateContact(contact.getContact_type(), contact.getContact_detail(), contact.getPerson_id());
     }
 
+    public void deleteContact(int contact_id){
+        adminDbManager.deleteContact(contact_id);
+    }
 
 }
