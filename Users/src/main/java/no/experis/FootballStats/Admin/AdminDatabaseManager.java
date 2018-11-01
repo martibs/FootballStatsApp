@@ -1,11 +1,10 @@
 package no.experis.FootballStats.Admin;
 
 import no.experis.FootballStats.Admin.Models.Address;
-
-
+import no.experis.FootballStats.Admin.Models.Contact;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 public class AdminDatabaseManager {
     private Connection conn = null;
@@ -16,18 +15,6 @@ public class AdminDatabaseManager {
     private final String DB_PASSWD = "a42ebfe205e754d8b170f120ab30d5679bf64a324b80b2bc429c3e2e90f9f353";
     private final String DB_NAME = "d5togjfivbt4tr";
     private final String DB_URL = "jdbc:postgresql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME;
-
-    private String addressId;
-    private String addressLine1;
-    private String addressLine2;
-    private String addressLine3;
-    private String postalCode;
-    private String city;
-    private String country;
-    private String locationId;
-    private String locationName;
-    private String description;
-
 
     // DB CONNECTION
     public Connection connect() {
@@ -242,6 +229,7 @@ public class AdminDatabaseManager {
         }
     }
 
+
     public void createMatchGoal(String description,int goal_type_id, int match_id, int player_id) {
         String sql = "INSERT INTO MATCH_GOAL(description,goal_type_id,match_id,player_id) VALUES (?,?,?,?);";
 
@@ -281,13 +269,13 @@ public class AdminDatabaseManager {
 
     // ****** MATCH *****
 
-    public void createMatch(String match_date, int season_id,int location_id, int home_team_id, int away_team_id) {
+    public void createMatch(Date match_date, int season_id,int location_id, int home_team_id, int away_team_id) {
         String sql = "INSERT INTO match(match_date,season_id,location_id,home_team_id,away_team_id) VALUES (?,?,?,?,?)";
 
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, match_date);
+            pstmt.setDate(1, match_date);
             pstmt.setInt(2, season_id);
             pstmt.setInt(3, location_id);
             pstmt.setInt(4, home_team_id);
@@ -300,12 +288,12 @@ public class AdminDatabaseManager {
         }
     }
 
-    public void updateMatch(String match_date, int season_id,int location_id, int home_team_id, int away_team_id, int match_id) {
+    public void updateMatch(Date match_date, int season_id,int location_id, int home_team_id, int away_team_id, int match_id) {
         String sql = "UPDATE MATCH set match_date = ? ,season_id = ?, location_id = ?, home_team_id = ?, away_team_id = ?  WHERE match_id = ?";
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, match_date);
+            pstmt.setDate(1, match_date);
             pstmt.setInt(2, season_id);
             pstmt.setInt(3, location_id);
             pstmt.setInt(4, home_team_id);
@@ -664,6 +652,58 @@ public class AdminDatabaseManager {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+
+    public void updateContact(String contact_type, String contact_detail, int person_id) {
+        String sql = "UPDATE Contact set contact_type = ? , contact_detail = ? WHERE person_id = ?";
+
+        try (Connection conn = this.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, contact_type);
+            pstmt.setString(2, contact_detail);
+            pstmt.setInt(3, person_id);
+            pstmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public ArrayList<Contact> getContacts() {
+        String sql = "SELECT * FROM Contact";
+
+        int contact_id;
+        int person_id;
+        String contact_type;
+        String contact_detail;
+
+
+        Contact tempContact = null;
+        ArrayList<Contact> tempContactList = new ArrayList<Contact>();
+
+        try (Connection conn = this.connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+
+            // loop through the result set
+            while (rs.next()) {
+                contact_id = rs.getInt("CONTACT_ID");
+                person_id = rs.getInt("PERSON_ID");
+                contact_type = rs.getString("CONTACT_TYPE");
+                contact_detail = rs.getString("CONTACT_DETAIL");
+
+
+                tempContact = new Contact(contact_id, person_id, contact_type, contact_detail);
+                tempContactList.add(tempContact);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return tempContactList;
     }
 
 }

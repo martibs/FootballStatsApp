@@ -3,6 +3,9 @@ package no.experis.FootballStats.Admin;
 import no.experis.FootballStats.Admin.Models.*;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class AdminService {
 
@@ -61,10 +64,12 @@ public class AdminService {
     // GOAL
     public void createGoal(Goal goal){
         adminDbManager.createMatchGoal(goal.getDescription(), goal.getGoal_type_id(), goal.getMatch_id(), goal.getPlayer_id());
+        adminDbManager.createGoalType(goal.getType());
     }
 
     public void updateGoal(Goal goal){
         adminDbManager.updateMatchGoal(goal.getDescription(), goal.getGoal_type_id(), goal.getMatch_id(), goal.getPlayer_id(), goal.getGoal_id());
+        adminDbManager.updateGoalType(goal.getType(),goal.getGoal_type_id());
     }
 
 
@@ -105,6 +110,7 @@ public class AdminService {
 
     // TEAM
     public void createTeam(Team team){
+        adminDbManager.createAssociation(team.getAssociation_name(), team.getAssociation_description());
         adminDbManager.createTeam(team.getOwner_id(), team.getAssociation_id(), team.getCoach_id(), team.getLocation_id());
     }
 
@@ -113,6 +119,34 @@ public class AdminService {
         adminDbManager.updateAssociation(team.getAssociation_name(), team.getAssociation_description(), id);
     }
 
+
+    // CONTACT
+
+    public List<Contact> displayContacts(){
+        ArrayList<Contact> contacts = new ArrayList<Contact>();
+        contacts.addAll(adminDbManager.getContacts());
+        return contacts;
+    }
+
+    public Contact displayOneContact(int id){
+        ArrayList<Contact> contacts = new ArrayList<Contact>();
+        contacts.addAll(adminDbManager.getContacts());
+
+        for(Contact contact : contacts){
+            if(contact.getPerson_id() == id){
+                return contact;
+            }
+        }
+        return null;
+    }
+
+    public void createContact(Contact contact){
+        adminDbManager.createContact(contact.getContact_type(), contact.getContact_detail(), contact.getPerson_id());
+    }
+
+    public void updateContact(Contact contact){
+        adminDbManager.updateContact(contact.getContact_type(), contact.getContact_detail(), contact.getPerson_id());
+    }
 
 
 }

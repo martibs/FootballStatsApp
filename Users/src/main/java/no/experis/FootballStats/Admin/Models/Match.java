@@ -1,9 +1,11 @@
 package no.experis.FootballStats.Admin.Models;
 
+import java.sql.Date;
+
 public class Match {
 
     private int match_id;
-    private String match_date;
+    private Date match_date;
     private int home_team_id;
     private int away_team_id;
     private int season_id;
@@ -13,7 +15,7 @@ public class Match {
 
     }
 
-    public Match(int match_id, String match_date, int home_team_id, int away_team_id, int season_id, int location_id) {
+    public Match(int match_id, Date match_date, int home_team_id, int away_team_id, int season_id, int location_id) {
         this.match_id = match_id;
         this.match_date = match_date;
         this.home_team_id = home_team_id;
@@ -30,11 +32,11 @@ public class Match {
         this.match_id = match_id;
     }
 
-    public String getMatch_date() {
+    public Date getMatch_date() {
         return match_date;
     }
 
-    public void setMatch_date(String match_date) {
+    public void setMatch_date(Date match_date) {
         this.match_date = match_date;
     }
 

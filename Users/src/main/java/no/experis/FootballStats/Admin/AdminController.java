@@ -4,13 +4,14 @@ import no.experis.FootballStats.Admin.Models.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
-@Controller
+
+@RestController
 public class AdminController{
 
     private AdminDatabaseManager adminDatabase = new AdminDatabaseManager();
     private AdminService adminService = new AdminService();
-
 
     // ADDRESS
 
@@ -89,8 +90,6 @@ public class AdminController{
         adminService.updateGoal(goal);
     }
 
-    // TODO: CREATE GOAL TYPE
-
     // MATCH
 
     @RequestMapping(method = RequestMethod.POST, value = "/createMatch")
@@ -147,6 +146,32 @@ public class AdminController{
     public void updateTeam(@RequestBody Team team) {
         adminService.updateTeam(team);
     }
+
+    // CONTACTS
+
+    @GetMapping("/showContacts")
+    public List showContacts() {
+        return adminService.displayContacts();
+    }
+
+    @GetMapping("/showContacts/{someID}")
+    public Contact showOneContact(@PathVariable(value="someID") int id){
+        return adminService.displayOneContact(id);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/createContact")
+    @ResponseBody
+    public void createContact(@RequestBody Contact contact){
+        adminService.createContact(contact);
+
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/updateContact")
+    @ResponseBody
+    public void updateContact(@RequestBody Contact contact) {
+        adminService.updateContact(contact);
+    }
+
 
 
 /*
