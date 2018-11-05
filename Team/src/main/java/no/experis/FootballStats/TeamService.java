@@ -31,4 +31,26 @@ public class TeamService {
         }
         return null;
     }
+
+    // Association
+    public List<Association> displayAllAssociations() {
+        ArrayList<Association> associations = new ArrayList<Association>();
+
+        associations.addAll(dbManager.getAssociations());
+
+        return associations;
+    }
+
+
+    public Association displayOneAssociation(String association_id) {
+        ArrayList<Association> associationArrayList = new ArrayList<Association>();
+        associationArrayList.addAll(dbManager.getAssociations());
+
+        for (Association association : associationArrayList) {
+            if (association.getAssociation_id().equals(association_id)) {
+                return association;
+            }
+        }
+        return null;
+    }
 }
