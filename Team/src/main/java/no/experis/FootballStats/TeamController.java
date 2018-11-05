@@ -20,5 +20,16 @@ public class TeamController {
     }
 
 
+    @GetMapping("/showAssociations")
+    public List showAssociations() {
+        return teamService.displayAllAssociations();
+    }
+
+    @GetMapping("/showAssociations/{someID}")
+    public Association showOneAssociation(@PathVariable(value="someID") String id){
+        return teamService.displayOneAssociation(id);
+    }
+
+
 
 }

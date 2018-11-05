@@ -14,15 +14,6 @@ public class DatabaseManager {
 
     private Connection conn = null;
 
-    private String team_id;
-    private String association_id;
-    private String coach_id;
-    private String owner_id;
-    private String location_id;
-    private String association_name;
-    private String association_description;
-
-
     public Connection connect() {
         try {
             Class.forName("org.postgresql.Driver");
@@ -35,7 +26,13 @@ public class DatabaseManager {
     }
 
     public ArrayList<Team> getTeams() {
-        String sql = "SELECT * FROM TEAM INNER JOIN ASSOCIATION ON ASSOCIATION.ASSOCIATION_ID = TEAM.ASSOCIATION_ID";
+        String team_id;
+        String association_id;
+        String coach_id;
+        String owner_id;
+        String location_id;
+
+        String sql = "SELECT * FROM TEAM";
 
         Team tempTeam = null;
         ArrayList<Team> tempPlayersList = new ArrayList<Team>();
@@ -51,11 +48,8 @@ public class DatabaseManager {
                 coach_id = Integer.toString(rs.getInt("COACH_ID"));
                 owner_id = Integer.toString(rs.getInt("OWNER_ID"));
                 location_id = Integer.toString(rs.getInt("LOCATION_ID"));
-                association_name = rs.getString("NAME");
-                association_description = rs.getString("DESCRIPTION");
 
-
-                tempTeam = new Team(team_id,association_id,coach_id,owner_id,location_id, association_name, association_description);
+                tempTeam = new Team(team_id,association_id,coach_id,owner_id,location_id);
                 tempPlayersList.add(tempTeam);
             }
 
@@ -63,6 +57,36 @@ public class DatabaseManager {
             System.out.println(e.getMessage());
         }
         return tempPlayersList;
+    }
+
+    public ArrayList<Association> getAssociations() {
+        String association_id;
+        String association_name;
+        String association_description;
+
+        String sql = "SELECT * FROM ASSOCIATION";
+
+        Association tempAssociation = null;
+        ArrayList<Association> tempAssociationList = new ArrayList<Association>();
+
+        try (Connection conn = this.connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            // loop through the result set
+            while (rs.next()) {
+                association_id = Integer.toString(rs.getInt("association_id"));
+                association_name = rs.getString("name");
+                association_description = rs.getString("description");
+
+                tempAssociation = new Association(association_id, association_name, association_description);
+                tempAssociationList.add(tempAssociation);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return tempAssociationList;
     }
 
 }
