@@ -147,8 +147,8 @@ public class AdminService {
 
     // TEAM
     public void createTeam(Team team){
-        adminDbManager.createAssociation(team.getAssociation_name(), team.getAssociation_description());
-        adminDbManager.createTeam(team.getOwner_id(), team.getAssociation_id(), team.getCoach_id(), team.getLocation_id());
+        int id = adminDbManager.createAssociation(team.getAssociation_name(), team.getAssociation_description());
+        adminDbManager.createTeam(team.getOwner_id(), id, team.getCoach_id(), team.getLocation_id());
     }
 
     public void updateTeam(Team team){

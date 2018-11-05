@@ -131,9 +131,10 @@ public class AdminDatabaseManager {
 
     // **** TEAM *****
 
-    public void createAssociation(String name,String description) {
-        String sql = "INSERT INTO association(name,description) VALUES (?,?)";
+    public int createAssociation(String name,String description) {
+        String sql = "INSERT INTO association(name,description) VALUES (?,?) Returning association_id";
 
+        int association_id = -1;
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -141,10 +142,17 @@ public class AdminDatabaseManager {
             pstmt.setString(2, description);
             pstmt.executeUpdate();
 
+            ResultSet rs = pstmt.getResultSet();
+
+            while(rs.next()) {
+                association_id = rs.getInt(1);
+            }
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+
+        return association_id;
     }
 
     public void updateAssociation(String name,String description, int association_id) {
