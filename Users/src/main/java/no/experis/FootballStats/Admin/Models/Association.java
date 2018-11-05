@@ -2,8 +2,6 @@ package no.experis.FootballStats.Admin.Models;
 
 public class Association {
 
-    // TODO: SPLIT AWAY FROM TEAM!
-
     private int association_id;
     private String association_name;
     private String association_description;
