@@ -156,7 +156,7 @@ public class AdminDatabaseManager {
     }
 
     public void updateAssociation(String name,String description, int association_id) {
-        String sql = "UPDATE MATCH_GOAL set name = ? ,description = ? WHERE association_id = ?";
+        String sql = "UPDATE Association set name = ? ,description = ? WHERE association_id = ?";
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
