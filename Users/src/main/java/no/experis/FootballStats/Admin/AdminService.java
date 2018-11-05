@@ -161,6 +161,20 @@ public class AdminService {
     }
 
 
+    // ASSOCIATION
+
+    public void createAssociation(Association association){
+        adminDbManager.createAssociation(association.getAssociation_name(), association.getAssociation_description());
+    }
+
+    public void updateAssociation(Association association){
+        adminDbManager.updateAssociation(association.getAssociation_name(), association.getAssociation_description(), association.getAssociation_id());
+    }
+
+    public void deleteAssociation(int association_id){
+        adminDbManager.deleteAssociation(association_id);
+    }
+
     // CONTACT
 
     public List<Contact> displayContacts(){

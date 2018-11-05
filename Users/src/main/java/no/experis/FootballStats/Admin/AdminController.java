@@ -153,6 +153,28 @@ public class AdminController{
         adminService.deleteMatch(id);
     }
 
+    // ASSOCIATION
+
+    @RequestMapping(method = RequestMethod.POST, value = "/createAssociation")
+    @ResponseBody
+    public void createAssociation(@RequestBody Association association){
+        adminService.createAssociation(association);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/updateAssociation")
+    @ResponseBody
+    public void updateAssociation(@RequestBody Association association) {
+        adminService.updateAssociation(association);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteAssociation/{id}")
+    @ResponseBody
+    public void deleteAssociation(@PathVariable int id) {
+        adminService.deleteAssociation(id);
+    }
+
+
+
     // RESULT
 
     @RequestMapping(method = RequestMethod.POST, value = "/createResult")
