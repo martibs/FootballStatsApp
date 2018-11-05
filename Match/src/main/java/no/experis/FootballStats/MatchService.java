@@ -30,4 +30,15 @@ public class MatchService {
         return null;
     }
 
+    public List<Match> displayUpcommingMatches(){
+        ArrayList<Match> matches = new ArrayList<Match>();
+
+        matches.addAll(dbManager.getUpcommingMatches());
+
+        return matches;
+    }
+
+
+
+
 }

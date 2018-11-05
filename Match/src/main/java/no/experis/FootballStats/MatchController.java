@@ -14,6 +14,9 @@ public class MatchController {
         return matchService.displayAllMatches();
     }
 
+    @GetMapping("/showUpcommingMatches")
+    public List showUpcommingMatches() { return matchService.displayUpcommingMatches();}
+
     @GetMapping("/showOneMatch/{someID}")
     public Match showMatch(@PathVariable(value="someID") String id) {
         return matchService.displayOneMatch(id);
