@@ -267,6 +267,51 @@ public class AdminController{
     }
 
 
+    // ADMIN DASHBOARD
+
+    @GetMapping("/getAllDashboardData")
+    public int[] getAllDashboardData() {
+        return adminService.getDashboardData();
+    }
+
+
+    @GetMapping("/getCountPlayers")
+    public int getCountPlayers() {
+        return adminService.getCountPlayersFromDB();
+    }
+
+
+    @GetMapping("/getCountTeams")
+    public int getCountTeams() {
+        return adminService.getCountTeamsFromDB();
+    }
+
+
+    @GetMapping("/getCountMatches")
+    public int getCountMatches() {
+        return adminService.getCountMatchesFromDB();
+    }
+
+
+    @GetMapping("/getCountSeasons")
+    public int getCountSeasons() {
+        return adminService.getCountSeasonsFromDB();
+    }
+
+
+    @GetMapping("/getCountGoals")
+    public int getCountGoals() {
+        return adminService.getCountGoalsFromDB();
+    }
+
+
+    @GetMapping("/getCountUsers")
+    public int getCountUsers() {
+        return adminService.getCountUsersFromDB();
+    }
+
+
+
 /*
 @RestController
 public class AdminController {

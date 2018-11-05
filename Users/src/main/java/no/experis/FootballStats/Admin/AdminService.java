@@ -205,4 +205,43 @@ public class AdminService {
         adminDbManager.deleteContact(contact_id);
     }
 
+    // DASHBOARD ADMIN METHODS
+
+    public int[] getDashboardData(){
+        int[] list  = new int[6];
+        list[0] = adminDbManager.getCountPlayers();
+        list[1] = adminDbManager.getCountTeams();
+        list[2] = adminDbManager.getCountMatches();
+        list[3] = adminDbManager.getCountSeasons();
+        list[4] = adminDbManager.getCountGoals();
+        list[5] = adminDbManager.getCountUsers();
+
+        return list;
+    }
+
+
+    public int getCountPlayersFromDB(){
+        return adminDbManager.getCountPlayers();
+    }
+
+    public int getCountTeamsFromDB(){
+        return adminDbManager.getCountTeams();
+    }
+
+    public int getCountMatchesFromDB(){
+        return adminDbManager.getCountMatches();
+    }
+
+    public int getCountSeasonsFromDB(){
+        return adminDbManager.getCountSeasons();
+    }
+
+    public int getCountGoalsFromDB(){
+        return adminDbManager.getCountGoals();
+    }
+
+    public int getCountUsersFromDB(){
+        return adminDbManager.getCountUsers();
+    }
+
 }
