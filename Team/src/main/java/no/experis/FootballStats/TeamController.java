@@ -30,6 +30,9 @@ public class TeamController {
         return teamService.displayOneAssociation(id);
     }
 
-
+    @GetMapping("/showAllTeamData")
+    public List showAllTeamData() {
+        return teamService.displayAllTeamData();
+    }
 
 }

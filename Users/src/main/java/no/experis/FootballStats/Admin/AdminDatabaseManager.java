@@ -252,7 +252,7 @@ public class AdminDatabaseManager {
     }
 
     public void updateGoalType(String type, int goal_type_id) {
-        String sql = "UPDATE Player set type = ? WHERE goal_type_id = ?";
+        String sql = "UPDATE goal_type set type = ? WHERE goal_type_id = ?";
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

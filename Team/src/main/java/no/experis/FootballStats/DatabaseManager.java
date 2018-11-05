@@ -89,4 +89,43 @@ public class DatabaseManager {
         return tempAssociationList;
     }
 
+    public ArrayList<FootballTeam> getAllTeamData() {
+        String team_id;
+        String association_id;
+        String coach_id;
+        String owner_id;
+        String location_id;
+        String association_name;
+        String association_description;
+
+        String sql = "SELECT * FROM TEAM INNER JOIN ASSOCIATION ON ASSOCIATION.ASSOCIATION_ID = TEAM.ASSOCIATION_ID";
+
+        FootballTeam tempTeam = null;
+        ArrayList<FootballTeam> tempPlayersList = new ArrayList<FootballTeam>();
+
+        try (Connection conn = this.connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            // loop through the result set
+            while (rs.next()) {
+                team_id = Integer.toString(rs.getInt("TEAM_ID"));
+                association_id = Integer.toString(rs.getInt("ASSOCIATION_ID"));
+                coach_id = Integer.toString(rs.getInt("COACH_ID"));
+                owner_id = Integer.toString(rs.getInt("OWNER_ID"));
+                location_id = Integer.toString(rs.getInt("LOCATION_ID"));
+                association_name = rs.getString("NAME");
+                association_description = rs.getString("DESCRIPTION");
+
+
+                tempTeam = new FootballTeam(team_id,association_id,coach_id,owner_id,location_id, association_name, association_description);
+                tempPlayersList.add(tempTeam);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return tempPlayersList;
+    }
+
 }

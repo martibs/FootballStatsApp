@@ -53,4 +53,12 @@ public class TeamService {
         }
         return null;
     }
+
+    public List<FootballTeam> displayAllTeamData(){
+        ArrayList<FootballTeam> list = new ArrayList<FootballTeam>();
+
+        list.addAll(dbManager.getAllTeamData());
+
+        return list;
+    }
 }
