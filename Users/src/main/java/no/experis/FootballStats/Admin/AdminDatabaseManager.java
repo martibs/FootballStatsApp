@@ -871,4 +871,131 @@ public class AdminDatabaseManager {
         return tempContactList;
     }
 
+    public int getCountPlayers() {
+        String sql = "Select Count(*) as PlayersInLeague\n" +
+                "from player;";
+
+        int count=0;
+
+        try (Connection conn = this.connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            // loop through the result set
+            while (rs.next()) {
+                count = rs.getInt("PlayersInLeague");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return count;
+    }
+
+    public int getCountTeams() {
+        String sql = "Select Count(*) as TeamsInLeague\n" +
+                "from team;";
+
+        int count=0;
+
+        try (Connection conn = this.connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            // loop through the result set
+            while (rs.next()) {
+                count = rs.getInt("TeamsInLeague");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return count;
+    }
+
+    public int getCountMatches() {
+        String sql = "Select Count(*) as MatchesPlayed\n" +
+                "from match\n" +
+                "where match_id in(Select match_id from result);";
+
+        int count=0;
+
+        try (Connection conn = this.connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            // loop through the result set
+            while (rs.next()) {
+                count = rs.getInt("MatchesPlayed");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return count;
+    }
+
+    public int getCountSeasons() {
+        String sql = "Select Count(*) as Seasons\n" +
+                "from season;";
+
+        int count=0;
+
+        try (Connection conn = this.connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            // loop through the result set
+            while (rs.next()) {
+                count = rs.getInt("Seasons");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return count;
+    }
+
+    public int getCountGoals() {
+        String sql = "Select Count(*) as GoalsInLeague\n" +
+                "from match_goal;";
+
+        int count=0;
+
+        try (Connection conn = this.connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            // loop through the result set
+            while (rs.next()) {
+                count = rs.getInt("GoalsInLeague");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return count;
+    }
+
+    public int getCountUsers() {
+        String sql = "Select Count(*) as UsersRegistered\n" +
+                "from users;";
+
+        int count=0;
+
+        try (Connection conn = this.connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            // loop through the result set
+            while (rs.next()) {
+                count = rs.getInt("UsersRegistered");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return count;
+    }
+
 }
