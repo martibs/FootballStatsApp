@@ -185,14 +185,14 @@ public class AdminDatabaseManager {
     }
 
     public void createTeam(int owner_id,int association_id, int coach_id, int location_id) {
-        String sql = "INSERT INTO team(owner_id,association_id,coach_id,location_id) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO team(association_id,coach_id,owner_id,location_id) VALUES (?,?,?,?)";
 
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, owner_id);
-            pstmt.setInt(2, association_id);
-            pstmt.setInt(3, coach_id);
+            pstmt.setInt(1, association_id);
+            pstmt.setInt(2, coach_id);
+            pstmt.setInt(3, owner_id);
             pstmt.setInt(4, location_id);
             pstmt.executeUpdate();
 
@@ -202,33 +202,22 @@ public class AdminDatabaseManager {
         }
     }
 
-    public int updateTeam(int owner_id,int association_id, int coach_id, int location_id,int team_id) {
-        String sql = "UPDATE TEAM set owner_id = ? ,association_id = ?, coach_id = ?, location_id = ? WHERE team_id = ? RETURNING association_id";
+    public void updateTeam(int team_id, int association_id, int coach_id, int owner_id, int location_id) {
+        String sql = "UPDATE TEAM set association_id = ?, coach_id = ?, owner_id = ? location_id = ? WHERE team_id = ?";
 
-        int lastTeam = -1;
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, owner_id);
-            pstmt.setInt(2, association_id);
-            pstmt.setInt(3, coach_id);
+            pstmt.setInt(1, association_id);
+            pstmt.setInt(2, coach_id);
+            pstmt.setInt(3, owner_id);
             pstmt.setInt(4, location_id);
-            pstmt.setInt(5, location_id);
-            pstmt.setInt(6, team_id);
+            pstmt.setInt(5, team_id);
             pstmt.execute();
-
-            ResultSet rs = pstmt.getResultSet();
-
-            while(rs.next()) {
-                lastTeam = rs.getInt(1);
-            }
-
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
-        return lastTeam;
 
     }
 

@@ -151,7 +151,7 @@ public class AdminService {
     }
 
     public void updateTeam(Team team){
-        int id = adminDbManager.updateTeam(team.getOwner_id(), team.getAssociation_id(), team.getCoach_id(), team.getLocation_id(), team.getTeam_id());
+        adminDbManager.updateTeam(team.getOwner_id(), team.getAssociation_id(), team.getCoach_id(), team.getLocation_id(), team.getTeam_id());
     }
 
     public void deleteTeam(int team_id){
