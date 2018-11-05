@@ -104,9 +104,9 @@ CREATE TABLE COACH
 CREATE TABLE TEAM
 (
   team_id SERIAL NOT NULL,
-  owner_id INT NOT NULL,
   association_id INT NOT NULL,
   coach_id INT NOT NULL,
+  owner_id INT NOT NULL,
   location_id INT NOT NULL,
   PRIMARY KEY (team_id),
   FOREIGN KEY (owner_id) REFERENCES OWNER(owner_id),
