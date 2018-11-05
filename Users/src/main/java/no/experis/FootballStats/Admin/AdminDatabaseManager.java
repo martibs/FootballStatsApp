@@ -203,7 +203,7 @@ public class AdminDatabaseManager {
     }
 
     public void updateTeam(int team_id, int association_id, int coach_id, int owner_id, int location_id) {
-        String sql = "UPDATE TEAM set association_id = ?, coach_id = ?, owner_id = ? location_id = ? WHERE team_id = ?";
+        String sql = "UPDATE TEAM set association_id = ?, coach_id = ?, owner_id = ?, location_id = ? WHERE team_id = ?";
 
 
         try (Connection conn = this.connect();

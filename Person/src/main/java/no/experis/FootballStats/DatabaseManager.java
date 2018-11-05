@@ -261,9 +261,9 @@ public class DatabaseManager {
                 "CREATE TABLE TEAM\n" +
                 "(\n" +
                 "  team_id SERIAL NOT NULL,\n" +
-                "  owner_id INT NOT NULL,\n" +
                 "  association_id INT NOT NULL,\n" +
                 "  coach_id INT NOT NULL,\n" +
+                "  owner_id INT NOT NULL,\n" +
                 "  location_id INT NOT NULL,\n" +
                 "  PRIMARY KEY (team_id),\n" +
                 "  FOREIGN KEY (owner_id) REFERENCES OWNER(owner_id),\n" +
