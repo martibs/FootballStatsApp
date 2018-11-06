@@ -74,17 +74,14 @@ public class AdminService {
 
     public void deletePlayer(int person_id){
         adminDbManager.deletePlayer(person_id);
-        adminDbManager.deletePerson(person_id);
     }
 
     public void deleteCoach(int person_id){
         adminDbManager.deleteCoach(person_id);
-        adminDbManager.deletePerson(person_id);
     }
 
     public void deleteOwner(int person_id){
         adminDbManager.deleteOwner(person_id);
-        adminDbManager.deletePerson(person_id);
     }
 
 
