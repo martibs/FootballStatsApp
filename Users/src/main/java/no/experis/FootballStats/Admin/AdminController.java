@@ -4,6 +4,7 @@ import no.experis.FootballStats.Admin.Models.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -334,6 +335,11 @@ public class AdminController{
     @GetMapping("/getCountUsers")
     public int getCountUsers() {
         return adminService.getCountUsersFromDB();
+    }
+
+    @GetMapping("/getNews")
+    public ArrayList<String> getNews() {
+        return adminService.getNewsFromDB();
     }
 
 }

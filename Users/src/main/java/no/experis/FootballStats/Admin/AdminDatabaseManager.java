@@ -1015,4 +1015,28 @@ public class AdminDatabaseManager {
         return count;
     }
 
+    public ArrayList<String> getNews() {
+        String sql = "Select * from news order by news_id desc limit 10;";
+
+        String news;
+
+        ArrayList<String> tempNewsList = new ArrayList<>();
+
+        try (Connection conn = this.connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+
+            // loop through the result set
+            while (rs.next()) {
+                news = rs.getString("news_string");
+                tempNewsList.add(news);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return tempNewsList;
+    }
+
 }
