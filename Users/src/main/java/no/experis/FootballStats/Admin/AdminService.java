@@ -28,6 +28,10 @@ public class AdminService {
         adminDbManager.deleteAddress(address_id);
     }
 
+    public void deleteLocation(String location_id){
+        adminDbManager.deleteLocation(location_id);
+    }
+
     // PERSON
 
     public void createPerson(Person person){

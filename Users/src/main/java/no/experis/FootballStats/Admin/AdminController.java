@@ -33,6 +33,11 @@ public class AdminController{
         adminService.deleteAddress(id);
     }
 
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteLocation/{id}")
+    @ResponseBody
+    public void deleteLocation(@PathVariable String id) {
+        adminService.deleteLocation(id);
+    }
 
     // PERSON
 

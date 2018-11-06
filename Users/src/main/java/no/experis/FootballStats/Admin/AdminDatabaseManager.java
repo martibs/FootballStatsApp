@@ -792,6 +792,20 @@ public class AdminDatabaseManager {
         }
     }
 
+    public void deleteLocation(String location_id) {
+        String sql = "DELETE FROM Location WHERE address_id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, Integer.parseInt(location_id));
+            pstmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public void createContact(String contact_type,String contact_detail, String person_id) {
         String sql = "INSERT INTO contact(contact_type,contact_detail, person_id) VALUES (?,?,?)";
 
