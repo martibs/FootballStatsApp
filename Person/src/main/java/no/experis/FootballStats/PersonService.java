@@ -10,6 +10,31 @@ public class PersonService {
 
     private DatabaseManager dbManager = new DatabaseManager();
 
+    // PERSONS
+
+    public List<Person> displayPersons(){
+        ArrayList<Person> people = new ArrayList<Person>();
+
+        people.addAll(dbManager.getPlayers());
+
+        return people;
+    }
+
+
+    public Person displayOnePerson(String person_id){
+        ArrayList<Person> persons = new ArrayList<Person>();
+        persons.addAll(dbManager.getPlayers());
+
+        for(Person person : persons){
+            if(person.getPerson_id().equals(person_id)){
+                return person;
+            }
+        }
+        return null;
+    }
+
+
+
     // Players
     public List<Player> displayAllPlayers(){
         ArrayList<Player> people = new ArrayList<Player>();
@@ -31,6 +56,7 @@ public class PersonService {
         }
         return null;
     }
+
     public List<Player> displayAllPlayersInTeam(String team_id){
         List<Player> players = displayAllPlayers();
 

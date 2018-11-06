@@ -30,6 +30,18 @@ public class AdminService {
 
     // PERSON
 
+    public void createPerson(Person person){
+        adminDbManager.createPerson(person.getFirst_name(), person.getLast_name(), person.getDate_of_birth(), person.getAddress_id());
+    }
+
+    public void updatePerson(Person person){
+        adminDbManager.updatePerson(person.getFirst_name(), person.getLast_name(), person.getDate_of_birth(), person.getAddress_id());
+    }
+
+    public void deletePerson(int person_id){
+        adminDbManager.deletePerson(person_id);
+    }
+
     public void createPlayer(Player player){
         int id = adminDbManager.createPerson(player.getFirst_name(), player.getLast_name(), player.getDate_of_birth(), player.getAddress_id());
         adminDbManager.createPlayer(player.getNormal_position(), player.getNumber(), id, player.getTeam_id());
@@ -60,16 +72,19 @@ public class AdminService {
         adminDbManager.updateOwner(id, owner.getOwner_id());
     }
 
-    public void deletePlayer(int player_id){
-        adminDbManager.deletePlayer(player_id);
+    public void deletePlayer(int person_id){
+        adminDbManager.deletePlayer(person_id);
+        adminDbManager.deletePerson(person_id);
     }
 
-    public void deleteCoach(int player_id){
-        adminDbManager.deleteCoach(player_id);
+    public void deleteCoach(int person_id){
+        adminDbManager.deleteCoach(person_id);
+        adminDbManager.deletePerson(person_id);
     }
 
-    public void deleteOwner(int player_id){
-        adminDbManager.deleteOwner(player_id);
+    public void deleteOwner(int person_id){
+        adminDbManager.deleteOwner(person_id);
+        adminDbManager.deletePerson(person_id);
     }
 
 

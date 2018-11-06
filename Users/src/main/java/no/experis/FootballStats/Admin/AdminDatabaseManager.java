@@ -541,6 +541,20 @@ public class AdminDatabaseManager {
 
     }
 
+
+    public void deletePerson(int person_id) {
+        String sql = "DELETE FROM Person WHERE person_id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1,person_id);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public void updatePlayer(String normal_position, String number, int team_id, int real_id) {
         String sql = "UPDATE Player set normal_position = ? ,number = ?, team_id = ? WHERE person_id = ?";
 
