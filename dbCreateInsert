@@ -13,6 +13,7 @@ DROP TABLE IF EXISTS ASSOCIATION;
 DROP TABLE IF EXISTS LOCATION;
 DROP TABLE IF EXISTS SEASON;
 DROP TABLE IF EXISTS ADDRESS;
+DROP TABLE IF EXISTS news;
 
 
 CREATE TABLE ADDRESS
@@ -174,6 +175,13 @@ CREATE TABLE MATCH_GOAL
   FOREIGN KEY (goal_type_id) REFERENCES GOAL_TYPE(goal_type_id),
   FOREIGN KEY (match_id) REFERENCES MATCH(match_id),
   FOREIGN KEY (player_id) REFERENCES PLAYER(player_id)
+);
+
+CREATE TABLE news
+(
+  news_id SERIAL NOT NULL,
+  news_string character varying(150) NOT NULL,
+  CONSTRAINT news_pkey PRIMARY KEY (news_id)
 );
 
 -- INSERT ADDRESS
@@ -422,3 +430,10 @@ INSERT INTO MATCH_GOAL(description,goal_type_id,match_id,player_id) VALUES ('Cor
 INSERT INTO MATCH_GOAL(description,goal_type_id,match_id,player_id) VALUES ('Free-kick goal',2,3,1);
 INSERT INTO MATCH_GOAL(description,goal_type_id,match_id,player_id) VALUES ('Corner goal',3,3,1);
 INSERT INTO MATCH_GOAL(description,goal_type_id,match_id,player_id) VALUES ('Free-kick goal',2,3,3);
+
+-- INSERT NEWS
+insert into news (news_string) values('Tyrael scored a goal for Hells Angles');
+insert into news (news_string) values('Voljin joined The Loa Football Club');
+insert into news (news_string) values('Team Cyntex won their match ageinst the Ghuuns');
+insert into news (news_string) values('Yin got a new coach, Yang');
+insert into news (news_string) values('Lucio join Wall Riders');
