@@ -10,7 +10,7 @@ import java.util.List;
 public class AdminService {
 
     private AdminDatabaseManager adminDbManager = new AdminDatabaseManager();
-
+    private int association_id;
 
     // ADDRESS
 
@@ -163,7 +163,7 @@ public class AdminService {
 
     // TEAM
     public void createTeam(Team team){
-        adminDbManager.createTeam(team.getOwner_id(), team.getAssociation_id(), team.getCoach_id(), team.getLocation_id());
+        adminDbManager.createTeam(team.getOwner_id(), association_id, team.getCoach_id(), team.getLocation_id());
     }
 
     public void updateTeam(Team team){

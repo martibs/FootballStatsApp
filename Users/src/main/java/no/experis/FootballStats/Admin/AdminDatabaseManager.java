@@ -132,7 +132,7 @@ public class AdminDatabaseManager {
     // **** TEAM *****
 
     public int createAssociation(String name,String description) {
-        String sql = "INSERT INTO association(name,description) VALUES (?,?) Returning association_id";
+        String sql = "INSERT INTO association(name,description) VALUES (?,?) Returning association_id Returning";
 
         int association_id = -1;
 
