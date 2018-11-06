@@ -231,7 +231,6 @@ public class AdminService {
         return list;
     }
 
-
     public int getCountPlayersFromDB(){
         return adminDbManager.getCountPlayers();
     }
@@ -255,5 +254,29 @@ public class AdminService {
     public int getCountUsersFromDB(){
         return adminDbManager.getCountUsers();
     }
+
+/*
+
+    // VALIDERING
+
+    private boolean isStringValid(String testValue){
+        if(testValue.isEmpty()){
+            return false;
+        }else if(testValue.){
+
+        }
+    }
+
+    private boolean isPostalCodeValid(String testValue){
+        if(testValue.isEmpty()){
+            return false;
+        }else if( ! (testValue.length() == 8) ) {
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+*/
 
 }
