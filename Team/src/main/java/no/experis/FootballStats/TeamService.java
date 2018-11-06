@@ -53,4 +53,25 @@ public class TeamService {
         }
         return null;
     }
+
+    public List<FootballTeam> displayAllTeamData(){
+        ArrayList<FootballTeam> list = new ArrayList<FootballTeam>();
+
+        list.addAll(dbManager.getAllTeamData());
+
+        return list;
+    }
+
+    public FootballTeam displayOneTeamData(String player_id) {
+        ArrayList<FootballTeam> teams = new ArrayList<FootballTeam>();
+        teams.addAll(dbManager.getAllTeamData());
+
+        for (FootballTeam team : teams) {
+            if (team.getTeam_id().equals(player_id)) {
+                return team;
+            }
+        }
+        return null;
+    }
+
 }

@@ -203,7 +203,7 @@ public class AdminDatabaseManager {
     }
 
     public void updateTeam(int team_id, int association_id, int coach_id, int owner_id, int location_id) {
-        String sql = "UPDATE TEAM set association_id = ?, coach_id = ?, owner_id = ? location_id = ? WHERE team_id = ?";
+        String sql = "UPDATE TEAM set association_id = ?, coach_id = ?, owner_id = ?, location_id = ? WHERE team_id = ?";
 
 
         try (Connection conn = this.connect();
@@ -252,7 +252,7 @@ public class AdminDatabaseManager {
     }
 
     public void updateGoalType(String type, int goal_type_id) {
-        String sql = "UPDATE Player set type = ? WHERE goal_type_id = ?";
+        String sql = "UPDATE goal_type set type = ? WHERE goal_type_id = ?";
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -539,6 +539,20 @@ public class AdminDatabaseManager {
 
         return lastPerson;
 
+    }
+
+
+    public void deletePerson(int person_id) {
+        String sql = "DELETE FROM Person WHERE person_id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1,person_id);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void updatePlayer(String normal_position, String number, int team_id, int real_id) {

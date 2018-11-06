@@ -9,6 +9,19 @@ public class PersonController {
 
     private PersonService personService = new PersonService();
 
+    // PERSON
+
+    @GetMapping("/showPersons")
+    public List showPersons() {
+        return personService.displayPersons();
+    }
+
+    @GetMapping("/showPersons/{someID}")
+    public Person showOnePerson(@PathVariable(value="someID") String id){
+        return personService.displayOnePerson(id);
+    }
+
+
     // PLAYERS
 
     @GetMapping("/showPlayers")

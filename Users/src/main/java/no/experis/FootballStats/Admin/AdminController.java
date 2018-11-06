@@ -36,6 +36,27 @@ public class AdminController{
 
     // PERSON
 
+    @RequestMapping(method = RequestMethod.POST, value = "/createPerson")
+    @ResponseBody
+    public void createPerson(@RequestBody Person person){
+        adminService.createPerson(person);
+    }
+
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/updatePerson")
+    @ResponseBody
+    public void updatePerson(@RequestBody Person person) {
+        adminService.updatePerson(person);
+    }
+
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deletePerson/{id}")
+    @ResponseBody
+    public void deletePerson(@PathVariable int id) {
+        adminService.deletePerson(id);
+    }
+
+
     @RequestMapping(method = RequestMethod.POST, value = "/createPlayer")
     @ResponseBody
     public void createPlayer(@RequestBody Player player){
@@ -267,42 +288,47 @@ public class AdminController{
     }
 
 
-/*
-@RestController
-public class AdminController {
-    private AdminDatabaseManager adminDatabase = new AdminDatabaseManager();
-    private AdminService adminService = new AdminService();
+    // ADMIN DASHBOARD
 
-    private final Logger log = LoggerFactory.getLogger(AdminController.class);
-
-    @GetMapping("/showAddresses")
-    public List showAddresses() {
-        return adminService.displayAllAddresses();
+    @GetMapping("/getAllDashboardData")
+    public int[] getAllDashboardData() {
+        return adminService.getDashboardData();
     }
 
-    @GetMapping("/showOneAddress/{someID}")
-    public Address showAddress(@PathVariable(value="someID") String id){
-        return adminService.displayOneAddress(id);
+
+    @GetMapping("/getCountPlayers")
+    public int getCountPlayers() {
+        return adminService.getCountPlayersFromDB();
     }
 
-    @PostMapping("/createAddress")
-    ResponseEntity<Address> createAddress(@Valid @RequestBody Address address) throws URISyntaxException {
-        log.info("Request to create group: {}", address);
-        Address result = adminDatabase.createAddress(address.getAddress_line_1(), address.getAddress_line_2(), address.getAddress_line_3(), address.getPostal_code(),address.getCity(), address.getCountry());
-        return ResponseEntity.created(new URI("/createAddress" + result.getAddress_id())).body(result);
+
+    @GetMapping("/getCountTeams")
+    public int getCountTeams() {
+        return adminService.getCountTeamsFromDB();
     }
 
-    @PutMapping("/updateAddress/{id}")
-    ResponseEntity<Address> updateAddress(@PathVariable String id, @Valid @RequestBody Address address) {
-        System.out.println("this is the object: " + address);
 
-        address.setAddress_id(id);
-        log.info("Request to update group: {}", address);
-        Address result = adminDatabase.updateAddress(address.getAddress_line_1(), address.getAddress_line_2(), address.getAddress_line_3(), address.getPostal_code(),address.getCity(), address.getCountry(), address.getAddress_id());
-        return ResponseEntity.ok().body(result);
+    @GetMapping("/getCountMatches")
+    public int getCountMatches() {
+        return adminService.getCountMatchesFromDB();
     }
 
-*/
 
+    @GetMapping("/getCountSeasons")
+    public int getCountSeasons() {
+        return adminService.getCountSeasonsFromDB();
+    }
+
+
+    @GetMapping("/getCountGoals")
+    public int getCountGoals() {
+        return adminService.getCountGoalsFromDB();
+    }
+
+
+    @GetMapping("/getCountUsers")
+    public int getCountUsers() {
+        return adminService.getCountUsersFromDB();
+    }
 
 }

@@ -30,6 +30,15 @@ public class TeamController {
         return teamService.displayOneAssociation(id);
     }
 
+    @GetMapping("/showAllTeamData")
+    public List showAllTeamData() {
+        return teamService.displayAllTeamData();
+    }
+
+    @GetMapping("/showAllTeamData/{someID}")
+    public FootballTeam showOneFootballTeam(@PathVariable(value="someID") String id){
+        return teamService.displayOneTeamData(id);
+    }
 
 
 }

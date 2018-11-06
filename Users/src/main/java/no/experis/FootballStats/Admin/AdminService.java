@@ -30,6 +30,18 @@ public class AdminService {
 
     // PERSON
 
+    public void createPerson(Person person){
+        adminDbManager.createPerson(person.getFirst_name(), person.getLast_name(), person.getDate_of_birth(), person.getAddress_id());
+    }
+
+    public void updatePerson(Person person){
+        adminDbManager.updatePerson(person.getFirst_name(), person.getLast_name(), person.getDate_of_birth(), person.getAddress_id());
+    }
+
+    public void deletePerson(int person_id){
+        adminDbManager.deletePerson(person_id);
+    }
+
     public void createPlayer(Player player){
         int id = adminDbManager.createPerson(player.getFirst_name(), player.getLast_name(), player.getDate_of_birth(), player.getAddress_id());
         adminDbManager.createPlayer(player.getNormal_position(), player.getNumber(), id, player.getTeam_id());
@@ -60,16 +72,16 @@ public class AdminService {
         adminDbManager.updateOwner(id, owner.getOwner_id());
     }
 
-    public void deletePlayer(int player_id){
-        adminDbManager.deletePlayer(player_id);
+    public void deletePlayer(int person_id){
+        adminDbManager.deletePlayer(person_id);
     }
 
-    public void deleteCoach(int player_id){
-        adminDbManager.deleteCoach(player_id);
+    public void deleteCoach(int person_id){
+        adminDbManager.deleteCoach(person_id);
     }
 
-    public void deleteOwner(int player_id){
-        adminDbManager.deleteOwner(player_id);
+    public void deleteOwner(int person_id){
+        adminDbManager.deleteOwner(person_id);
     }
 
 
@@ -204,5 +216,67 @@ public class AdminService {
     public void deleteContact(int contact_id){
         adminDbManager.deleteContact(contact_id);
     }
+
+    // DASHBOARD ADMIN METHODS
+
+    public int[] getDashboardData(){
+        int[] list  = new int[6];
+        list[0] = adminDbManager.getCountPlayers();
+        list[1] = adminDbManager.getCountTeams();
+        list[2] = adminDbManager.getCountMatches();
+        list[3] = adminDbManager.getCountSeasons();
+        list[4] = adminDbManager.getCountGoals();
+        list[5] = adminDbManager.getCountUsers();
+
+        return list;
+    }
+
+    public int getCountPlayersFromDB(){
+        return adminDbManager.getCountPlayers();
+    }
+
+    public int getCountTeamsFromDB(){
+        return adminDbManager.getCountTeams();
+    }
+
+    public int getCountMatchesFromDB(){
+        return adminDbManager.getCountMatches();
+    }
+
+    public int getCountSeasonsFromDB(){
+        return adminDbManager.getCountSeasons();
+    }
+
+    public int getCountGoalsFromDB(){
+        return adminDbManager.getCountGoals();
+    }
+
+    public int getCountUsersFromDB(){
+        return adminDbManager.getCountUsers();
+    }
+
+/*
+
+    // VALIDERING
+
+    private boolean isStringValid(String testValue){
+        if(testValue.isEmpty()){
+            return false;
+        }else if(testValue.){
+
+        }
+    }
+
+    private boolean isPostalCodeValid(String testValue){
+        if(testValue.isEmpty()){
+            return false;
+        }else if( ! (testValue.length() == 8) ) {
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+*/
 
 }
