@@ -255,6 +255,13 @@ public class AdminService {
         return adminDbManager.getCountUsers();
     }
 
+    public ArrayList<String> getNewsFromDB(){
+        ArrayList<String> list  = new ArrayList<>();
+        list.addAll(adminDbManager.getNews());
+
+        return list;
+    }
+
 /*
 
     // VALIDERING
