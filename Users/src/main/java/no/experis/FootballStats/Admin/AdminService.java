@@ -164,13 +164,8 @@ public class AdminService {
     // TEAM
     public void createTeam(Team team){
         System.out.println("team used of id " + id);
-        adminDbManager.createTeam(id, team.getOwner_id(), team.getCoach_id(), team.getLocation_id());
+        adminDbManager.createTeam(id, team.getCoach_id(), team.getOwner_id(), team.getLocation_id());
 
-    }
-
-    public void createTeamWithAssociation(Association association, Team team){
-        int association_id = adminDbManager.createAssociation(association.getAssociation_name(), association.getAssociation_description());
-        adminDbManager.createTeam(association_id, team.getOwner_id(), team.getCoach_id(), team.getLocation_id());
     }
 
     public void updateTeam(Team team){

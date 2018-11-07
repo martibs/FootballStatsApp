@@ -248,15 +248,6 @@ public class AdminController{
         adminService.createTeam(team);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/createTeamWithAssociation")
-    @ResponseBody
-    public void createTeamWithAssociation(@RequestBody Association association, Team team){
-        adminService.createTeamWithAssociation(association, team);
-    }
-
-
-
-
     @RequestMapping(method = RequestMethod.PUT, value = "/updateTeam")
     @ResponseBody
     public void updateTeam(@RequestBody Team team) {

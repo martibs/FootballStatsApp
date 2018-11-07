@@ -132,7 +132,7 @@ public class AdminDatabaseManager {
     // **** TEAM *****
 
     public int createAssociation(String name,String description) {
-        String sql = "INSERT INTO association(name,description) VALUES (?,?) Returning association_id Returning";
+        String sql = "INSERT INTO association(name,description) VALUES (?,?) Returning association_id";
 
         int association_id = -1;
 
@@ -140,7 +140,7 @@ public class AdminDatabaseManager {
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, name);
             pstmt.setString(2, description);
-            pstmt.executeUpdate();
+            pstmt.execute();
 
             ResultSet rs = pstmt.getResultSet();
 
@@ -184,7 +184,7 @@ public class AdminDatabaseManager {
         }
     }
 
-    public void createTeam(int association_id, int owner_id, int coach_id, int location_id) {
+    public void createTeam(int association_id, int coach_id, int owner_id, int location_id) {
         String sql = "INSERT INTO team(association_id,coach_id,owner_id,location_id) VALUES (?,?,?,?)";
 
 
