@@ -10,7 +10,6 @@ import java.util.List;
 public class AdminService {
 
     private AdminDatabaseManager adminDbManager = new AdminDatabaseManager();
-    private int association_id;
 
     // ADDRESS
 
@@ -162,8 +161,9 @@ public class AdminService {
 
 
     // TEAM
-    public void createTeam(Team team){
-        adminDbManager.createTeam(team.getOwner_id(), association_id, team.getCoach_id(), team.getLocation_id());
+    public void createTeam(Association association, Team team, ){
+        int id  = adminDbManager.createAssociation(association.getAssociation_name(), association.getAssociation_description());
+        adminDbManager.createTeam(team.getOwner_id(), id, team.getCoach_id(), team.getLocation_id());
     }
 
     public void updateTeam(Team team){
@@ -265,29 +265,5 @@ public class AdminService {
 
         return list;
     }
-
-/*
-
-    // VALIDERING
-
-    private boolean isStringValid(String testValue){
-        if(testValue.isEmpty()){
-            return false;
-        }else if(testValue.){
-
-        }
-    }
-
-    private boolean isPostalCodeValid(String testValue){
-        if(testValue.isEmpty()){
-            return false;
-        }else if( ! (testValue.length() == 8) ) {
-            return false;
-        }else{
-            return true;
-        }
-    }
-
-*/
 
 }
