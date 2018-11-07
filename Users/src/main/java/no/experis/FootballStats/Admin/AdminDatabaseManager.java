@@ -184,7 +184,7 @@ public class AdminDatabaseManager {
         }
     }
 
-    public void createTeam(int owner_id,int association_id, int coach_id, int location_id) {
+    public void createTeam(int association_id, int owner_id, int coach_id, int location_id) {
         String sql = "INSERT INTO team(association_id,coach_id,owner_id,location_id) VALUES (?,?,?,?)";
 
 

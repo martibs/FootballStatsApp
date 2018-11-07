@@ -10,6 +10,7 @@ import java.util.List;
 public class AdminService {
 
     private AdminDatabaseManager adminDbManager = new AdminDatabaseManager();
+    private int id;
 
     // ADDRESS
 
@@ -161,9 +162,15 @@ public class AdminService {
 
 
     // TEAM
-    public void createTeam(Association association, Team team){
-        int id  = adminDbManager.createAssociation(association.getAssociation_name(), association.getAssociation_description());
-        adminDbManager.createTeam(team.getOwner_id(), id, team.getCoach_id(), team.getLocation_id());
+    public void createTeam(Team team){
+        System.out.println("team used of id " + id);
+        adminDbManager.createTeam(id, team.getOwner_id(), team.getCoach_id(), team.getLocation_id());
+
+    }
+
+    public void createTeamWithAssociation(Association association, Team team){
+        int association_id = adminDbManager.createAssociation(association.getAssociation_name(), association.getAssociation_description());
+        adminDbManager.createTeam(association_id, team.getOwner_id(), team.getCoach_id(), team.getLocation_id());
     }
 
     public void updateTeam(Team team){
@@ -178,7 +185,8 @@ public class AdminService {
     // ASSOCIATION
 
     public void createAssociation(Association association){
-        adminDbManager.createAssociation(association.getAssociation_name(), association.getAssociation_description());
+        id = adminDbManager.createAssociation(association.getAssociation_name(), association.getAssociation_description());
+        System.out.println("association create id = " + id);
     }
 
     public void updateAssociation(Association association){
