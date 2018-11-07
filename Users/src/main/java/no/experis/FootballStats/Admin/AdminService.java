@@ -161,7 +161,7 @@ public class AdminService {
 
 
     // TEAM
-    public void createTeam(Association association, Team team, ){
+    public void createTeam(Association association, Team team){
         int id  = adminDbManager.createAssociation(association.getAssociation_name(), association.getAssociation_description());
         adminDbManager.createTeam(team.getOwner_id(), id, team.getCoach_id(), team.getLocation_id());
     }
