@@ -1039,4 +1039,101 @@ public class AdminDatabaseManager {
         return tempNewsList;
     }
 
+    public ArrayList<Integer> getPlayerWatchlist(int user_id) {
+        String sql = "Select * from player_watchlist where user_id = ?;";
+
+        int player_id;
+
+        ArrayList<Integer> tempPlayerWatchlist = new ArrayList<>();
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1,user_id);
+            pstmt.execute();
+            ResultSet rs = pstmt.getResultSet();
+
+
+            // loop through the result set
+            while (rs.next()) {
+                player_id = rs.getInt("player_watch_id");
+                tempPlayerWatchlist.add(player_id);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return tempPlayerWatchlist;
+    }
+
+    public ArrayList<Integer> getTeamWatchlist(int user_id) {
+        String sql = "Select * from team_watchlist where user_id = ?;";
+
+        int team_id;
+
+        ArrayList<Integer> tempTeamsWatchlist = new ArrayList<>();
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1,user_id);
+            pstmt.execute();
+            ResultSet rs = pstmt.getResultSet();
+
+
+            // loop through the result set
+            while (rs.next()) {
+                team_id = rs.getInt("team_watch_id");
+                tempTeamsWatchlist.add(team_id);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return tempTeamsWatchlist;
+    }
+
+    public ArrayList<String> getUserNews(int user_id) {
+        ArrayList<Integer> tempPlayersWatchlist = getPlayerWatchlist(user_id);
+        ArrayList<Integer> tempTeamsWatchlist = getTeamWatchlist(user_id);
+        String whereCause="";
+        if(tempPlayersWatchlist.size()>0||tempTeamsWatchlist.size()>0){
+            whereCause="where ";
+        }else{return null;}
+        String or=" or";
+        for (int intTemp : tempPlayersWatchlist){
+            if (tempPlayersWatchlist.indexOf(intTemp)==(tempPlayersWatchlist.size()-1)&&tempTeamsWatchlist.size()<1){
+                or="";
+            }
+            whereCause+="player_id ="+intTemp+or+" ";
+
+        }
+        for (int intTemp : tempTeamsWatchlist){
+            if (tempTeamsWatchlist.indexOf(intTemp)==(tempTeamsWatchlist.size()-1)){
+                or="";
+            }
+            whereCause+="team_id ="+intTemp+or+" ";
+
+        }
+        String sql = "Select * from news "+ whereCause +"order by news_id desc limit 10;";
+
+        String news;
+
+        ArrayList<String> tempNewsList = new ArrayList<>();
+
+        try (Connection conn = this.connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+
+            // loop through the result set
+            while (rs.next()) {
+                news = rs.getString("news_string");
+                tempNewsList.add(news);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return tempNewsList;
+    }
+
 }

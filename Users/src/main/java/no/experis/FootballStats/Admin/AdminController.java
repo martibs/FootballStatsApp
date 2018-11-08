@@ -340,4 +340,9 @@ public class AdminController{
         return adminService.getNewsFromDB();
     }
 
+    @GetMapping("/getUserNews/{someID}")
+    public ArrayList<String> getUserNews(@PathVariable(value="someID") int id) {
+        return adminDatabase.getUserNews(id);
+    }
+
 }
