@@ -10,7 +10,7 @@ import java.util.List;
 public class AdminService {
 
     private AdminDatabaseManager adminDbManager = new AdminDatabaseManager();
-
+    private int id;
 
     // ADDRESS
 
@@ -26,6 +26,10 @@ public class AdminService {
 
     public void deleteAddress(String address_id){
         adminDbManager.deleteAddress(address_id);
+    }
+
+    public void deleteLocation(String location_id){
+        adminDbManager.deleteLocation(location_id);
     }
 
     // PERSON
@@ -159,7 +163,9 @@ public class AdminService {
 
     // TEAM
     public void createTeam(Team team){
-        adminDbManager.createTeam(team.getOwner_id(), team.getAssociation_id(), team.getCoach_id(), team.getLocation_id());
+        System.out.println("team used of id " + id);
+        adminDbManager.createTeam(id, team.getCoach_id(), team.getOwner_id(), team.getLocation_id());
+
     }
 
     public void updateTeam(Team team){
@@ -174,7 +180,8 @@ public class AdminService {
     // ASSOCIATION
 
     public void createAssociation(Association association){
-        adminDbManager.createAssociation(association.getAssociation_name(), association.getAssociation_description());
+        id = adminDbManager.createAssociation(association.getAssociation_name(), association.getAssociation_description());
+        System.out.println("association create id = " + id);
     }
 
     public void updateAssociation(Association association){
@@ -261,29 +268,5 @@ public class AdminService {
 
         return list;
     }
-
-/*
-
-    // VALIDERING
-
-    private boolean isStringValid(String testValue){
-        if(testValue.isEmpty()){
-            return false;
-        }else if(testValue.){
-
-        }
-    }
-
-    private boolean isPostalCodeValid(String testValue){
-        if(testValue.isEmpty()){
-            return false;
-        }else if( ! (testValue.length() == 8) ) {
-            return false;
-        }else{
-            return true;
-        }
-    }
-
-*/
 
 }

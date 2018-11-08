@@ -140,7 +140,7 @@ public class AdminDatabaseManager {
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, name);
             pstmt.setString(2, description);
-            pstmt.executeUpdate();
+            pstmt.execute();
 
             ResultSet rs = pstmt.getResultSet();
 
@@ -184,7 +184,7 @@ public class AdminDatabaseManager {
         }
     }
 
-    public void createTeam(int owner_id,int association_id, int coach_id, int location_id) {
+    public void createTeam(int association_id, int coach_id, int owner_id, int location_id) {
         String sql = "INSERT INTO team(association_id,coach_id,owner_id,location_id) VALUES (?,?,?,?)";
 
 
@@ -784,6 +784,20 @@ public class AdminDatabaseManager {
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, Integer.parseInt(address_id));
+            pstmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void deleteLocation(String location_id) {
+        String sql = "DELETE FROM Location WHERE address_id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, Integer.parseInt(location_id));
             pstmt.executeUpdate();
 
 

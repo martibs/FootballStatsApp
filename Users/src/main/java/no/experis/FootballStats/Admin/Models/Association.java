@@ -6,6 +6,10 @@ public class Association {
     private String association_name;
     private String association_description;
 
+    public Association(){
+
+    }
+
     public Association(int association_id, String association_name, String association_description) {
         this.association_id = association_id;
         this.association_name = association_name;
