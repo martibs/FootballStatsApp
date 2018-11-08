@@ -1014,6 +1014,22 @@ public class AdminDatabaseManager {
         }
         return count;
     }
+    // TODO Fikse route til å lage news.
+    public void createNews(String news_string, int team_id,int player_id) {
+        String sql = "INSERT INTO news(news_string,team_watch_id,player_id) VALUES(?,?,?)";
+
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, news_string);
+            pstmt.setInt(2, team_id);
+            pstmt.setInt(3, player_id);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     public ArrayList<String> getNews() {
         String sql = "Select * from news order by news_id desc limit 10;";

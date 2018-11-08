@@ -38,6 +38,14 @@ public class MatchService {
         return matches;
     }
 
+    public List<Match> displayCompletedMatches(){
+        ArrayList<Match> matches = new ArrayList<Match>();
+
+        matches.addAll(dbManager.getCompletedMatches());
+
+        return matches;
+    }
+
 
 
 
