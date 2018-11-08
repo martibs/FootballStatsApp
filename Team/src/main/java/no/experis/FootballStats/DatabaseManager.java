@@ -31,6 +31,7 @@ public class DatabaseManager {
         String coach_id;
         String owner_id;
         String location_id;
+        String team_image;
 
         String sql = "SELECT * FROM TEAM";
 
@@ -48,8 +49,9 @@ public class DatabaseManager {
                 coach_id = Integer.toString(rs.getInt("COACH_ID"));
                 owner_id = Integer.toString(rs.getInt("OWNER_ID"));
                 location_id = Integer.toString(rs.getInt("LOCATION_ID"));
+                team_image = rs.getString("team_image");
 
-                tempTeam = new Team(team_id,association_id,coach_id,owner_id,location_id);
+                tempTeam = new Team(team_id,association_id,coach_id,owner_id,location_id,team_image);
                 tempPlayersList.add(tempTeam);
             }
 
@@ -97,6 +99,7 @@ public class DatabaseManager {
         String location_id;
         String association_name;
         String association_description;
+        String team_image;
 
         String sql = "SELECT * FROM TEAM INNER JOIN ASSOCIATION ON ASSOCIATION.ASSOCIATION_ID = TEAM.ASSOCIATION_ID";
 
@@ -116,9 +119,10 @@ public class DatabaseManager {
                 location_id = Integer.toString(rs.getInt("LOCATION_ID"));
                 association_name = rs.getString("NAME");
                 association_description = rs.getString("DESCRIPTION");
+                team_image = rs.getString("team_image");
 
 
-                tempTeam = new FootballTeam(team_id,association_id,coach_id,owner_id,location_id, association_name, association_description);
+                tempTeam = new FootballTeam(team_id,association_id,coach_id,owner_id,location_id, association_name, association_description,team_image);
                 tempPlayersList.add(tempTeam);
             }
 

@@ -48,3 +48,12 @@ CREATE TABLE users
   CONSTRAINT team_user_pkey PRIMARY KEY (team_watch_id,user_id),
   CONSTRAINT team_user_fkey FOREIGN KEY(user_id) REFERENCES users(user_id)
 );
+
+CREATE TABLE admin
+(
+  user_id SERIAL NOT NULL,
+  email character varying(64) NOT NULL,
+  password character varying(64) NOT NULL,
+  CONSTRAINT users_pkey PRIMARY KEY (user_id),
+  CONSTRAINT users_email_key UNIQUE (email)
+);
