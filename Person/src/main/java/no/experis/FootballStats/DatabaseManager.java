@@ -43,6 +43,7 @@ public class DatabaseManager {
         String normal_position;
         String number;
         String team_id;
+        String player_image;
 
         try (Connection conn = this.connect();
              Statement stmt = conn.createStatement();
@@ -59,8 +60,9 @@ public class DatabaseManager {
                 normal_position = rs.getString("NORMAL_POSITION");
                 number = rs.getString("NUMBER");
                 team_id = Integer.toString(rs.getInt("TEAM_ID"));
+                player_image = rs.getString("player_image");
 
-                tempPlayer = new Player(id,firstname,lastname,date,addressid, player_id, normal_position, number, team_id);
+                tempPlayer = new Player(id,firstname,lastname,date,addressid, player_id, normal_position, number, team_id,player_image);
                 tempPlayersList.add(tempPlayer);
             }
 
