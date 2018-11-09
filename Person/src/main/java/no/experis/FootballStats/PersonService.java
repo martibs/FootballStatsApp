@@ -15,15 +15,14 @@ public class PersonService {
     public List<Person> displayPersons(){
         ArrayList<Person> people = new ArrayList<Person>();
 
-        people.addAll(dbManager.getPlayers());
+        people.addAll(dbManager.getPersons());
 
         return people;
     }
 
-
     public Person displayOnePerson(String person_id){
         ArrayList<Person> persons = new ArrayList<Person>();
-        persons.addAll(dbManager.getPlayers());
+        persons.addAll(dbManager.getPersons());
 
         for(Person person : persons){
             if(person.getPerson_id().equals(person_id)){

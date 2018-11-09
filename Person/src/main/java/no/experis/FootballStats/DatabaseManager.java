@@ -135,6 +135,35 @@ public class DatabaseManager {
     }
 
 
+    public ArrayList<Person> getPersons() {
+        String sql = "SELECT * FROM PERSON";
+
+        Person tempPlayer = null;
+        ArrayList<Person> tempPlayersList = new ArrayList<Person>();
+
+        try (Connection conn = this.connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            // loop through the result set
+            while (rs.next()) {
+                id = Integer.toString(rs.getInt("PERSON_ID"));
+                firstname = rs.getString("FIRST_NAME");
+                lastname = rs.getString("LAST_NAME");
+                date = rs.getString("DATE_OF_BIRTH");
+                addressid = Integer.toString(rs.getInt("ADDRESS_ID"));
+
+                tempPlayer = new Person(id,firstname,lastname,date,addressid);
+                tempPlayersList.add(tempPlayer);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return tempPlayersList;
+    }
+
+
     // TEST UPDATE STATEMENT
     public void updateTest() {
         // SQL statement for updating a table

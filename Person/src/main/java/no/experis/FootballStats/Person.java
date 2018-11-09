@@ -2,7 +2,7 @@ package no.experis.FootballStats;
 
 import java.util.ArrayList;
 
-public abstract class Person {
+public class Person {
     private String person_id;
     private String first_name;
     private String last_name;
