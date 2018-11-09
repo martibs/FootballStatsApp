@@ -8,6 +8,7 @@ public class Player extends Person{
     private String normal_position;
     private String number;
     private int team_id;
+    private String player_image;
 
 
     public Player(){
@@ -42,4 +43,6 @@ public class Player extends Person{
     public int getTeam_id() {
         return team_id;
     }
+
+    public String getPlayer_image() {return player_image;}
 }

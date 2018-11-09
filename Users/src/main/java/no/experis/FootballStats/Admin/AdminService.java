@@ -66,6 +66,10 @@ public class AdminService {
         adminDbManager.updatePlayer(player.getNormal_position(), player.getNumber(), id, player.getTeam_id());
     }
 
+    public void updatePlayerImage(Player player){
+        adminDbManager.updatePlayerImage(player.getPlayer_image(), Integer.parseInt(player.getPlayer_id()));
+    }
+
     public void updateCoach(Coach coach){
         int id = adminDbManager.updatePerson(coach.getFirst_name(), coach.getLast_name(), coach.getDate_of_birth(), coach.getAddress_id());
         adminDbManager.updateCoach(id, coach.getCoach_id());

@@ -88,6 +88,12 @@ public class AdminController{
         adminService.updatePlayer(player);
     }
 
+    @RequestMapping(method = RequestMethod.PUT, value = "/updatePlayerImage")
+    @ResponseBody
+    public void updatePlayerImage(@RequestBody Player player) {
+        adminService.updatePlayerImage(player);
+    }
+
 
     @RequestMapping(method = RequestMethod.PUT, value = "/updateCoach")
     @ResponseBody

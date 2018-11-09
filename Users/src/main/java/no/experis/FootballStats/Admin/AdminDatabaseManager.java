@@ -572,6 +572,21 @@ public class AdminDatabaseManager {
         }
     }
 
+    public void updatePlayerImage(String player_image,int real_id) {
+        String sql = "UPDATE Player set player_image = ? WHERE player   _id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, player_image);
+            pstmt.setInt(2, real_id);
+            pstmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public void createPlayer(String normal_position,String number, int person_id, int team_id) {
         String sql = "INSERT INTO Player(normal_position,number,person_id,team_id) VALUES (?,?,?,?)";
 
