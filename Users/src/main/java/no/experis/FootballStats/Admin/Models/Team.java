@@ -7,6 +7,7 @@ public class Team{
     private int coach_id;
     private int owner_id;
     private int location_id;
+    private String team_image;
 
     public Team(){
 
@@ -59,4 +60,7 @@ public class Team{
     public void setLocation_id(int location_id) {
         this.location_id = location_id;
     }
+
+    public String getTeam_image() {return team_image;}
+
 }

@@ -260,6 +260,12 @@ public class AdminController{
         adminService.updateTeam(team);
     }
 
+    @RequestMapping(method = RequestMethod.PUT, value = "/updateTeamImage")
+    @ResponseBody
+    public void updateTeamImage(@RequestBody Team team) {
+        adminService.updateTeamImage(team);
+    }
+
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteTeam/{id}")
     @ResponseBody
     public void deleteTeam(@PathVariable int id) {

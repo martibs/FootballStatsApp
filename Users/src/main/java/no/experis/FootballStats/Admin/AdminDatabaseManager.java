@@ -221,6 +221,21 @@ public class AdminDatabaseManager {
 
     }
 
+    public void updateTeamImage(String team_image,int real_id) {
+        String sql = "UPDATE TEAM set team_image = ? WHERE team_id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, team_image);
+            pstmt.setInt(2, real_id);
+            pstmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public void deleteTeam(int team_id) {
         String sql = "DELETE FROM TEAM WHERE team_id = ?";
 
@@ -573,7 +588,7 @@ public class AdminDatabaseManager {
     }
 
     public void updatePlayerImage(String player_image,int real_id) {
-        String sql = "UPDATE Player set player_image = ? WHERE player   _id = ?";
+        String sql = "UPDATE Player set player_image = ? WHERE player_id = ?";
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
