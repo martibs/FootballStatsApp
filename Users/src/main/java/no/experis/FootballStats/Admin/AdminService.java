@@ -262,11 +262,17 @@ public class AdminService {
         return adminDbManager.getCountUsers();
     }
 
+    //NEWS
     public ArrayList<String> getNewsFromDB(){
         ArrayList<String> list  = new ArrayList<>();
         list.addAll(adminDbManager.getNews());
 
         return list;
     }
+
+    public void createNews(News news) {
+        adminDbManager.createNews(news.getNews_string(), news.getTeam_id(), news.getPlayer_id());
+    }
+
 
 }

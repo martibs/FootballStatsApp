@@ -334,7 +334,7 @@ public class AdminController{
     public int getCountUsers() {
         return adminService.getCountUsersFromDB();
     }
-
+     //News
     @GetMapping("/getNews")
     public ArrayList<String> getNews() {
         return adminService.getNewsFromDB();
@@ -344,5 +344,13 @@ public class AdminController{
     public ArrayList<String> getUserNews(@PathVariable(value="someID") int id) {
         return adminDatabase.getUserNews(id);
     }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/createNews")
+    @ResponseBody
+    public void createNews(@RequestBody News news){
+        adminService.createNews(news);
+
+    }
+
 
 }
