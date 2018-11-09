@@ -1,30 +1,35 @@
 package no.experis.FootballStats.UserSetup;
 
+import no.experis.FootballStats.Admin.Models.Contact;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserService {
 
-    // TODO: **** Buisness Logic ****
     private DatabaseManager dbManager = new DatabaseManager();
 
-    public void registerUser(){
-        if(validateUserInput()){
-            dbManager.insertUserInDB();
-        }
-        else{
-            // TODO: Handle errors
-            System.out.println("ERROR, UserSetup input was incorrect!");
-        }
+
+    // USER
+
+    public List<User> displayUsers(){
+        ArrayList<User> contacts = new ArrayList<User>();
+        contacts.addAll(dbManager.getUsersFromDb());
+        return contacts;
     }
 
+    public User displayOneUser(String id){
+        ArrayList<User> users = new ArrayList<User>();
+        users.addAll(dbManager.getUsersFromDb());
 
-    public boolean validateUserInput(){
-        if(true){
-            return true;
-        }else{
-            return false;
+        for(User user : users){
+            if(user.getUserId().equals(id)){
+                return user;
+            }
         }
+        return null;
     }
 
 }
