@@ -54,4 +54,20 @@ public class GoalService {
         }
         return null;
     }
+
+    public List<Goal> displayAllGoalsInMatch(int match_id) {
+        ArrayList<Goal> goal = new ArrayList<Goal>();
+
+        goal.addAll(dbManager.getGoalsInOneMatch(match_id));
+
+        return goal;
+    }
+
+    public List<Goal> displayAllGoalsForPlayer(int player_id) {
+        ArrayList<Goal> goal = new ArrayList<Goal>();
+
+        goal.addAll(dbManager.getGoalsForPlayer(player_id));
+
+        return goal;
+    }
 }

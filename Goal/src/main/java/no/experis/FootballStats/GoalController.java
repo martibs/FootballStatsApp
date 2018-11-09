@@ -32,6 +32,14 @@ public class GoalController {
         return goalService.displayOneGoalType(id);
     }
 
+    @GetMapping("/showGoalsInOneMacth/{someID}")
+    public List<Goal> showGoalsInMatch(@PathVariable(value="someID") Integer id){
+        return goalService.displayAllGoalsInMatch(id);
+    }
 
+    @GetMapping("/showGoalsForPlayer/{someID}")
+    public List<Goal> showGoalsForPlayer(@PathVariable(value="someID") Integer id){
+        return goalService.displayAllGoalsForPlayer(id);
+    }
 
 }

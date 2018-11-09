@@ -66,6 +66,66 @@ public class DatabaseManager {
         return tempGoalList;
     }
 
+    public ArrayList<Goal> getGoalsInOneMatch(int match_id1) {
+        String sql = "SELECT * FROM MATCH_GOAL WHERE MATCH_ID = ?";
+
+        Goal tempGoal = null;
+        ArrayList<Goal> tempGoalList = new ArrayList<Goal>();
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1,match_id1);
+            pstmt.execute();
+            ResultSet rs = pstmt.getResultSet();
+
+            // loop through the result set
+            while (rs.next()) {
+                goal_id = Integer.toString(rs.getInt("GOAL_ID"));
+                player_id = Integer.toString(rs.getInt("PLAYER_ID"));
+                goal_type_id = Integer.toString(rs.getInt("GOAL_TYPE_ID"));
+                match_id = Integer.toString(rs.getInt("MATCH_ID"));
+                description = rs.getString("DESCRIPTION");
+
+                tempGoal = new Goal(goal_id,player_id,goal_type_id,match_id,description);
+                tempGoalList.add(tempGoal);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return tempGoalList;
+    }
+
+    public ArrayList<Goal> getGoalsForPlayer(int player_id1) {
+        String sql = "SELECT * FROM MATCH_GOAL WHERE Player_id = ?";
+
+        Goal tempGoal = null;
+        ArrayList<Goal> tempGoalList = new ArrayList<Goal>();
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1,player_id1);
+            pstmt.execute();
+            ResultSet rs = pstmt.getResultSet();
+
+            // loop through the result set
+            while (rs.next()) {
+                goal_id = Integer.toString(rs.getInt("GOAL_ID"));
+                player_id = Integer.toString(rs.getInt("PLAYER_ID"));
+                goal_type_id = Integer.toString(rs.getInt("GOAL_TYPE_ID"));
+                match_id = Integer.toString(rs.getInt("MATCH_ID"));
+                description = rs.getString("DESCRIPTION");
+
+                tempGoal = new Goal(goal_id,player_id,goal_type_id,match_id,description);
+                tempGoalList.add(tempGoal);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return tempGoalList;
+    }
+
 
     public ArrayList<GoalType> getGoalType() {
         String sql = "SELECT * FROM GOAL_TYPE";
