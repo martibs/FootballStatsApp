@@ -1,6 +1,5 @@
 package no.experis.FootballStats.UserSetup;
 
-import no.experis.FootballStats.Admin.Models.Contact;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ public class UserService {
         users.addAll(dbManager.getUsersFromDb());
 
         for(User user : users){
-            if(user.getUserId().equals(id)){
+            if(user.getUser_id().equals(id)){
                 return user;
             }
         }
