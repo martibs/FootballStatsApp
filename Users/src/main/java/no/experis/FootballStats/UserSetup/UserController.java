@@ -27,5 +27,12 @@ public class UserController{
         return userService.showUserId(email);
     }
 
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteUserWatchPlayer/{player_id}/{user_id}")
+    @ResponseBody
+    public void deleteLocation(@PathVariable int player_id, int user_id) {
+        userService.deleteUserWatchPlayer(player_id,user_id);
+    }
+
+
 }
 

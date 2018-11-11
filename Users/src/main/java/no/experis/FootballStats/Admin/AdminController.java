@@ -357,6 +357,16 @@ public class AdminController{
         return adminDatabase.getUserNews(id);
     }
 
+    @GetMapping("/getPlayerNews/{someID}")
+    public ArrayList<String> getPlayerNews(@PathVariable(value="someID") int id) {
+        return adminDatabase.getPlayerNews(id);
+    }
+
+    @GetMapping("/getPlayerWatchlist/{someID}")
+    public ArrayList<Integer> getPlayerWatchlist(@PathVariable(value="someID") int id) {
+        return adminDatabase.getPlayerWatchlist(id);
+    }
+
     @RequestMapping(method = RequestMethod.POST, value = "/createNews")
     @ResponseBody
     public void createNews(@RequestBody News news){

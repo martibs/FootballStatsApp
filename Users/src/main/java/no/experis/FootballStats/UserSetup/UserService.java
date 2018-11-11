@@ -32,4 +32,6 @@ public class UserService {
     }
     public User showUserId(String email){return dbManager.getUserID(email);}
 
+    public void deleteUserWatchPlayer(int player_id,int user_id){dbManager.deleteUserWatchPlayer(player_id,user_id);}
+
 }

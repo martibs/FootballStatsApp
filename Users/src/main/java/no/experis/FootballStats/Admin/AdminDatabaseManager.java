@@ -1086,6 +1086,31 @@ public class AdminDatabaseManager {
         return tempNewsList;
     }
 
+    public ArrayList<String> getPlayerNews(int player_id) {
+        String sql = "Select * from news where player_id="+player_id+" order by news_id desc limit 10;";
+
+        String news;
+
+        ArrayList<String> tempNewsList = new ArrayList<>();
+
+        try (Connection conn = this.connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+
+            // loop through the result set
+            while (rs.next()) {
+                news = rs.getString("news_string");
+                tempNewsList.add(news);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return tempNewsList;
+    }
+
+
     public ArrayList<Integer> getPlayerWatchlist(int user_id) {
         String sql = "Select * from player_watchlist where user_id = ?;";
 
