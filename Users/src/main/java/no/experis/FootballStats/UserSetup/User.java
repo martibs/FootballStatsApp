@@ -13,8 +13,8 @@ public class User {
 
     }
 
-    public User(String userId) {
-        this.userId = userId;
+    public User(String user_id) {
+        this.user_id = user_id;
     }
 
 
