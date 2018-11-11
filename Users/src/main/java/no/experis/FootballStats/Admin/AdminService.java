@@ -39,7 +39,7 @@ public class AdminService {
     }
 
     public void updatePerson(Person person){
-        adminDbManager.updatePerson(person.getFirst_name(), person.getLast_name(), person.getDate_of_birth(), person.getAddress_id());
+        adminDbManager.updatePerson(person.getFirst_name(), person.getLast_name(), person.getDate_of_birth(), person.getAddress_id(),Integer.parseInt(person.getPerson_id()));
     }
 
     public void deletePerson(int person_id){
@@ -62,7 +62,7 @@ public class AdminService {
     }
 
     public void updatePlayer(Player player){
-        int id = adminDbManager.updatePerson(player.getFirst_name(), player.getLast_name(), player.getDate_of_birth(), player.getAddress_id());
+        int id = adminDbManager.updatePerson(player.getFirst_name(), player.getLast_name(), player.getDate_of_birth(), player.getAddress_id(),Integer.parseInt(player.getPerson_id()));
         adminDbManager.updatePlayer(player.getNormal_position(), player.getNumber(), player.getTeam_id(), id);
     }
 
@@ -71,12 +71,12 @@ public class AdminService {
     }
 
     public void updateCoach(Coach coach){
-        int id = adminDbManager.updatePerson(coach.getFirst_name(), coach.getLast_name(), coach.getDate_of_birth(), coach.getAddress_id());
+        int id = adminDbManager.updatePerson(coach.getFirst_name(), coach.getLast_name(), coach.getDate_of_birth(), coach.getAddress_id(),Integer.parseInt(coach.getPerson_id()));
         adminDbManager.updateCoach(id, coach.getCoach_id());
     }
 
     public void updateOwner(Owner owner){
-        int id = adminDbManager.updatePerson(owner.getFirst_name(), owner.getLast_name(), owner.getDate_of_birth(), owner.getAddress_id());
+        int id = adminDbManager.updatePerson(owner.getFirst_name(), owner.getLast_name(), owner.getDate_of_birth(), owner.getAddress_id(),Integer.parseInt(owner.getPerson_id()));
         adminDbManager.updateOwner(id, owner.getOwner_id());
     }
 

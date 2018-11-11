@@ -528,8 +528,8 @@ public class AdminDatabaseManager {
         return lastPerson;
     }
 
-    public int updatePerson(String first_name,String last_name, Date date_of_birth,int real_id) {
-        String sql = "UPDATE Person set first_name = ? ,last_name = ?, date_of_birth = ? WHERE person_id = ? RETURNING person_id";
+    public int updatePerson(String first_name,String last_name, Date date_of_birth,int address_id,int real_id) {
+        String sql = "UPDATE Person set first_name = ? ,last_name = ?, date_of_birth = ?, address_id = ? WHERE person_id = ? RETURNING person_id";
 
         int lastPerson = -1;
 
@@ -538,7 +538,8 @@ public class AdminDatabaseManager {
             pstmt.setString(1, first_name);
             pstmt.setString(2, last_name);
             pstmt.setDate(3, date_of_birth);
-            pstmt.setInt(4, real_id);
+            pstmt.setInt(4,address_id);
+            pstmt.setInt(5, real_id);
             pstmt.execute();
 
             ResultSet rs = pstmt.getResultSet();
