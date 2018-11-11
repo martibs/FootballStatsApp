@@ -364,5 +364,19 @@ public class AdminController{
 
     }
 
+    @RequestMapping(method = RequestMethod.POST, value = "/createUserWatchPlayer")
+    @ResponseBody
+    public void createUserWatchPlayer(@RequestBody Watchlist watchlist){
+        adminService.createUserWatchPlayer(watchlist);
+
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/createUserWatchTeam")
+    @ResponseBody
+    public void createUserWatchTeam(@RequestBody Watchlist watchlist){
+        adminService.createUserWatchTeam(watchlist);
+
+    }
+
 
 }

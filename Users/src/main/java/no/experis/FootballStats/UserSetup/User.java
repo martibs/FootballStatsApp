@@ -9,6 +9,13 @@ public class User {
     private ArrayList<String> player_watchlist;
     private ArrayList<String> team_watchlist;
 
+    public User(){
+
+    }
+
+    public User(String userId) {
+        this.userId = userId;
+    }
 
     public User(String userId, String email, String password, ArrayList<String> player_watchlist, ArrayList<String> team_watchlist) {
         this.userId = userId;

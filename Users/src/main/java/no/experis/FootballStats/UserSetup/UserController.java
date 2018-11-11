@@ -13,5 +13,13 @@ public class UserController {
     public String showUser() {
         return "{User: userStuff}";
     }
+
+
+
+    @GetMapping("/userID/{email}")
+    public User showUserId(@PathVariable(value="email") String email) {
+        return userService.showUserId(email);
+    }
+
 }
 

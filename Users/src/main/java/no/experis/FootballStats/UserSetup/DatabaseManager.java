@@ -47,6 +47,31 @@ public class DatabaseManager {
             System.out.println(e.getMessage());
         }
     }
+    public User getUserID(String Email){
+        String sql = "SELECT * FROM USERS WHERE email";
+        int userID;
+        User tempUser = null;
+
+
+        try (Connection conn = this.connectToUserDB();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            // loop through the result set
+            while (rs.next()) {
+
+                userID=rs.getInt("user_id");
+
+                tempUser = new User(Integer.toString(userID));
+
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return tempUser;
+
+    }
 
     // TODO: Get user data from the database.
     public ArrayList<User> getUsersFromDb() {

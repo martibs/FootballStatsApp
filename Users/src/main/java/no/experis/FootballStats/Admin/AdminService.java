@@ -282,5 +282,9 @@ public class AdminService {
         adminDbManager.createNews(news.getNews_string(), news.getTeam_id(), news.getPlayer_id());
     }
 
+    public void createUserWatchPlayer(Watchlist watchlist){adminDbManager.createUserWatchPlayer(watchlist.getWatch_id(),watchlist.getUser_id());}
+
+    public void createUserWatchTeam(Watchlist watchlist){adminDbManager.createUserWatchTeam(watchlist.getWatch_id(),watchlist.getUser_id());}
+
 
 }

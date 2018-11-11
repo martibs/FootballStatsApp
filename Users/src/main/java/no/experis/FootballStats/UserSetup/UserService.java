@@ -26,5 +26,6 @@ public class UserService {
             return false;
         }
     }
+    public User showUserId(String email){return dbManager.getUserID(email);}
 
 }
