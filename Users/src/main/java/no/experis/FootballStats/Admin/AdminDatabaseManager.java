@@ -855,14 +855,14 @@ public class AdminDatabaseManager {
     }
 
 
-    public void updateContact(String contact_type, String contact_detail, String person_id) {
-        String sql = "UPDATE Contact set contact_type = ? , contact_detail = ? WHERE person_id = ?";
+    public void updateContact(String contact_type, String contact_detail, int contact_id) {
+        String sql = "UPDATE Contact set contact_type = ? , contact_detail = ? WHERE contact_id = ?";
 
         try (Connection conn = this.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, contact_type);
             pstmt.setString(2, contact_detail);
-            pstmt.setInt(3, Integer.parseInt(person_id));
+            pstmt.setInt(3, contact_id);
             pstmt.executeUpdate();
 
 
