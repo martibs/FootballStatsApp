@@ -63,7 +63,7 @@ public class AdminService {
 
     public void updatePlayer(Player player){
         int id = adminDbManager.updatePerson(player.getFirst_name(), player.getLast_name(), player.getDate_of_birth(), player.getAddress_id());
-        adminDbManager.updatePlayer(player.getNormal_position(), player.getNumber(), id, player.getTeam_id());
+        adminDbManager.updatePlayer(player.getNormal_position(), player.getNumber(), player.getTeam_id(), id);
     }
 
     public void updatePlayerImage(Player player){

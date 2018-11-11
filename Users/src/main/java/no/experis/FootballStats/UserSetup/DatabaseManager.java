@@ -1,5 +1,7 @@
 package no.experis.FootballStats.UserSetup;
 
+import no.experis.FootballStats.Admin.Models.Contact;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -13,7 +15,7 @@ public class DatabaseManager {
     private final String DB_NAME = "d5togjfivbt4tr";
     private final String DB_URL = "jdbc:postgresql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME;
 
-    private String userId;
+    private String user_id;
     private String email;
     private String password;
     private ArrayList<String> player_watchlist;
@@ -73,13 +75,16 @@ public class DatabaseManager {
 
     }
 
-    // TODO: Get user data from the database.
     public ArrayList<User> getUsersFromDb() {
+        String sql = "SELECT * FROM Users";
 
-        String sql = "SELECT * FROM USERS ";
+        String contact_id;
+        String person_id;
+        String contact_type;
+        String contact_detail;
 
-        User tempUser = null;
-        ArrayList<User> tempUserList = new ArrayList<User>();
+        User tempContact = null;
+        ArrayList<User> tempUsers = new ArrayList<User>();
 
         try (Connection conn = this.connectToUserDB();
              Statement stmt = conn.createStatement();
@@ -87,19 +92,18 @@ public class DatabaseManager {
 
             // loop through the result set
             while (rs.next()) {
-
+                user_id = rs.getString("user_id");
                 email = rs.getString("EMAIL");
-                password = rs.getString("PASSWORD");
 
-                // TODO: Create user
-                //tempUser = new UserSetup();
-                tempUserList.add(tempUser);
+
+                tempContact = new User(user_id, email);
+                tempUsers.add(tempContact);
             }
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return tempUserList;
+        return tempUsers;
     }
 
     public void deleteUserWatchPlayer(int player_watch_id,int user_id) {
