@@ -1047,7 +1047,7 @@ public class AdminDatabaseManager {
     }
     // TODO Fikse route til å lage news.
     public void createNews(String news_string, int team_id,int player_id) {
-        String sql = "INSERT INTO news(news_string,team_watch_id,player_id) VALUES(?,?,?)";
+        String sql = "INSERT INTO news(news_string,team_id,player_id) VALUES(?,?,?)";
 
 
         try (Connection conn = this.connect();
