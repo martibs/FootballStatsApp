@@ -3,7 +3,7 @@ package no.experis.FootballStats.Admin.Models;
 import java.util.ArrayList;
 import java.sql.Date;
 
-public class Person {
+public abstract class Person {
     private String person_id;
     private String first_name;
     private String last_name;
