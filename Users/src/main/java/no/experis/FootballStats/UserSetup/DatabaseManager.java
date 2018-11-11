@@ -50,7 +50,7 @@ public class DatabaseManager {
         }
     }
     public User getUserID(String Email){
-        String sql = "SELECT * FROM USERS WHERE email";
+        String sql = "SELECT * FROM USERS WHERE email='"+Email+"'";
         int userID;
         User tempUser = null;
 
