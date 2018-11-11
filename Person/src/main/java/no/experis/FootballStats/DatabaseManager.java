@@ -201,6 +201,12 @@ public class DatabaseManager {
                 "DROP TABLE IF EXISTS LOCATION;\n" +
                 "DROP TABLE IF EXISTS SEASON;\n" +
                 "DROP TABLE IF EXISTS ADDRESS;\n" +
+                "DROP TABLE IF EXISTS news;\n" +
+                "DROP TABLE IF EXISTS player_watchlist;\n" +
+                "DROP TABLE IF EXISTS team_watchlist;\n" +
+                "DROP TABLE IF EXISTS users;\n" +
+                "DROP TABLE IF EXISTS admin;\n" +
+                "\n" +
                 "\n" +
                 "\n" +
                 "CREATE TABLE ADDRESS\n" +
@@ -296,6 +302,7 @@ public class DatabaseManager {
                 "  coach_id INT NOT NULL,\n" +
                 "  owner_id INT NOT NULL,\n" +
                 "  location_id INT NOT NULL,\n" +
+                "  team_image VARCHAR(150) DEFAULT NULL,\n" +
                 "  PRIMARY KEY (team_id),\n" +
                 "  FOREIGN KEY (owner_id) REFERENCES OWNER(owner_id),\n" +
                 "  FOREIGN KEY (association_id) REFERENCES ASSOCIATION(association_id),\n" +
@@ -336,6 +343,7 @@ public class DatabaseManager {
                 "  number VARCHAR(8),\n" +
                 "  person_id INT NOT NULL,\n" +
                 "  team_id INT NOT NULL,\n" +
+                "  player_image VARCHAR(150) DEFAULT NULL,\n" +
                 "  PRIMARY KEY (player_id),\n" +
                 "  FOREIGN KEY (person_id) REFERENCES PERSON(person_id),\n" +
                 "  FOREIGN KEY (team_id) REFERENCES TEAM(team_id)\n" +
@@ -362,6 +370,47 @@ public class DatabaseManager {
                 "  FOREIGN KEY (goal_type_id) REFERENCES GOAL_TYPE(goal_type_id),\n" +
                 "  FOREIGN KEY (match_id) REFERENCES MATCH(match_id),\n" +
                 "  FOREIGN KEY (player_id) REFERENCES PLAYER(player_id)\n" +
+                ");\n" +
+                "\n" +
+                "CREATE TABLE news\n" +
+                "(\n" +
+                "  news_id SERIAL NOT NULL,\n" +
+                "  news_string character varying(150) NOT NULL,\n" +
+                "  team_id integer DEFAULT NULL,\n" +
+                "  player_id integer DEFAULT NULL,\n" +
+                "  CONSTRAINT news_pkey PRIMARY KEY (news_id)\n" +
+                ");\n" +
+                "\n" +
+                "CREATE TABLE users\n" +
+                "(\n" +
+                "  user_id SERIAL NOT NULL,\n" +
+                "  email character varying(64) NOT NULL,\n" +
+                "  password character varying(64) NOT NULL,\n" +
+                "  CONSTRAINT users_pkey PRIMARY KEY (user_id),\n" +
+                "  CONSTRAINT users_email_key UNIQUE (email)\n" +
+                ");\n" +
+                " CREATE TABLE player_watchlist\n" +
+                "(\n" +
+                "  player_watch_id integer NOT NULL,\n" +
+                "  user_id integer NOT NULL,\n" +
+                "  CONSTRAINT player_user_pkey PRIMARY KEY (player_watch_id,user_id),\n" +
+                "  CONSTRAINT player_user_fkey FOREIGN KEY(user_id) REFERENCES users(user_id)\n" +
+                ");\n" +
+                " CREATE TABLE team_watchlist\n" +
+                "(\n" +
+                "  team_watch_id integer NOT NULL,\n" +
+                "  user_id integer NOT NULL,\n" +
+                "  CONSTRAINT team_user_pkey PRIMARY KEY (team_watch_id,user_id),\n" +
+                "  CONSTRAINT team_user_fkey FOREIGN KEY(user_id) REFERENCES users(user_id)\n" +
+                ");\n" +
+                "\n" +
+                "CREATE TABLE admin\n" +
+                "(\n" +
+                "  user_id SERIAL NOT NULL,\n" +
+                "  email character varying(64) NOT NULL,\n" +
+                "  password character varying(64) NOT NULL,\n" +
+                "  CONSTRAINT admin_pkey PRIMARY KEY (user_id),\n" +
+                "  CONSTRAINT admin_email_key UNIQUE (email)\n" +
                 ");\n" +
                 "\n" +
                 "-- INSERT ADDRESS\n" +
@@ -609,7 +658,57 @@ public class DatabaseManager {
                 "INSERT INTO MATCH_GOAL(description,goal_type_id,match_id,player_id) VALUES ('Corner goal',3,3,1);\n" +
                 "INSERT INTO MATCH_GOAL(description,goal_type_id,match_id,player_id) VALUES ('Free-kick goal',2,3,1);\n" +
                 "INSERT INTO MATCH_GOAL(description,goal_type_id,match_id,player_id) VALUES ('Corner goal',3,3,1);\n" +
-                "INSERT INTO MATCH_GOAL(description,goal_type_id,match_id,player_id) VALUES ('Free-kick goal',2,3,3);\n";
+                "INSERT INTO MATCH_GOAL(description,goal_type_id,match_id,player_id) VALUES ('Free-kick goal',2,3,3);\n" +
+                "\n" +
+                "-- INSERT NEWS\n" +
+                "insert into news (news_string) values('Tyrael scored a goal for Hells Angles');\n" +
+                "insert into news (news_string) values('Voljin joined The Loa Football Club');\n" +
+                "insert into news (news_string) values('Team Cyntex won their match ageinst the Ghuuns');\n" +
+                "insert into news (news_string) values('Yin got a new coach, Yang');\n" +
+                "insert into news (news_string) values('Lucio join Wall Riders');\n" +
+                "\n" +
+                "-- insert gab team\n" +
+                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES('Illidan','Stormrage','1991-03-26',10);\n" +
+                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES('Jaina','Proudmoore','1989-12-26',10);\n" +
+                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES('Sylvanas','Windrunner','1985-08-30',10);\n" +
+                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES('Varok','Saurfang','1988-03-07',10);\n" +
+                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES('Anduin','Wrynn','1991-01-01',10);\n" +
+                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES('Varian','Wrynn','1986-11-21',10);\n" +
+                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES('Malfurion','Stormrage','1990-10-26',10);\n" +
+                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES('Tyrande','Whisperwind','1987-05-20',10);\n" +
+                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES('Baine','Bloodhoof','1988-03-26',10);\n" +
+                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES('Genn','Graymane','1989-04-06',10);\n" +
+                "INSERT INTO person(first_name,last_name,date_of_birth,address_id) VALUES('Thrall','Thrall','1981-03-16',10);\n" +
+                "\n" +
+                "INSERT INTO coach(person_id) VALUES (48);\n" +
+                "\n" +
+                "INSERT INTO owner(person_id) VALUES (48);\n" +
+                "\n" +
+                "INSERT INTO association(name,description) VALUES ('WOW','A team of creatures from all over Azeroth');\n" +
+                "\n" +
+                "INSERT INTO team(owner_id,association_id,coach_id,location_id,team_image) VALUES (4,5,4,10,'https://upload.wikimedia.org/wikipedia/commons/e/eb/WoW_icon.svg');\n" +
+                "\n" +
+                "insert into player ( normal_position, number, person_id, team_id,player_image) values ('Attack', '5', 38, 4,'https://d1u5p3l4wpay3k.cloudfront.net/wowpedia/e/e0/Illidan_the_Betrayer.jpg?version=ca1a497f686d4e0fb9ecf6ab8b9005cf');\n" +
+                "\n" +
+                "insert into player ( normal_position, number, person_id, team_id,player_image) values ('Attack', '29', 39, 4,'https://wow.gamepedia.com/Jaina_Proudmoore#/media/File:Jaina_Proudmoore_of_Kul_Tiras.jpg');\n" +
+                "\n" +
+                "insert into player ( normal_position, number, person_id, team_id,player_image) values ('Attack', '10', 40, 4,'https://wow.gamepedia.com/Sylvanas_Windrunner#/media/File:Sylvanas_by_Erik_Braddock_-_cropped.jpg');\n" +
+                "\n" +
+                "insert into player ( normal_position, number, person_id, team_id,player_image) values ('Attack', '15', 41, 4,'https://cdnb.artstation.com/p/assets/images/images/012/415/077/large/laurits-rask-saurfang-10mb.jpg?1534695352');\n" +
+                "\n" +
+                "insert into player ( normal_position, number, person_id, team_id,player_image) values ('Keeper', '1', 42, 4,'https://wow.gamepedia.com/Anduin_Wrynn#/media/File:Anduin_by_Erik_Braddock_-_cropped.jpg');\n" +
+                "\n" +
+                "insert into player ( normal_position, number, person_id, team_id,player_image) values ('Defence', '17', 43, 4,'https://d1u5p3l4wpay3k.cloudfront.net/wowpedia/b/be/Varian_Wei.jpg?version=f1dae75b94bf31cafa21029ba6300d7c');\n" +
+                "\n" +
+                "insert into player ( normal_position, number, person_id, team_id,player_image) values ('Defence', '12', 44, 4,'https://wow.gamepedia.com/Malfurion_Stormrage#/media/File:Malfurion_WotE_Cropped.jpg');\n" +
+                "\n" +
+                "insert into player ( normal_position, number, person_id, team_id,player_image) values ('Defence', '35', 45, 4,'https://d1u5p3l4wpay3k.cloudfront.net/wowpedia/4/47/Tyrande_HS_cropped.jpg?version=7c5db9a60120f665d0d72ca41b035122');\n" +
+                "\n" +
+                "insert into player ( normal_position, number, person_id, team_id,player_image) values ('Center', '4', 46, 4,'https://wow.gamepedia.com/Baine_Bloodhoof#/media/File:Glowei_Baine_Bloodhoof.jpg');\n" +
+                "\n" +
+                "insert into player ( normal_position, number, person_id, team_id,player_image) values ('Center', '11', 47, 4,'https://d1u5p3l4wpay3k.cloudfront.net/wowpedia/c/c9/Genn_Greymane_Battle_for_Azeroth_Cinematic.jpg?version=083c4eabf76ded7ea542b2deb12364c1');\n" +
+                "\n" +
+                "insert into player ( normal_position, number, person_id, team_id,player_image) values ('Center', '21', 48, 4,'https://wow.gamepedia.com/Thrall#/media/File:Thrall_WarCraft_Raneman.jpg');\n";
 
         System.out.println("started to create a table");
 
