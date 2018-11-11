@@ -20,16 +20,17 @@ public class ResultService {
     }
 
 
-    public Result displayOneResult(String match_id){
+    public ArrayList<Result> displayOneResult(String match_id){
         ArrayList<Result> results = new ArrayList<Result>();
+        ArrayList<Result> resultswithid = new ArrayList<Result>();
         results.addAll(dbManager.getResults());
 
         for(Result result : results){
             if(result.getMatch_id().equals(match_id)){
-                return result;
+                resultswithid.add(result);
             }
         }
-        return null;
+        return resultswithid;
     }
 
 }

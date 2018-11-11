@@ -2,6 +2,8 @@ package no.experis.FootballStats;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -15,7 +17,7 @@ public class ResultController {
     }
 
     @GetMapping("/showOneResult/{someID}")
-    public Result showAddress(@PathVariable(value="someID") String id){
+    public ArrayList<Result> showAddress(@PathVariable(value="someID") String id){
         return resultService.displayOneResult(id);
     }
 
