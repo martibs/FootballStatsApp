@@ -225,7 +225,7 @@ public class AdminService {
     }
 
     public void updateContact(Contact contact){
-        adminDbManager.updateContact(contact.getContact_type(), contact.getContact_detail(), contact.getPerson_id());
+        adminDbManager.updateContact(contact.getContact_type(), contact.getContact_detail(), Integer.parseInt(contact.getPerson_id()));
     }
 
     public void deleteContact(int contact_id){
