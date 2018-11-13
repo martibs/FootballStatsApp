@@ -1166,10 +1166,13 @@ public class AdminDatabaseManager {
     public ArrayList<String> getUserNews(int user_id) {
         ArrayList<Integer> tempPlayersWatchlist = getPlayerWatchlist(user_id);
         ArrayList<Integer> tempTeamsWatchlist = getTeamWatchlist(user_id);
+
+        ArrayList<String> arrayNews = new ArrayList<>();
+
         String whereCause="";
         if(tempPlayersWatchlist.size()>0||tempTeamsWatchlist.size()>0){
             whereCause="where ";
-        }else{return null;}
+        }else{return arrayNews;}
         String or=" or";
         for (int intTemp : tempPlayersWatchlist){
             if (tempPlayersWatchlist.indexOf(intTemp)==(tempPlayersWatchlist.size()-1)&&tempTeamsWatchlist.size()<1){

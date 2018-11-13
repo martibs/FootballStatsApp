@@ -272,7 +272,7 @@ public class AdminService {
 
     //NEWS
     public ArrayList<String> getNewsFromDB(){
-        ArrayList<String> list  = new ArrayList<>();
+        ArrayList<String> list  = new ArrayList<String>();
         list.addAll(adminDbManager.getNews());
 
         return list;
