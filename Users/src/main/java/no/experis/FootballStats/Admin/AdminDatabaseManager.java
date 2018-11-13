@@ -387,7 +387,7 @@ public class AdminDatabaseManager {
     }
 
     public void deleteMatch(int match_id) {
-        String sql = "DELETE FROM MATCH_GOAL WHERE match_id = ?";
+        String sql = "DELETE FROM MATCH WHERE match_id = ?";
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
