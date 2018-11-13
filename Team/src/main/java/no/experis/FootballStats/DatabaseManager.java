@@ -101,7 +101,7 @@ public class DatabaseManager {
         String association_description;
         String team_image;
 
-        String sql = "SELECT * FROM TEAM INNER JOIN ASSOCIATION ON ASSOCIATION.ASSOCIATION_ID = TEAM.ASSOCIATION_ID";
+        String sql = "SELECT * FROM TEAM ORDER BY(TEAM_ID) ASC INNER JOIN ASSOCIATION ON ASSOCIATION.ASSOCIATION_ID = TEAM.ASSOCIATION_ID";
 
         FootballTeam tempTeam = null;
         ArrayList<FootballTeam> tempPlayersList = new ArrayList<FootballTeam>();

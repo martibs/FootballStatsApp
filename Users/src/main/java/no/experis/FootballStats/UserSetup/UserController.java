@@ -33,6 +33,5 @@ public class UserController{
         userService.deleteUserWatchPlayer(player_id,user_id);
     }
 
-
 }
 
